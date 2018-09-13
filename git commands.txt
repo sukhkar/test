@@ -1,0 +1,24 @@
+Git uses ‘C’ language
+git init
+//initlizes a empty git repository in folder 
+git status
+// how many files are still not staged and how many are new files , also shows currently we are on which branch
+git add .
+// it will stage all files present in current folder 
+git commit -m 'This is initial commit'
+// this is used for commiting all the files present in the folder
+git branch  NewBranch
+// for creating new branch
+git checkout  NewBranch // for switching to NewBranch
+git checkout master // for going back to master branch
+git merge NewBranch   // for merging content of NewBrnach into master Branch
+git commit -a -m 'second commit'  // if doing this then there is no need to do first staging and then commiting , 
+you can directly do commit. but in this way only updated files will be commited and newly created files will not be commited
+git config --global user.email "bhalekarvijay5@mail.com" // for setting email id
+git config --global user.name "vijay"  // for setting name
+git push -u origin master  // for pushing content into repo
+git revert head 
+git push -u origin master // for reverting last commited and pushed change to repository
+git log --oneline  // show history of all last commits and reverts
+Git pull = git fetch + git merge
+git pull https://github.com/A589930/test.git 
