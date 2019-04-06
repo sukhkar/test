@@ -21,4 +21,4 @@ git revert head
 git push -u origin master // for reverting last commited and pushed change to repository
 git log --oneline  // show history of all last commits and reverts
 Git pull = git fetch + git merge
-git pull https://github.com/A589930/test.git  //pull 
+git pull https://github.com/A589930/test.git  //pull
