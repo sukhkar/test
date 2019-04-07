@@ -1,0 +1,700 @@
+Python Strings
+
+We can also create really long strings that take up multiple lines by using three single
+quotes (or three double quotes), like this:
+long_string = '''This is a
+string that spans across multiple lines'''
+long_string = """This is a new string
+that spans across two lines"""
+
+format method with string
+>>> hands=2
+>>> head =1
+>>> print("we have {} head and {} hands".format(head , hands))
+we have 1 head and 2 hands
+
+>>> print("we have {0} head and {1} hands".format(hands, head))
+we have 2 head and 1 hands
+
+>>> print("we have {head} head and {hands} hands".format(head=1, hands=2))
+we have 1 head and 2 hands
+
+find method 
+>>> phrase = "the surprise is in here somewhere"
+>>> print(phrase.find("surprise"))
+4
+in case pattern is not found then find returns "-1"
+
+Replace method
+>>> "Hello vijay Hello  how are you Hello".replace("Hello", "Go")
+'Go vijay Go  how are you Go'
+
+Python allows you to add special comments called docstrings. A docstring serves as documentation, helping to explain what a
+function does and how to use it.
+
+True and False in script behaves like 1 and 0 correspondingly
+>>> 42 * True + False
+42
+>>> False * 2 - 3
+-3
+>>> True + 0.2 / True
+1.2
+
+>>> print(r"c:\vijay")
+c:\vijay
+>>> print(r"c:\\vijay")
+c:\\vijay
+>>> print("c:\\vijay")
+c:\vijay
+
+String interpolation:
+>>> head =1
+>>> print("vijay has", str(head), "head")
+vijay has 1 head
+
+>>> word = 'Python'
+>>> word[0]  # character in position 0
+'P'
+>>> word[5]  # character in position 5
+'n'
+>>> word[-1]  # last character
+'n'
+>>> word[-2]  # second-last character
+'o'
+>>> word[:2] + word[2:]
+'Python'
+
+>>> word[:2]   # character from the beginning to position 2 (excluded)
+'Py'
+>>> word[4:]   # characters from position 4 (included) to the end
+'on'
+>>> word[-2:]  # characters from the second-last (included) to the end
+'on'
+
+>>> word[42]  # the word only has 6 characters
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+
+>>> word[4:42]
+'on'
+>>> word[42:]
+''
+
+Python strings cannot be changed — they are immutable. Therefore, assigning to an indexed position in the string results in an error:
+
+>>> word[0] = 'J'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object does not support item assignment
+
+word="hello"
+this is allowd
+
+The built-in function len() returns the length of a string:
+>>> len(word)
+6
+
+String build in functions:
+str.capitalize(): It makes first letter capital
+>>> print(word.capitalize())
+Python
+
+IF Else Statement
+
+num = 15
+if num < 10:
+print("number is less than 10")
+elif num > 10:
+print("number is greater than 10")
+else:
+print("number is equal to 10")
+
+list				dictionary		tuple
+mutable				mutable			immutable
+duplicates allowd   not allowd		allowed
+
+
+
+List
+It is mutable(we can change the content)
+>>> squares
+[1, 4, 9, 16, 25]
+>>> squares[:]
+[1, 4, 9, 16, 25]
+
+Lists also support operations like concatenation:
+
+>>>
+>>> squares + [36, 49, 64, 81, 100]
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+>>> squares.append(121)
+>>> squares
+>>> [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121]
+
+Assignment to slices is also possible, and this can even change the size of the list or clear it entirely:
+
+>>>
+>>> letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+>>> letters
+['a', 'b', 'c', 'd', 'e', 'f', 'g']
+>>> # replace some values
+>>> letters[2:5] = ['C', 'D', 'E']
+>>> letters
+['a', 'b', 'C', 'D', 'E', 'f', 'g']
+>>> # now remove them
+>>> letters[2:5] = []
+>>> letters
+['a', 'b', 'f', 'g']
+>>> # clear the list by replacing all the elements with an empty list
+>>> letters[:] = []
+>>> letters
+[]
+
+>>> len(letters)
+0
+
+>>> sub1=[0,1]
+>>> sub2=[1,2]
+>>> super=[sub1,sub2]
+>>> super
+[[0, 1], [1, 2]]
+>>> super[1]
+[1, 2]
+>>> super[1][1]
+2
+>>>
+
+Range function
+
+range(5, 10)
+   5, 6, 7, 8, 9
+
+range(0, 10, 3)
+   0, 3, 6, 9
+
+range(-10, -100, -30)
+  -10, -40, -70
+  
+To iterate over the indices of a sequence, you can combine range() and len() as follows:
+
+>>>
+>>> a = ['Mary', 'had', 'a', 'little', 'lamb']
+>>> for i in range(len(a)):
+...     print(i, a[i])
+...
+0 Mary
+1 had
+2 a
+3 little
+4 lamb
+
+
+Function:
+Keyword arguments
+
+>>> def parrot(price,color="green",like="samosa"):
+...     print("price is ",price)
+...     print("color is",color)
+...     print("parrot likes",like)
+...
+>>> parrot(23)
+('price is ', 23)
+('color is', 'green')
+('parrot likes', 'samosa')
+
+
+>>> parrot(100,color="red")
+('price is ', 100)
+('color is', 'red')
+('parrot likes', 'samosa')
+
+>>> parrot(33,"red","vadapav")
+('price is ', 33)
+('color is', 'red')
+('parrot likes', 'vadapav')
+
+
+but all the following calls would be invalid:
+
+parrot()                     # required argument missing
+parrot(voltage=5.0, 'dead')  # non-keyword argument after a keyword argument
+parrot(110, voltage=220)     # duplicate value for the same argument
+parrot(actor='John Cleese')  # unknown keyword argument
+
+
+Lambda expression:
+Small anonymous functions can be created with the lambda keyword
+
+>>> def make_incrementor(n):
+...     return lambda x: x + n
+...
+>>> f = make_incrementor(42)
+>>> f(0)
+42
+>>> f(1)
+43
+
+List examples
+colors = ["red", "green", "burnt sienna", "blue"]
+scores = [10, 8, 9, -2, 9]
+my_list = ["one", 2, 3.0]
+
+We can create empty list by specifying empty list of square bracket.
+
+>>> animal=[]
+>>> animal.append("cat")
+>>> animal.append("dog")
+>>> print(animal)
+['cat', 'dog']
+
+we can remove object from list using remove() method
+>>> animal.remove("cat")
+>>> print(animal)
+['dog']
+
+we can use extend to add more than 1 onject into list.
+>>> animal.extend(["lion", "tiger"])
+>>> print(animal)
+['dog', 'lion', 'tiger']
+
+we can use index() method to get the index of particular element in list
+>>> print(animal.index("lion"))
+1
+
+
+Copying 1 list into another
+
+>>> animals = ["lion", "tiger", "frumious Bandersnatch"]
+>>> large_cats = animals
+>>> large_cats.append("Tigger")
+>>> print(animals)
+['lion', 'tiger', 'frumious Bandersnatch', 'Tigger']
+
+Explanation:
+when we say
+large_cats = animals , we make the lists large_cats and animals both refer to the
+same object. When we created our first list, the name animals was only a way to point us
+to a list object - in other words, the name animals is just a way to reference the actual list
+object that is somewhere in the computer's memory. Instead of copying all the contents
+of the list object and creating s new list, saying large_cats = animals assigns the same
+object reference to large_cats; both of our list names now refer to the same object, and
+any changes made to one will affect the other since both names point to the same
+object.
+
+If we actually wanted to copy the contents of one list object into a new list object, we
+have to retrieve all the individual items from the list and copy them over individually. We
+don't have to use a loop to do this, however; we can simply say:
+
+
+>>> animals = ["lion", "tiger", "frumious Bandersnatch"]
+>>> large_cats = animals[:]
+>>> large_cats.append("leopard")
+>>> print(large_cats)
+['lion', 'tiger', 'frumious Bandersnatch', 'leopard']
+>>> print(animals)
+["lion", "tiger", "frumious Bandersnatch"]
+
+>>> name=["v","a","s","j"]
+>>> print(name.sort())
+None
+This happened because we are printing operation and not the list.
+
+>>> name.sort()
+>>> print(name)
+["a","j","v","s"]
+
+
+2 dimensional list
+>>> two=[[0,1],[2,3]]
+>>> print(two[0][0])
+0
+
+>>> list = ["I heard you like lists", ["so I put a list", "in your list"]]
+>>> print(list)
+['I heard you like lists', ['so I put a list', 'in your list']]
+
+Conversion of string into list
+>>> str="vijay,ajay,ram"
+>>> lis=str.split(",")
+>>> print(lis)
+['vijay', 'ajay', 'ram']
+
+List Operations:
+>>> list=["a",'b','c']
+>>> list
+['a', 'b', 'c']
+
+
+>>> list.insert(1,'p')
+>>> list
+['a', 'p', 'b', 'c', 'd', 'e', 'e', 'f']
+
+>>> list.remove("p")
+>>> list
+['a', 'b', 'c', 'd', 'e', 'e', 'f']
+
+>>> list.remove('e')
+>>> list
+['a', 'b', 'c', 'd', 'e', 'f']
+
+>>> list.pop()
+'f'
+>>> list
+['a', 'b', 'c', 'd', 'e']
+
+>>> list.count('e')
+1
+
+>>> list.reverse()
+>>> list
+['e', 'd', 'c', 'b', 'a']
+
+>>> list.index('a')
+4
+>>> list.reverse()
+>>> list
+['a', 'b', 'c', 'd', 'e']
+
+
+Using List as Queue
+we need to import collection.deque
+
+>>> from collections import deque
+>>> queue = deque(["Eric", "John", "Michael"])
+>>> queue.append("Terry")           # Terry arrives
+>>> queue.append("Graham")          # Graham arrives
+>>> queue.popleft()                 # The first to arrive now leaves
+'Eric'
+>>> queue.popleft()                 # The second to arrive now leaves
+'John'
+>>> queue                           # Remaining queue in order of arrival
+deque(['Michael', 'Terry', 'Graham'])
+
+List comprehension:
+List comprehensions provide a better way to create lists.
+Only those elements will be added to list which fit some specific criteria.
+
+>>> squares = []
+>>> for x in range(10):
+...     squares.append(x**2)
+...
+>>> squares
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+This is normal way of creating list
+
+squares = [x**2 for x in range(10)]
+THis is list comprehension
+
+few examples of list comprehension
+>>> vec = [-4, -2, 0, 2, 4]
+>>> # create a new list with the values doubled
+>>> [x*2 for x in vec]
+[-8, -4, 0, 4, 8]
+>>> # filter the list to exclude negative numbers
+>>> [x for x in vec if x >= 0]
+[0, 2, 4]
+>>> # apply a function to all the elements
+>>> [abs(x) for x in vec]
+[4, 2, 0, 2, 4]
+
+Del statement can be used to delete 
+
+
+
+
+Tuple:
+
+Tuple are very much similiar to list only tuples are immutable and list are mutable.
+tuple does not support append, sort , reverse methos
+tuple objects are represented with ( ) parenthesis.
+
+>>> def adder_subtractor(num1, num2):
+... add = num1 + num2
+... subtract = num1 - num2
+... return add, subtract
+...
+>>> adder_subtractor(3, 2)
+(5, 1)
+>>> test = adder_subtractor(4, 3)
+>>> test
+(7, 1)
+>>> type(test)
+<type 'tuple'>
+
+Parentheses are actually optional when we are creating a tuple
+
+>>> coordinates = 4.21, 9.29
+>>> print coordinates
+(4.21, 9.29)
+
+This process is called tuple packing because we are "packing" a number of objects into
+a single immutable tuple object.
+
+If we were to receive the above coordinates tuple from a
+function and we then want to retrieve the individual values from this tuple, we can
+perform the reverse process, suitably called tuple unpacking:
+
+Tuple unpacking example:
+>>> x, y = coordinates
+>>> print(x)
+4.21
+>>> print(y)
+9.29
+
+Dictionary:
+
+It holds info in pair of data i. e. key and value.
+>>> phonebook = {"Jenny": "867-5309", "Mike Jones": "281-330-8004",
+"Destiny": "900-783-3369"}
+
+>>> del(phonebook["Destiny"])
+>>> print(phonebook)
+{"Jenny": "867-5309", "Mike Jones": "281-330-8004"}
+
+If we want to print all the keys in dictionary
+
+>>> print(phonebook.keys())
+(['Mike Jones', 'Jenny', 'Obama'])
+
+They keys() method returns an object of the type dict_keys :
+names = phonebook.keys()
+>>>type(names)
+<class 'dict_keys'>
+
+
+we can convert dictionary keys into list.
+>>>names = list(phonebook.keys())
+>>>type(names)
+<class 'list'>
+
+we can use for loop for printing the dictionary>>>
+for contact_name in phonebook:
+print(contact_name, phonebook[contact_name])
+Mike Jones 281-330-8004
+Jenny 555-0199
+Obama 202-456-1414
+
+we can use "in" keyword in dictionary to check whether particular key is present in dictionary or not.
+>>> "Jenny" in phonebook
+True
+
+we can sort the dictionary with help of key:
+>>>
+for contact_name in sorted(phonebook):
+print(contact_name, phonebook[contact_name])
+Jenny 555-0199
+Mike Jones 281-330-8004
+Obama 202-456-1414
+
+However this change is temporary actual content is not sorted.
+
+
+Dictionary values can even be other dictionaries
+
+>>> contacts = {"Jenny": {"cell": "555-0199", "home": "867-5309"}, "Mike
+Jones": {"home": "281-330-8004"}, "Destiny": {"work": "900-783-3369"}}
+>>> print(contacts)
+{'Mike Jones': {'home': '281-330-8004'},
+'Jenny': {'cell': '555-0199', 'home':
+'867-5309'}, 'Destiny': {'work': '900-783-3369'}}
+>>> print(contacts["Jenny"])
+{'cell': '555-0199', 'home': '867-5309'}
+>>> print(contacts["Jenny"]["cell"])
+555-0199
+
+we can fetch the value like below:
+>>> contacts["Jenny"]["cell"]
+555-0199
+
+We can create dictionary in following way as well:
+>>> simple_dict = dict([("string1","value1"), ("string2",2),
+("string3",3.0)])
+>>> print(simple_dict)
+{'string2': 2, 'string3': 3.0, 'string1': 'value1'}
+===================================================
+
+File Operation:
+>>> f=open(r"C:\Users\VIJAY\Desktop\python\calc.py","w")
+>>> f.writelines("Hello VIjay")
+>>> f.close()
+
+As soon as you open() a file in w (write) mode, if the file already exists then the file's current contents are completely deleted
+
+case 1) If we are reading data with the help of read() function then it will read like normal file
+f=open(r"C:\Users\VIJAY\Desktop\python\calc.py","a")
+
+test=["THis is first\n" , "This is second\n", "this is Third"]
+f.writelines(test)
+f.close()
+
+t=open(r"C:\Users\VIJAY\Desktop\python\calc.py","r")
+print(t.read())
+t.close()
+
+o/p:
+THis is first
+This is second
+this is Third
+
+Case 2) If we are reading data with the help of readlines() then it will be read as list:
+f=open(r"C:\Users\VIJAY\Desktop\python\calc.py","a")
+
+test=["THis is first\n" , "This is second\n", "this is Third"]
+f.writelines(test)
+f.close()
+
+t=open(r"C:\Users\VIJAY\Desktop\python\calc.py","r")
+print(t.readlines())
+t.close()
+
+o/p:
+['THis is first\n', 'This is second\n', 'this is Third']
+
+Case 3):
+If we are using readline() function then at a time only first line of the file is read on next execution it print second line of file.
+
+For the write() function we can pass only string object not list and for writelines() function we can pass list as well as string object.
+
+We can use forloop for reading file line by line:
+
+t=open(r"C:\Users\VIJAY\Desktop\python\calc.py","r")
+for i in t.readlines():
+    print(i)
+t.close()
+
+O/P:
+THis is very first
+
+THis is first
+
+This is fourth
+
+This is last
+
+
+any print statement will usually add a new line to the end of the line of output.
+You can remove the automatic \n (or change it to something different) by specifying the "end" parameter of the print() function like so:
+print(i, end="")
+
+
+t=open(r"C:\Users\VIJAY\Desktop\python\calc.py","r")
+for i in t.readlines():
+    print(i, end="")
+t.close()
+
+O/P:
+THis is very first
+THis is first
+This is fourth
+This is last
+
+We can use readline() function to read entire file with help of while loop:
+
+t=open(r"C:\Users\VIJAY\Desktop\python\calc.py","r")
+
+line=t.readline()
+while line != "":
+    print(line,end="")
+    line=t.readline()
+t.close()
+
+O/P:
+THis is very first
+THis is first
+This is fourth
+This is last
+
+We can use "with" and "as" keyword to open a file , there is no need to close that file.
+
+with open(r"C:\Users\VIJAY\Desktop\python\calc.py","r") as f:
+    for i in f.readlines():
+        print(i,end="")
+		
+O/P:
+THis is very first
+THis is first
+This is fourth
+This is last
+
+
+We can simultaneously read from one file and write into another file with the help of with and as:
+
+with open(r"C:\Users\VIJAY\Desktop\python\calc.py","r") as f,open(r"C:\Users\VIJAY\Desktop\python\output.py","w") as o:
+    for i in f.readlines():
+        o.write(i)
+	
+If we want to visit a specific part of the file, we can use the seek() method to jump a
+particular number of characters into the file.	
+		
+t=open(r"C:\Users\VIJAY\Desktop\python\calc.py","r")
+print(t.readline())
+t.seek(2)
+print(t.readline())
+
+t.seek(5)
+print(t.readline())
+
+O/P:
+THis is first
+
+is is first
+
+is first
+
+Read content of csv file :
+import csv
+
+with open(r"C:\Users\VIJAY\Desktop\python\csvt.txt","r") as f:
+    rd=csv.reader(f)
+    for i in rd:
+        print(i)
+		
+O/P:
+['vijay;is;this']
+['ajay;is;this']		
+
+
+
+==========================================
+
+OS module
+>>> os.getcwd()
+'/root'
+>>>os.chdir("/var")
+
+>>> os.uname()
+('Linux', 'system1.district.example.com', '3.10.0-123.1.2.el7.x86_64', '#1 SMP Thu Oct 9 19:42:17 CDT 2014', 'x86_64')
+
+File opening program:
+import os
+try:
+    filename="/var/tmp/tt"
+    f = open(filename, 'rU')
+    text=f.read()
+    f.close()
+    print text
+except IOError:
+    print("error occured")
+
+	O/P :
+	Hello dear
+	
+File rename:
+
+os.rename("/var/tmp/old" , 'new')
+
+
+>>> os.path.isabs('/var')
+True
+// this checks whether the path is absolute or not i. e. path should start with "/"
+
+// check whether any directory is present or not
+>>> os.path.isdir('/var/tmp/abr')
+False
+
+Random NO Generation:
+
+>>> from random import randint
+>>> print(randint(0, 5))
+3

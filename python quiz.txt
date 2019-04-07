@@ -1,0 +1,116 @@
+flavour="Mango"
+ print(flavor[:]) is same as print(flavour)
+ 1. true 
+ 2. false
+ 
+ ANS : 1
+ =================
+my_string = "goal"
+
+which of the following sentenses hold for my_string:
+ 
+1. my_string[0] = "f"
+2. my_string = "goal"
+3. my_string = "f" + my_string[1:]
+
+
+1. all
+2. none of above
+3. only 1
+4. 2 & 3
+ANS : 4
+==============
+In IDLE what is the keyboard shortcut to find all the methods can apply to a particular kind of object.
+1. alt + space
+2. ctrl + space
+3. alt + ctrl
+4. alt + esc
+5. TAB
+
+ANS: 2 and 5
+
+================
+my_number = "12.0"
+print(int(my_number))
+
+what will be the output:
+1. 12
+2. 12.0
+3. ValueError
+4. TypeError
+ANs : 3
+====================
+what function to use to convert a number into a string
+
+1. object()
+2. string()
+3. str()
+4. Not possible
+
+ANS : 3
+===============================
+"my number is 5555555555".find(5)
+what would be the output of the above
+1. 14
+2. 13
+3. 0
+4. none of the above
+ANS : 4
+=================================
+
+What would be the output of following code snippet:
+n=5
+square_value=square(n)
+
+def square(num):
+    return num ** 2
+
+print(square_value)
+
+1. 5
+2. 25
+3. 125
+4. None of the above
+
+ANS : 4
+
+============================
+which method is used to add multiple ohject in list
+1. add()
+2. multiAdd()
+3. addMore()
+4.extend()
+
+ANS : 4
+
+========================
+>>> print(an)
+['1', '2', '3', '4', '5', '6', '7']
+>>> an=an.extend("7")
+
+What will be the output of print(an):
+1. ['1', '2', '3', '4', '5', '6', '7', '7']
+2. ['1', '2', '3', '4', '5', '6', '7']
+3. None
+4. None of the above
+
+ANS: 3
+===========================
+>>> name=["v","a","s","j"]
+>>> print(name.sort())
+What will be output of above print statement
+1. ["v","a","s","j"]
+2. ["a","j","s","v"]
+3. None
+4. None of the above
+
+ANS : 3
+===========================
+
+What method is used to convert string into list
+1. split()
+2. list()
+3. toList()
+4. None of the above
+
+ANS : 1

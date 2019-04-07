@@ -24,7 +24,59 @@ mtime : ls -l : show the last update to file content, it does not udpate with ch
 atime : ls -lu : shows the last file accessed time 
 ctime : ls -lc : it changes when u change the files ownership or access permission .
 
+ls is eqivalent to echo *
+create a file with some content with the help of cat command.
+cat > hello
+enter the content followd by CTRL + D
+
+[root@system1 ~]# date -u
+Sat Mar 23 17:39:05 UTC 2019
+[root@system1 ~]# date -s "Sat Mar 23 23:08:08"
+Sat Mar 23 23:08:08 IST 2019
+[root@system1 ~]#  date +"%T"
+23:10:46
+[root@system1 ~]# date +%B
+March
+[root@system1 ~]# date +%d
+23
+[root@system1 ~]# date +%D
+03/23/19
+[root@system1 ~]# date +%b
+Mar
+[root@system1 ~]# date +%y
+19
+[root@system1 ~]# date +%Y
+2019
+[root@system1 ~]# date +%F
+2019-03-23
+[root@system1 ~]# date +%f
+%f
 
 
+1> redirects stdout to filename 
+1>> appends stdout to filename
+2> redirects stderr to filename
+&> redirects both stderr and stdout to a filename
 
-use awk and nawk
+
+ls ? will show all the files with single character as name
+ls ??? will show all the files with three characters as name
+
+[root@system1 ~]# ls a[a-d]c
+aac  abc  acc  adc
+
+[root@system1 ~]# ls *[0-9]* // it will display all the files whose name contains at least 1 digit
+
+ls test_[!9]*  // it will print all the files except test_9
+if want to create a file with special character in their name then can use "\"
+
+touch \\
+touch \$
+touch hello\ there
+[root@system1 test]# ls
+$  \  hello there
+touch hello\\\ there
+[root@system1 test]# ls
+hello\ there
+
+
