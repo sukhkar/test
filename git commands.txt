@@ -95,3 +95,27 @@ git branch  NewBranch
 git checkout  NewBranch // for switching to NewBranch
 git checkout master // for going back to master branch
 git merge NewBranch   // for merging content of NewBrnach into master Branch
+
+
+
+git branch
+// it will tell you, u are working with which branch
+
+
+git branch new-branch
+// will create a new branch 
+
+git checkout new-branch
+// it will switch you to new-branch
+
+git push -u origin new-branch
+// this will push the data to new-branch
+
+for merging the data of new-branch to master do:
+git checkout master // this will set your branch to master
+git merge new-branch // this will merge the data of new-branch to master
+
+
+git branch -d new-branch  // it will delete branch but deleted branch will not be visible only in CLI that will be present in GUI i. e. website
+
+git push origin --delete new-branch // it will delete the branch from website as well

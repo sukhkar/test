@@ -1,0 +1,90 @@
+ansible-playbook http.yml --syntax-check  // for checking the syntax of yml file
+
+ansible-playbook -i /root/hosts http.yml // for providing user defined inventory
+copy:
+- name: copy brooklyn.cfg into {{cfg_location}}
+  template: dest=/etc/amp/brooklyn.cfg  src=brooklyn.cfg.j2 mode=0600  owner={{amp_user}}  group={{amp_user}}
+  
+file create:
+- file: "path={{ssh}} state=directory"
+  name: "Create-Directory {{ssh}}"
+
+- file: "dest={{ssh}} owner=amp group=amp recurse=yes"   // set ownership
+  name: "set owner of {{ssh}}  to  amp"
+  
+move
+delete
+
+service stop , start, restart:
+- name: restart ldap
+  service: name=slapd state=restarted
+  
+want to perform same thing with multiple items:
+- action: "yum name={{ item }} state=present"
+  name: "Installing Ldap"
+  with_items: 
+    - openldap-servers
+    - openldap-clients
+    - libselinux-python
+	
+shell or command:
+for anything not specified 
+
+
+If Else condition:
+- name: "Check whether id_rsa exists"
+  register: stat_result
+  stat:
+    path: /home/amp/.ssh/id_rsa
+
+- file:
+    path: /home/amp/.ssh/id_rsa
+    state: absent
+  name: "Delete id_rsa if it exist"
+  when: "stat_result.stat.exists == True"
+  
+- name: set brooklyn.cfg path in osgilauncher    // replace in file
+  lineinfile:
+    dest: /etc/amp/org.apache.brooklyn.osgilauncher.cfg
+    regexp: 'localBrooklynPropertiesFile='
+    line: 'localBrooklynPropertiesFile=/etc/amp/brooklyn.cfg'
+
+- replace: 
+    dest: /etc/openldap/slapd.d/frontend.ldif
+    regexp: <ldapadminpassword>
+    replace: "{{ generated_ldap_admin_ps.stdout }}"
+	
+- name: extract latest  compose-amp_bp_packaging tar.gz inside the /opt directory  // extract
+  unarchive:
+    src: roles/amp4/files/compose-amp_bp_packaging-2017.04-Final.tar.gz
+    dest: /opt/
+	
+- name: please wait,it might take 12  minutes to uploading yaml to catalog // wait for 12 minutes
+  pause:
+     minutes: 12
+	 
+- name: insert "kernel.random.read_wakeup_threshold = 2048" in /etc/sysctl.conf  // insert into file
+  blockinfile:
+    dest: /etc/sysctl.conf
+    block: |
+      kernel.random.read_wakeup_threshold = 2048
+      kernel.random.write_wakeup_threshold = 3072
+	  
+	  
+Ad hoc commands : 
+Ansible abc -m file -a "dest = /path/user1/new mode = 777 owner = user1 group = user1 state = directory"
+where , 
+abc=hosts specified in /etc/ansible/hosts
+m=module name
+a= arguments
+
+Ansible abc -m yum -a "name = demo-tomcat-1 state = latest" 
+
+
+
+=========================VAULT================
+ansible-vault encrypt  http.yml  // to set the password
+ansible-valut view http.yml  // to view file content
+ansible-valut edit http.yml  // to edit file
+ansible-playbook  http.yml --ask-vault-pass  // to run script
+ansible-vault decrypt http.yml   // to remove the password

@@ -1,0 +1,37 @@
+Password Break of root user , Single user mode , Rescue mode, BOOT Process , Kernel Panic issue
+CTRL + D maintenance mode is Rescue mode
+
+For going into rescue mode , type command: systemctl rescue
+For going into emergency mode , type command: systemctl emergency
+There is not harm for going into both of the above mode ,after going into aobve mode we can use "reboot"
+command to come back to orignial state
+
+linux16 line after lvm value
+systemd.unit=emergency.target
+CTRL+X
+
+============================================
+
+linux 16 line go to last 
+init=/bin/sh  or init=/bin/bash
+
+OR
+
+linux16 line after lvm value
+systemd.unit=rescue.target
+CTRL+X
+
+=======================
+
+Kernel Panic 
+Reasons:
+1) after fresh istallation or after kernel upgrade followd by reboot
+2) Kernel isnot isntalled properly
+
+Solution
+1) during splash screen rescue mode is shown, select that and press enter
+2)You will get the terminal , get kernel version with "uname -r" command
+3) we need to create a initrd image with mkinitrd command, mkinitrd --help
+mkinitrd -f "image name with kernel  version" "kernel version obtained from uname -r command"
+you can also use dracut command
+4) systemctl reboot
