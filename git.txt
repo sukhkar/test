@@ -1,0 +1,121 @@
+﻿GIT : IT is distributed version control system
+GIt : opensource tool/ software used for version controlling
+github: version control service
+bitbucket & gitlab are same as github they provide service to GIT
+github is not free while bitbucket is free
+service of github is good as compare to bitcucket, github is purcased by Microsoft
+
+after creating any folder on right click we get 2 option
+1) GIT GUI
+2) GIT BASH
+
+git GUI uses GIT BASh in background
+
+1) for getting the version of git
+git --version
+git version 2.18.0.windows.1
+
+
+create any new folder --> go inside that folder --> right click git bash --> git init --> the newly create folder will behave like 
+a new repository
+
+git init
+//initlizes a empty git repository in folder 
+
+git bash works like linux commands.
+Git supports 3 layer architecture
+1) working area
+2) staging area
+3) commit area
+
+
+for checkig the logged in user email and name
+git config user.email
+git config user.name
+
+
+for adding to staging area:
+git add .
+
+if you want to remove from staging area then use command
+gir reset filename
+
+by mistakely you have added a change in file and not added that file to staging area then for removing that change from file use:
+git checkout filename  // in this way we will go to our last commit state
+
+for commiting the change:
+git commit -m "messge for commit"
+
+for pushing to git
+git push -u origin  master
+
+for pulling the data from github to local:
+git pull origin master
+
+Git add -A : stages ALL
+git add . : stages new and modified , WITHOUT DELETED
+git add -u : stages modified and deleted , WITHOUT NEW
+
+For cloning any other repository into you local:
+create a new folder , right click , git bash here 
+git clone git@github.com:A589930/test.git  
+a new folder will be created inside your folder
+
+
+if you dont want to create new folder and just want script should be directly visible the
+git clone git@github.com:A589930/test.git  .
+
+
+
+for seeing the origin added:
+$ git remote -v
+origin  git@github.com:A589930/test.git (fetch)
+origin  git@github.com:A589930/test.git (push)
+
+for removing the origin added
+git remote rm origin
+// here origin we have taken from output of above commands
+
+git status
+in git status command if you can see there is some delta between local file and git hub file then you can compare the change by following 
+command:
+git diff filename.txt
+
+you have done change in one file and added that to stage and want to see the difference between staged and github file
+git diff --staged filename.txt
+
+
+.gitignore
+
+if want any file not to push / pull / track then we can create a .gitignore file in you folder and add that files name in .gitignore file
+
+git branch  NewBranch
+// for creating new branch
+
+git checkout  NewBranch // for switching to NewBranch
+git checkout master // for going back to master branch
+git merge NewBranch   // for merging content of NewBrnach into master Branch
+
+
+
+git branch
+// it will tell you, u are working with which branch
+
+
+git branch new-branch
+// will create a new branch 
+
+git checkout new-branch
+// it will switch you to new-branch
+
+git push -u origin new-branch
+// this will push the data to new-branch
+
+for merging the data of new-branch to master do:
+git checkout master // this will set your branch to master
+git merge new-branch // this will merge the data of new-branch to master
+
+
+git branch -d new-branch  // it will delete branch but deleted branch will not be visible only in CLI that will be present in GUI i. e. website
+
+git push origin --delete new-branch // it will delete the branch from website as well
