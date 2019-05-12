@@ -1,0 +1,183 @@
+Types of JOIN
+
+1) Cross JOIN or Cartesian Product
+This type of JOIN returns the cartesian product of rows from the tables in Join. It will return a table which consists of records which combines each row from the first table with each row of the second table
+
+Following is the class table,
+
+ID	NAME
+1	abhi
+2	adam
+4	alex
+and the class_info table,
+
+ID	Address
+1	DELHI
+2	MUMBAI
+3	CHENNAI
+
+SELECT * FROM 
+class CROSS JOIN class_info;
+
+The resultset table will look like,
+
+ID	NAME	ID	Address
+1	abhi	1	DELHI
+2	adam	1	DELHI
+4	alex	1	DELHI
+1	abhi	2	MUMBAI
+2	adam	2	MUMBAI
+4	alex	2	MUMBAI
+1	abhi	3	CHENNAI
+2	adam	3	CHENNAI
+4	alex	3	CHENNAI
+
+cross join will give product of two tables without matching any key.
+
+2) INNER Join or EQUI Join
+This is a simple JOIN in which the result is based on matched data as per the equality condition 
+
+Consider a class table,
+
+ID	NAME
+1	abhi
+2	adam
+3	alex
+4	anu
+and the class_info table,
+
+ID	Address
+1	DELHI
+2	MUMBAI
+3	CHENNAI
+
+
+SELECT * from class INNER JOIN class_info where class.id = class_info.id;
+The resultset table will look like,
+
+ID	NAME	ID	Address
+1	abhi	1	DELHI
+2	adam	2	MUMBAI
+3	alex	3	CHENNAI
+
+
+3) Natural JOIN
+Natural Join is a type of Inner join which is based on column having same name and same datatype present in both the tables to be joined.
+
+Here is the class table,
+
+ID	NAME
+1	abhi
+2	adam
+3	alex
+4	anu
+and the class_info table,
+
+ID	Address
+1	DELHI
+2	MUMBAI
+3	CHENNAI
+
+
+SELECT * from class NATURAL JOIN class_info; 
+
+The resultset table will look like,
+
+ID	NAME	Address
+1	abhi	DELHI
+2	adam	MUMBAI
+3	alex	CHENNAI
+
+
+
+4) LEFT Outer Join
+The left outer join returns a resultset table with the matched data from the two tables and then the remaining rows of the left table and null from the right table's columns.
+
+Here is the class table,
+
+ID	NAME
+1	abhi
+2	adam
+3	alex
+4	anu
+5	ashish
+and the class_info table,
+
+ID	Address
+1	DELHI
+2	MUMBAI
+3	CHENNAI
+7	NOIDA
+8	PANIPAT
+
+SELECT * FROM class LEFT OUTER JOIN class_info ON (class.id = class_info.id);
+
+ID	NAME	ID	Address
+1	abhi	1	DELHI
+2	adam	2	MUMBAI
+3	alex	3	CHENNAI
+4	anu	null	null
+5	ashish	null	null
+
+5)RIGHT Outer Join
+The right outer join returns a resultset table with the matched data from the two tables being joined, then the remaining rows of the right table and null for the remaining left table's columns.
+
+Once again the class table,
+
+ID	NAME
+1	abhi
+2	adam
+3	alex
+4	anu
+5	ashish
+and the class_info table,
+
+ID	Address
+1	DELHI
+2	MUMBAI
+3	CHENNAI
+7	NOIDA
+8	PANIPAT
+
+SELECT * FROM class RIGHT OUTER JOIN class_info ON (class.id = class_info.id);
+
+ID	NAME	ID	Address
+1	abhi	1	DELHI
+2	adam	2	MUMBAI
+3	alex	3	CHENNAI
+null	null	7	NOIDA
+null	null	8	PANIPAT
+
+
+6)Full Outer Join
+The full outer join returns a resultset table with the matched data of two table then remaining rows of both left table and then the right table.
+
+The class table,
+
+ID	NAME
+1	abhi
+2	adam
+3	alex
+4	anu
+5	ashish
+and the class_info table,
+
+ID	Address
+1	DELHI
+2	MUMBAI
+3	CHENNAI
+7	NOIDA
+8	PANIPAT
+
+
+SELECT * FROM class FULL OUTER JOIN class_info ON (class.id = class_info.id);
+
+
+ID	NAME	ID	Address
+1	abhi	1	DELHI
+2	adam	2	MUMBAI
+3	alex	3	CHENNAI
+4	anu	null	null
+5	ashish	null	null
+null	null	7	NOIDA
+null	null	8	PANIPAT

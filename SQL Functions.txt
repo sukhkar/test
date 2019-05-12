@@ -1,0 +1,234 @@
+SQL functions are divided into 2 categories:
+1. Aggregate Functions
+2. Scalar Functions
+
+
+1. Aggregate Functions
+These functions return a single value after performing calculations on a group of values
+
+1) AVG() Function
+Average returns average value after calculating it from values in a numeric column.
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	Anu	22	9000
+402	Shane	29	8000
+403	Rohan	34	6000
+404	Scott	44	10000
+405	Tiger	35	8000
+
+
+SELECT avg(salary) from Emp;
+
+avg(salary)
+8200
+
+2) COUNT() Function
+Count returns the number of rows present in the table either based on some condition or without condition.
+
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	Anu	22	9000
+402	Shane	29	8000
+403	Rohan	34	6000
+404	Scott	44	10000
+405	Tiger	35	8000
+SQL query to count employees, satisfying specified condition is,
+
+SELECT COUNT(name) FROM Emp WHERE salary = 8000;
+
+count(name)
+2
+
+
+SELECT COUNT(DISTINCT salary) FROM emp;
+
+count(distinct salary)
+4
+
+
+3)  FIRST() Function
+First function returns first value of a selected column
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	Anu	22	9000
+402	Shane	29	8000
+403	Rohan	34	6000
+404	Scott	44	10000
+405	Tiger	35	8000
+
+SELECT FIRST(salary) FROM Emp;
+
+first(salary)
+9000
+
+4) LAST() Function
+LAST function returns the return last value of the selected column.
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	Anu	22	9000
+402	Shane	29	8000
+403	Rohan	34	6000
+404	Scott	44	10000
+405	Tiger	35	8000
+SQL query will be,
+
+SELECT LAST(salary) FROM emp;
+
+last(salary)
+8000
+
+5)MAX() Function
+MAX function returns maximum value from selected column of the table.
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	Anu	22	9000
+402	Shane	29	8000
+403	Rohan	34	6000
+404	Scott	44	10000
+405	Tiger	35	8000
+SQL query to find the Maximum salary will be,
+
+SELECT MAX(salary) FROM emp;
+
+MAX(salary)
+10000
+
+6)MIN() Function
+MIN function returns minimum value from a selected column of the table.
+
+Consider the following Emp table,
+
+eid	name	age	salary
+401	Anu	22	9000
+402	Shane	29	8000
+403	Rohan	34	6000
+404	Scott	44	10000
+405	Tiger	35	8000
+
+SELECT MIN(salary) FROM emp;
+
+MIN(salary)
+6000
+
+7) SUM() Function
+SUM function returns total sum of a selected columns numeric values.
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	Anu	22	9000
+402	Shane	29	8000
+403	Rohan	34	6000
+404	Scott	44	10000
+405	Tiger	35	8000
+SQL query to find sum of salaries will be,
+
+SELECT SUM(salary) FROM emp;
+
+SUM(salary)
+41000
+
+
+
+2. Scalar Functions
+Scalar functions return a single value from an input value
+
+1)UCASE() Function
+UCASE function is used to convert value of string column to Uppercase characters.
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	anu	22	9000
+402	shane	29	8000
+403	rohan	34	6000
+404	scott	44	10000
+405	Tiger	35	8000
+SQL query for using UCASE is,
+
+SELECT UCASE(name) FROM emp;
+Result is,
+
+UCASE(name)
+ANU
+SHANE
+ROHAN
+SCOTT
+TIGER
+
+2) LCASE() Function
+LCASE function is used to convert value of string columns to Lowecase characters.
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	Anu	22	9000
+402	Shane	29	8000
+403	Rohan	34	6000
+404	SCOTT	44	10000
+405	Tiger	35	8000
+
+
+SELECT LCASE(name) FROM emp;
+Result will be,
+
+LCASE(name)
+anu
+shane
+rohan
+scott
+tiger
+
+3) MID() Function
+MID function is used to extract substrings from column values of string type in a table.
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	anu	22	9000
+402	shane	29	8000
+403	rohan	34	6000
+404	scott	44	10000
+405	Tiger	35	8000
+SQL query will be,
+
+SELECT MID(name,2,2) FROM emp;
+
+MID(name,2,2)
+nu
+ha
+oh
+co
+ig
+
+4)ROUND() Function
+ROUND function is used to round a numeric field to number of nearest integer. It is used on Decimal point values.
+
+Consider the following Emp table
+
+eid	name	age	salary
+401	anu	22	9000.67
+402	shane	29	8000.98
+403	rohan	34	6000.45
+404	scott	44	10000
+405	Tiger	35	8000.01
+SQL query is,
+
+SELECT ROUND(salary) from emp;
+
+ROUND(salary)
+9001
+8001
+6000
+10000
+8000

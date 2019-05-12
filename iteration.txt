@@ -249,48 +249,4 @@ grep -B 3 "vijay" file.txt
 grep -f user.txt /etc/passwd
 it will iterate through user.txt and for every word it will search the /etc/passwd file and display the matched pattern
   
-different ways of array declaration
-1)
-var[0]="Hello"
-var[1]="vijay"
-var[2]="dear"
-
-2)
-var=("The"  "rate" "is" 45 "kg")
-
-3) 
-var=([0]="hello" [1]="vijay" dear)
-
-4)
-echo "enter Ip addressed seperated by space"
-read -a ip_list // with -a option we are accepting the input and saving in array
-
-for i in ${ip_list[@]}
-do
-	echo $i
-done
-
-
-"here document" concept
-we can give multiline comment in code with here document concept
-
-echo "this will print"
-
-<< COMMENT
-
-echo "this will not print"
-touch filename   // this will not execute
-echp " again this will not execute"
-
-COMMENT
-
-echo "this will also print"
-here we can use any word instead of COMMENT ,the end word should be at the begining of the line
-
-
-perform copy operation with dd command
-dd if=/tmp/test.sh  of=/var/tmp/new_test.sh bs=10240
-
-
-cat /proc/cpuinfo is same lscpu
 

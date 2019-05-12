@@ -1,0 +1,72 @@
+These SQL commands are mainly categorized into four categories as discussed below:
+
+DDL(Data Definition Language) : DDL or Data Definition Language actually consists of the SQL commands that can be used to define the database schema. It simply deals with descriptions of the database schema and is used to create and modify the structure of database objects in database.
+Examples of DDL commands:
+
+CREATE – is used to create the database or its objects (like table, index, function, views, store procedure and triggers).
+eg: CREATE TABLE users(
+     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+     name VARCHAR( 25 ) NOT NULL ,
+     last_name VARCHAR( 25 ) NOT NULL ,
+     age INT NOT NULL 
+	 
+DROP – is used to delete table/database.
+
+DROP TABLE student;
+
+DROP DATABASE Test;
+
+ALTER-is used to alter the structure of the database.
+Here we can add one/multiple new column, add a column with default value, modify existing column , rename a column or drop a column.
+
+TRUNCATE–is used to remove all records from a table, including all spaces allocated for the records are removed.
+TRUNCATE TABLE student;
+
+
+COMMENT –is used to add comments to the data dictionary.
+RENAME –is used to rename an object existing in the database.
+RENAME TABLE student to students_info;
+
+
+
+DML(Data Manipulation Language) : The SQL commands that deals with the manipulation of data present in database belong to DML or Data Manipulation Language and this includes most of the SQL statements.
+Examples of DML:
+
+SELECT – is used to retrieve data from the a database.
+INSERT – is used to insert data into a table.
+EX : INSERT INTO Student VALUES(103,'Chris')
+		
+UPDATE – is used to update existing data within a table.
+UPDATE student SET age=18 WHERE student_id=102;
+UPDATE student SET name='Abhi', age=17 where s_id=103; 
+
+DELETE – is used to delete records from a database table.
+DELETE FROM student;  // delete all records from table
+DELETE FROM student WHERE s_id=103;
+
+
+DCL(Data Control Language) : DCL includes commands such as GRANT and REVOKE which mainly deals with the rights, permissions and other controls of the database system.
+Examples of DCL commands:
+
+GRANT-gives user’s access privileges to database.
+GRANT CREATE TABLE TO ram;
+GRANT sysdba TO username; //Grant all privilege to a User
+
+
+REVOKE-withdraw user’s access privileges given by using the GRANT command.
+REVOKE CREATE TABLE FROM ram;
+
+
+TCL(transaction Control Language) : TCL commands deals with the transaction within the database.
+Examples of TCL commands:
+
+COMMIT– commits a Transaction.
+COMMIT;
+
+ROLLBACK– rollbacks a transaction in case of any error occurs.
+ROLLBACK TO savepoint_name;
+
+SAVEPOINT–sets a savepoint within a transaction.
+SAVEPOINT savepoint_name;
+
+SET TRANSACTION–specify characteristics for the transaction.
