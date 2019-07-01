@@ -1,0 +1,68 @@
+sudo docket ps // will shw all running container
+sudo docker images // will show all images downloaded
+sudo docker pull ubuntu  // for downloading ubuntu image
+sudo docker run -ti ubuntu bash  // within ubuntu bash command will run
+
+Docker :
+pywinrm 1.1
+pywinarm 2.2
+
+
+docker info // it will give you info about container , docker version
+docker version  // it will give you information about client and server information
+
+docker is written in Go language
+
+docker container ls // to see active container  , container is image's running instance
+docker image ls // to see the images available
+docker network ls // to see available network
+
+docker container run ubuntu cat /etc/os-release  // one container will be prepared by taking image of ubuntu then cat /etc/os-release will be executed after executing this command container will end i. e. in docker container ls command it will not be visible, after creating the container it will run as well that container
+
+docker container ls // it will show all actively running containers, "docker ps"
+docker container ls -a // it will show all container list even those which are termintaed
+
+docker container rm "container id / name" // it will remove the container from list 
+docker container start container id // to start a stopped container 
+docker container stop container id // to stop a started container 
+
+docker container run -d ubuntu sleep 30 // this will run the container in background ( detach mode)
+docker container run -it ubuntu /bin/bash  // this will allow to go inside the container i. e. inside the ubuntu terminal with bash terminal , i for interactive and t for tty
+
+once we come out of the ubuntu termianl then in that container will go to stopped state , if you want to come out of ubuntu terminal and continer should also be runnung then inside container execute "CTRL + P + Q"
+
+docker container ls -aq // it will give the container id of all continers which are start/stopped state
+
+if you want to kill all the containers ( start/stopped) then execute :
+docker container rm $(docker container ls -aq)
+
+docker container inspect container id // to get all the details of the container like IP address , hostname and all
+
+docker container log container id // to see the logs of container
+docker container top container id // to see what process are running inside container 
+docker container stats // to see all running containers are consuming how much memory and cpu space
+
+docker container run -d -p 3600:80 nginx --name test_nginx // test_nginx will be the name of this container or else it takes any key as container name 
+3600:80  this is port mapping/forwarding i. e. all the requests coming from 3600 port of host machine those will be redirected to 80 port of container
+
+if you want to access nginx from host machine (IP Of Host machine: 192.168.0.2) then in browser enter 192.168.0.2:3600
+even in other machines browser you can access the nginx by same way (192.168.0.2:3600)
+
+
+how to get the bash terminal of already running container : docker container exec -it  container id
+docker container rename container id new_name // rename the container 
+docker container restart container id // to restart a container 
+docker container attach container id // to bring background container into foreground
+docker container wait container id // this command will wait until this container does not stop , upon stopping this command will return 0
+docker container pause container id  /// it will pasue the container we will not be able to access the services of that container at that time
+docker container unpause container id  // it will unpause the container 
+docker container prune // to kill all the container which are exited
+docker container create ubuntu sleep 60 //  it will just create container not run it
+docker container diff container id // it will show the difference between actual container image and files changed inside the container.
+it will show files/directories which are newly added/ updated / deleted.
+
+docker container cp test/ container_id:/tmp/ it will copy files from current server/machine's test directory to the container's /tmp directory 
+
+docker container export container id > my_ubuntu_git_mysql.tar  // this will export the container with all its installed app(here git and mysql) into my_ubuntu_git_mysql.tar file , instead of > we can use -o also.
+
+docker image import my_ubuntu_git_mysql.tar // for importing the image
