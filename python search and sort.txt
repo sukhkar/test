@@ -1,0 +1,547 @@
+Python interpereter , memorymanagement, python tools , lambda function , generator , iterator , slicing , linked list , array list , list tuple , orm design patterns ,pickling unpickling , mvc pattern , list stack queue , binary search  , memory management in python app , db modelling  , *args and **kwargs
+joins , ACID  , index 
+
+
+>>> def selection(a):
+	for i in range(len(a)):
+		lowest=i
+		for j in range(i+1 , len(a)):
+			if a[j] < a[lowest]:
+				lowest =j
+		a[i] , a[lowest]=a[lowest] , a[i]
+
+		
+>>> selection(a)
+>>> a
+[1, 2, 3, 4]
+
+============================
+>>> def bubble(a):
+	s=True
+	while s:
+		s=False
+		for i in range(len(a) -1):
+			if a[i] > a[i+1]:
+				a[i] , a[i+1] = a[i+1] , a[i]
+				s=True
+
+				
+>>> a=[2,3,1,5,4]
+>>> bubble(a)
+>>> a
+[1, 2, 3, 4, 5]
+
+=====================
+>>> def bubblesearch_iterative(a, l , r , x):
+	while l <= r:
+		mid=l+ (r-l)/2
+		if a[mid]==x:
+			return mid
+		elif a[mid] <x:
+			l=mid+1
+		else:
+			r=mid-1
+	return -1
+=================
+>>> def bs(a , l , r , x):
+	if r >= 1:
+		mid= l+ ( r-l )/2
+		if a[mid] == x:
+			return mid
+		elif a[mid] > x:
+			return bs(a , l , mid -1 , x)
+		else:
+			return bs(a , mid+1 , r, x)
+	else:
+		return -1
+========================
+class node:
+	def __init(self , data):
+		self.data=data
+		self.next=None
+		
+		
+class ll:
+	def __init__(self):
+		self.head=None
+	def traverse(self):
+		n=self.head
+		if n is None:
+			print("List is Empty")
+			return
+		else:
+			while n is not None:
+				print(n.data," ")
+				n=n.next
+	def insert_at_start(self , data):
+		n=node(data)
+		n.next=self.head
+		self.head=n
+	def insert_at_end(self,data):
+		n=node(data)
+		if self.head is None:
+			self.head = n
+			return
+		else:
+			tmp=self.head
+			while tmp.next is not None:
+				n=n.next
+			tmp.next=n
+	==========================
+	import collections
+>>> lst=collections.deque()
+>>> lst.append("a")
+>>> lst
+deque(['a'])
+>>> lst.append("b")
+>>> lst
+deque(['a', 'b'])
+>>> lst.reverse()
+>>> lst
+deque(['b', 'a'])
+>>> lst.reverse()
+>>> lst
+deque(['a', 'b'])
+>>> lst.appendleft("c")
+>>> lst
+deque(['c', 'a', 'b'])
+>>> lst.pop()
+'b'
+>>> lst.popleft()
+'c'
+>>> lst
+deque(['a'])
+>>> lst.append("b")
+>>> lst
+deque(['a', 'b'])
+>>> lst.append("c")
+>>> lst
+deque(['a', 'b', 'c'])
+>>> lst.popleft()
+'a'
+>>> lst
+deque(['b', 'c'])
+>>> lst.appendleft("a")
+>>> lst
+deque(['a', 'b', 'c'])
+>>> lst.remove("b")
+>>> lst
+deque(['a', 'c'])
+===========================
+Stack
+1) s = []
+
+s.append('eat')
+s.append('sleep')
+s.append('code')
+
+>>> s
+['eat', 'sleep', 'code']
+
+>>> s.pop()
+'code'
+>>> s.pop()
+'sleep'
+>>> s.pop()
+'eat'
+
+2) 
+from collections import deque
+>>> s=deque()
+>>> s.append(1)
+>>> s.append(2)
+>>> s.append(3)
+>>> s
+deque([1, 2, 3])
+>>> s.pop()
+3
+>>> s.pop()
+2
+>>> s
+deque([1])
+>>> s
+deque([1])
+>>> s.append(2)
+>>> s
+deque([1, 2])
+>>> s.pop()
+2
+>>> s
+deque([1])
+
+3) from queue import LifoQueue
+s = LifoQueue()
+
+s.put('eat')
+s.put('sleep')
+s.put('code')
+
+>>> s
+<queue.LifoQueue object at 0x108298dd8>
+
+>>> s.get()
+'code'
+>>> s.get()
+'sleep'
+>>> s.get()
+'eat'
+=======================
+QUEUE
+1) q = []
+
+q.append('eat')
+q.append('sleep')
+q.append('code')
+
+>>> q
+['eat', 'sleep', 'code']
+
+# Careful: This is slow!
+>>> q.pop(0)
+'eat'
+2) 
+from collections import deque
+q = deque()
+
+q.append('eat')
+q.append('sleep')
+q.append('code')
+
+>>> q
+deque(['eat', 'sleep', 'code'])
+
+>>> q.popleft()
+'eat'
+>>> q.popleft()
+'sleep'
+>>> q.popleft()
+'code'
+3) from queue import Queue
+q = Queue()
+
+q.put('eat')
+q.put('sleep')
+q.put('code')
+
+>>> q
+<queue.Queue object at 0x1070f5b38>
+
+>>> q.get()
+'eat'
+>>> q.get()
+'sleep'
+>>> q.get()
+'code'
+==================
+What the interpreter does is complex but in a nutshell :
+
+1. Looks at the date/time of your script and checks if there is a .pyc file for your script with a later date than your script; if there is skip stage 
+2. Read the script line by line and converts that script into python byte code, and then writes the byte code into a pyc file. If your application has mutiple files it creates a pyc file for every .py file. It is at this stage that syntax errors are generated.
+3. Load the first pyc file into memory, and the interpret then executes the file instruction by instruction, it is at this stage Runtime errors are created if your code generates such errors. If neccessary then other pyc files are loaded into memory and executed.
+
+============================
+Pickling :
+
+It is used to serilize and deserialize the python objects
+Pickling: It is a process where a Python object is converted into a byte stream.
+Unpickling: It is the reverse of Pickling process where a byte stream is converted into an python object.
+Module Interface :
+
+dumps() – This function is called to serialize an object.
+loads() – This function is called to de-serialize a data stream.
+
+
+import pickle
+
+a=10
+ l=[1,2,4,b"pickle is good" , " python is cooler"]
+ d={"vijay" : "TCS",
+   "ram": "GOD",
+   "Seeta": "Goddess"}
+ with open(r'C:\Users\VIJAY\Desktop\mydict.txt', "wb") as f:
+	pickle.dump(a, f)   #pickling
+	# O/P €K
+
+	with open(r'C:\Users\VIJAY\Desktop\mydict.txt', "rb") as f:
+	aa=pickle.load(f)   # unpickling
+	# o/p : 10
+	
+	with open(r'C:\Users\VIJAY\Desktop\mydict.txt', "wb") as f:
+	pickle.dump(l , f) # pickling
+	
+	O/p : €]q (KKKCpickle is goodqX    python is coolerqe.
+	
+	with open(r'C:\Users\VIJAY\Desktop\mydict.txt', "rb") as f:
+	pickle.load(f)  # unpickling
+
+	
+O/P : [1, 2, 4, b'pickle is good', ' python is cooler']
+
+
+	with open(r'C:\Users\VIJAY\Desktop\mydict.txt', "wb") as f:
+	pickle.dump(d , f) # pickling
+O/P : €}q (X   vijayqX   TCSqX   ramqX   GODqX   SeetaqX   Goddessqu.
+
+with open(r'C:\Users\VIJAY\Desktop\mydict.txt', "rb") as f:
+	pickle.load( f) # unpickling
+
+	
+O/P : {'vijay': 'TCS', 'ram': 'GOD', 'Seeta': 'Goddess'}
+
+====================================================
+Type of operators in Pyton:
+1) Arithmetic operators: Arithmetic operators are used to perform mathematical operations like addition, subtraction, multiplication and division.
+OPERATOR	DESCRIPTION	SYNTAX
++	Addition: adds two operands	x + y
+-	Subtraction: subtracts two operands	x - y
+*	Multiplication: multiplies two operands	x * y
+/	Division (float): divides the first operand by the second	x / y
+//	Division (floor): divides the first operand by the second	x // y
+%	Modulus: returns the remainder when first operand is divided by the second	x % y
+
+# Examples of Arithmetic Operator 
+a = 9
+b = 4
+  
+# Addition of numbers 
+add = a + b 
+# Subtraction of numbers  
+sub = a - b 
+# Multiplication of number  
+mul = a * b 
+# Division(float) of number  
+div1 = a / b 
+# Division(floor) of number  
+div2 = a // b 
+# Modulo of both number 
+mod = a % b 
+  
+# print results 
+print(add) 
+print(sub) 
+print(mul) 
+print(div1) 
+print(div2) 
+print(mod) 
+Output:
+
+13
+5
+36
+2.25
+2
+1
+
+
+2) Relational Operators: Relational operators compares the values. It either returns True or False according to the condition.
+OPERATOR	DESCRIPTION	SYNTAX
+>	Greater than: True if left operand is greater than the right	x > y
+<	Less than: True if left operand is less than the right	x < y
+==	Equal to: True if both operands are equal	x == y
+!=	Not equal to - True if operands are not equal	x != y
+>=	Greater than or equal to: True if left operand is greater than or equal to the right	x >= y
+<=	Less than or equal to: True if left operand is less than or equal to the right	x <= y
+
+# Examples of Relational Operators 
+a = 13
+b = 33
+  
+# a > b is False 
+print(a > b) 
+  
+# a < b is True 
+print(a < b) 
+  
+# a == b is False 
+print(a == b) 
+  
+# a != b is True 
+print(a != b) 
+  
+# a >= b is False 
+print(a >= b) 
+  
+# a <= b is True 
+print(a <= b) 
+
+Output:
+
+False
+True
+False
+True
+False
+True
+
+3) Logical operators: Logical operators perform Logical AND, Logical OR and Logical NOT operations.
+
+
+OPERATOR	DESCRIPTION	SYNTAX
+and	Logical AND: True if both the operands are true	x and y
+or	Logical OR: True if either of the operands is true	x or y
+not	Logical NOT: True if operand is false	not x
+
+# Examples of Logical Operator 
+a = True
+b = False
+  
+# Print a and b is False 
+print(a and b) 
+  
+# Print a or b is True 
+print(a or b) 
+  
+# Print not a is False 
+print(not a) 
+Output:
+
+False
+True
+False
+
+
+
+
+ 
+
+4) Bitwise operators: Bitwise operators acts on bits and performs bit by bit operation.
+OPERATOR	DESCRIPTION	SYNTAX
+&	Bitwise AND	x & y
+|	Bitwise OR	x | y
+~	Bitwise NOT	~x
+^	Bitwise XOR	x ^ y
+>>	Bitwise right shift	x>>
+<<	Bitwise left shift	x<<
+# Examples of Bitwise operators 
+a = 10
+b = 4
+  
+# Print bitwise AND operation   
+print(a & b) 
+  
+# Print bitwise OR operation 
+print(a | b) 
+  
+# Print bitwise NOT operation  
+print(~a) 
+  
+# print bitwise XOR operation  
+print(a ^ b) 
+  
+# print bitwise right shift operation  
+print(a >> 2) 
+  
+# print bitwise left shift operation  
+print(a << 2) 
+Output:
+
+0
+14
+-11
+14
+2
+40
+
+5) Assignment operators: Assignment operators are used to assign values to the variables.
+
+
+OPERATOR	DESCRIPTION	SYNTAX
+=	Assign value of right side of expression to left side operand	x = y + z
++=	Add AND: Add right side operand with left side operand and then assign to left operand	a+=b     a=a+b
+-=	Subtract AND: Subtract right operand from left operand and then assign to left operand	a-=b       a=a-b
+*=	Multiply AND: Multiply right operand with left operand and then assign to left operand	a*=b       a=a*b
+/=	Divide AND: Divide left operand with right operand and then assign to left operand	a/=b         a=a/b
+%=	Modulus AND: Takes modulus using left and right operands and assign result to left operand	a%=b   a=a%b
+//=	Divide(floor) AND: Divide left operand with right operand and then assign the value(floor) to left operand	a//=b       a=a//b
+**=	Exponent AND: Calculate exponent(raise power) value using operands and assign value to left operand	a**=b     a=a**b
+&=	Performs Bitwise AND on operands and assign value to left operand	a&=b     a=a&b
+|=	Performs Bitwise OR on operands and assign value to left operand	a|=b         a=a|b
+^=	Performs Bitwise xOR on operands and assign value to left operand	a^=b       a=a^b
+>>=	Performs Bitwise right shift on operands and assign value to left operand	a>>=b     a=a>>b
+<<=	Performs Bitwise left shift on operands and assign value to left operand	a <<= b                    a= a << b
+
+
+Special operators: There are some special type of operators like-
+
+6) Identity operators-
+is and is not are the identity operators both are used to check if two values are located on the same part of the memory. Two variables that are equal does not imply that they are identical.
+is          True if the operands are identical 
+is not      True if the operands are not identical 
+
+# Examples of Identity operators 
+a1 = 3
+b1 = 3
+a2 = 'GeeksforGeeks'
+b2 = 'GeeksforGeeks'
+a3 = [1,2,3] 
+b3 = [1,2,3] 
+  
+  
+print(a1 is not b1) 
+  
+  
+print(a2 is b2) 
+  
+# Output is False, since lists are mutable. 
+print(a3 is b3) 
+Output:
+
+False
+True
+False
+
+7) Membership operators-
+in and not in are the membership operators; used to test whether a value or variable is in a sequence.
+in            True if value is found in the sequence
+not in        True if value is not found in the sequence
+
+
+# Examples of Membership operator 
+x = 'Geeks for Geeks'
+y = {3:'a',4:'b'} 
+  
+  
+print('G' in x) 
+  
+print('geeks' not in x) 
+  
+print('Geeks' not in x) 
+  
+print(3 in y) 
+  
+print('b' in y) 
+Output:
+
+True
+True
+False
+True
+False
+
+===========================================
+Monkey Patching in Python (Dynamic Behavior)
+
+In Python, the term monkey patch refers to dynamic (or run-time) modifications of a class or module. In Python, we can actually change the behavior of code at run-time.
+
+
+# monk.py 
+class A: 
+     def func(self): 
+          print "func() is being called"
+We use above module (monk) in below code and change behavior of func() at run-time by assigning different value.
+
+
+import monk 
+def monkey_f(self): 
+     print "monkey_f() is being called"
+   
+# replacing address of "func" with "monkey_f" 
+monk.A.func = monkey_f 
+obj = monk.A() 
+  
+# calling function "func" whose address got replaced 
+# with function "monkey_f()" 
+obj.func() 
+Examples:
+
+Output :monkey_f() is being called
