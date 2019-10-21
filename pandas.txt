@@ -1,0 +1,42 @@
+data science: it is a  proess of analyzing large set of data points to get answers of questions related to that data set
+Pandas : it si a python module that makes data science easy and effective
+
+process of cleaning messy data is called as data munging or data wrangling
+
+data frame is main object in pandas, it is used to represent data with rows and columns.
+
+
+ways of creation of dataframe
+1)test='test.csv' 
+df=pd.read_csv(test)
+
+2)
+data={
+'day' : ['1/2/2019','1/3/2019'],
+'temp' : [23,24],
+'windspeed' : [30,34]
+}
+ df =pandas.DataFrame(data)
+ 
+print(df.shape) // it will print no of rows and no of columns in form of tuple
+(2,3) #o/p
+
+print(df.head())  // it will print starting 5 rows in table
+print(df.head(2))  // it will print starting 2 rows from table
+print(df.tail())  // it will print last 5 rows
+print(df.tail(2))  // it will print last 2 rows
+
+we can use slicing with dataframe
+print(df[2:5])  // it will print row no 2,3 and 4 
+df[:] will print entire table
+
+print(df.columns)  // it prints the all column names
+O/P : Index(['id', 'name', 'add'], dtype='object')
+
+print(df.name)  // it prints the name column
+print(df['name']) both will print same
+
+print(df[['name','add']])  // to print multiple column
+
+df['id'].max()  // will print maximum of id
+df['id'].mean()  // will print mean of id
