@@ -616,3 +616,18 @@ print("name of program is {}".format(program_name))
 print("arguments passed to program are as follows")
 for x in sys.argv[1:]:
      print(x)
+
+===============
+def person(name , *data):
+    print("name :",name)
+    for info in data:
+        print(info)
+person("vijay" , "bhadup" , "tcs")
+
+
+def person_kwargs(name , **data):
+    print("name is:",name)
+    for key , value in data.items():
+        print(key,value)
+
+person_kwargs("vijay"  , company="tcs" , hometown="bhandup" , phone=9588756746)
