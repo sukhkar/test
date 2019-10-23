@@ -606,3 +606,13 @@ with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as fin:
         for line in fin:
             fout.write(line.rstrip("\n") + s+ "\n")
 print(open(r"C:\Users\VIJAY\Desktop\myopt.txt").readlines())	// append string at end of every line
+
+======================
+// how to take command line input from user
+import sys
+
+program_name=sys.argv[0]
+print("name of program is {}".format(program_name))
+print("arguments passed to program are as follows")
+for x in sys.argv[1:]:
+     print(x)
