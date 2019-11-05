@@ -631,3 +631,40 @@ def person_kwargs(name , **data):
         print(key,value)
 
 person_kwargs("vijay"  , company="tcs" , hometown="bhandup" , phone=9588756746)
+
+======================
+case1) if you are printing __name__ in current program then it will print as "__main__"
+
+case2) in one program you are  printing __name__ and importing that program into another program then over there instead of printing "__main__" it will print the name of program which was imported
+
+
+===========================
+Multithreading
+
+from threading import *
+from time import *
+
+class Hello(Thread):
+    def run(self):
+        for i in range(15):
+            print("hello")
+
+class Hi(Thread):
+    def run(self):
+        for i in range(15):
+            print("hi")
+
+
+t1=Hello()
+t2=Hi()
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+print("bye")
+                    
+
+
+here because of join method main thread will wait for t1 to complete and t2 to complete and main thread will proceed to print "bye"
