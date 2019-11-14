@@ -732,3 +732,35 @@ del List[0] : deleted first element
 
 del List : deletes entire list
 
+=========================
+differences between Python 2.x and Python 3.x 
+ 1) Division Operator
+ print 7 / 5
+   
+Output in Python 2.x // When two integers are divided, you always provide integer value.
+1 
+
+Output in Python 3.x : //Whenever two integers are divided, you get a float value
+1.4 
+
+2) print() function
+print 'Hello, Geeks'  // python 2 supports this , 3 doesn't supports
+print('Hope You like these facts')  // python 3 supports this
+
+
+3) xrange() of Python 2.x doesn’t exist in Python 3.x
+
+4) "as" keyword is needed in exception handling
+
+try: 
+    trying_to_check_error 
+except NameError, err: 
+    print err, 'Error Caused'   # Would not work in Python 3.x , it works in python 2
+	
+	
+try: 
+     trying_to_check_error 
+except NameError as err: # 'as' is needed in Python 3.x 
+     print (err, 'Error Caused') 
+
+
