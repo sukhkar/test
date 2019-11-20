@@ -810,5 +810,21 @@ application of generator
 MRO :
 http://www.srikanthtechnologies.com/blog/python/mro.aspx
 ======
+write a method to check no is even or odd without using modulus operator
+method 1)
+def even(n):
+	return(n&1)
+	
+if even(20) == 0:
+	print("even")
+else:
+	print("odd")
 
-
+method 2)
+def test(n):
+	return (int(n/2)*2 ==n)
+if test(4) == True:
+	print("even")
+else:
+	print("odd")
+	
