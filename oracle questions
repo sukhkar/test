@@ -1,0 +1,208 @@
+1) what is dual table 
+
+it si a special one ro table which is create by default whenever u install oracel database
+it is used for selecting a psudeo column such as sysdate or user ( select user from dual) (select sysdate from dual)
+it can be used to perform calculations ( select 2*45 from dual)
+it can be used as sequence generator 
+
+2) how many columns and rows are in dual table
+
+1 row and 1 column ( name of column dummy and value is X)
+
+3)can we insert more rows in dual table
+yes
+
+
+4) can we create table based on existing table
+yes using CTAS ( create table as )
+
+create table sales1 as select * from sales
+
+5) can we drop all columns from table
+no
+
+6)what are psudeo columns
+similiar to table columns but are not actually stored in table
+we can select psudeo columns but cant update delete insert into them
+eg SYSDATE , ROWID , ROWNUM
+
+7) what is difference between count(1) and count(*) ?
+exactly same
+they take same amount of resources
+they incur same amount of work
+
+
+6) what is difference between IN and = operator
+= accepts only 1 value
+IN operator can accept more than 1 value
+
+select eid, salary 
+from emp
+where d_id=10
+
+select e_id , salary
+from emp
+where d_id IN (100 , 110 , 120)
+
+7) how many max values can in operator take ?
+999
+
+8)difference betn exist and in when using subqueries ?
+
+IN 
+The inner query is executed first and list of values obtained as result are used by outer query. the inner query is executed only once
+
+select e_id , salary
+from emp
+where d_id in( select d_id
+				from department)
+				
+				
+EXISTS
+the first row from outer query is executed and then the inner query is executed , the outer query output is uses this this result for checking
+
+the process of inner query execution repeates as many no of times as there are outer query rows
+
+
+select *
+from customer cs
+where exists ( select * 
+				from order_details ord
+				where ord.id=cs.id )
+				
+				
+9)what is differece having and where caluse
+
+where is used to filter out data before aggragation takes place
+having is used to filter out data after the aggregation takes place
+
+select d_id , sum(salary) as salary
+from emp
+where d_id in ( 100 , 200)
+group by d_id
+having sum(salary) > 10000
+
+in this first the where condition is applied on the data then it performs grouping by d_id
+and then sum(salary) > 10000 is applied
+
+10)diff betwenn delete and truncate ,which is fast ?
+delete :
+it is used to selectively remove rows form table using where clause
+if no  where clause then all rows are removed
+
+after performing delete operation u need to commit or rollback the transcation to make change permenant or undo it
+
+in delete , triggers on the table are fired if there are any triggers
+
+
+Truncate :
+it removes all the rows from table , you can not rollback the data
+it does not affect any of the table indexes , trigges or dependencies 
+since no undo log is maintained and has no dependencies truncate is faster
+
+
+11) can we use where condition with truncate ?
+no
+
+12)
+can we delete a record from moret han 1 table simultaneously ?
+yes
+
+delete t1 , t2
+from t1 inner join t2
+where t1.id = t2.id
+and t2.id=t3.id
+
+13)how to remove duplicate rows from table
+
+d_id d_name branch
+1     IT    IT_1
+1     IT    IT_1
+2     test   test_1
+3     CS     CS-1
+3     CS     CS-1
+
+delete from department d1
+where d1.rowid > 
+( select min(d2.rowid) from department d2
+where d1.d_id = d2.d_id
+and d1.d_name= d2.d_name
+and d1.branch = d2.branch )
+
+
+14 ) what is self join , explain with example
+
+it is a join in which table is joined with itself
+ex > getting details about emp and its manager
+select e1.ename as employee_name, 
+e2.ename as manager_name
+from emp
+where e1.mgr =  e2.empno
+
+15) what happends when join condition is missed
+
+it performs a cartessian join which is also called as cross join
+each row in first table is paired with all row in second table
+
+selecct * 
+from sales , customer
+
+16)which is faster among left outerjoin and right outer join
+there is no difference between same
+
+
+17)explain various data types in oracle
+
+character datatypes 
+-char
+-varchar
+-varchar2
+-nchar and nvarchar2
+-long
+
+numeric data dtypes
+-number
+-binary float
+-binary double
+
+date datatypes
+-date
+-timestamp
+-timstamp with timezone
+-timestamp with local time zone
+
+large objects
+-clob
+nclob
+bfile
+
+xml data types
+-xmltype
+
+18)diifference between char , varchar and varchar2
+
+varchar is reservedd by oracle fr future releaes and is advised not to use
+char variable stores data in fixed length 
+varchar2 stores data ( variable length text)
+
+19) diff betn data and timstamp data types
+data can store month ,day , year , century , hours , minute , seconds
+
+timestamp can store even miliseconds
+
+timestamp can optionall store timezone as well
+
+20) difference betn char and nchar
+when data is stored in char , it takes n bytes for n chars 
+while nchar takes 2n bytes for n chars since data is stored in nchar is unicode format
+
+21)
+explain composite data types
+composite data type can be record  , table , nested table or varray
+
+TYPE student_data IS RECORD
+(
+first_name varchar2(20),
+id number(2),
+);
+
