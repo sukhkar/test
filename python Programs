@@ -1,0 +1,653 @@
+1) check whether strings are anagrams or not
+
+>>> def test(s1 , s2):
+	if (sorted(s1) == sorted(s2)):
+		print("same")
+	else:
+		print("not anagram")
+
+		
+>>> test("silent" , "listen")
+same
+>>> test("silent" , "listenn")
+not anagram
+
+
+>>> def test(s1  , s2):
+	n1=len(s1)
+	n2=len(s2)
+	if n1!= n2:
+		return 0
+	s1=sorted(s1)
+	s2=sorted(s2)
+	for i in range(0 , n1):
+		if s1[i] != s2[i]:
+			return 0
+	return 1
+
+>>> test("hi" , "ih")
+1
+>>> test("hi" , "ihi")
+0
+>>> if test('hi' , 'ih'):
+	print("strings are anagram")
+else:
+	print("strings are not anagram")
+
+	
+strings are anagram
+
+====================
+
+Program to find first repetitive character in string/list
+
+def test(l):
+	s=set()
+	for ch in l:
+		if ch not in s:
+			s.add(ch)
+		else:
+			return ch
+			
+>>> test([1,2,3,4,1])
+1
+>>> test("vijayv")
+'v'
+
+=====================
+Find repeated character present first in a string
+Input  : geeksforgeeks
+Output : g
+(mind that it will be g, not e.)
+
+>>> def test(s):
+	for i in range(len(s)):
+		if s[i] in str(s[i+1:len(s)]):
+			return s[i]
+
+		
+>>> test("geekforgeek")
+'g'
+
+============================
+Find the character in first string that is present at minimum index in second string
+
+
+Input: str = “geeksforgeeks”, patt = “set”
+Output: e
+Both e and s of patt are present in str,
+but e is present at minimum index, which is 1.
+
+
+def test(strr , ptn):
+	mindex=100**3
+	for i in range(len(ptn)):
+		for j in range(len(strr)):
+			if ptn[i] == strr[j] and j < mindex:
+				mindex=j
+				break
+	if mindex != 100**3:
+		print("minimum index is at {} position and character is {}".format(mindex, strr[mindex]))
+	else:
+		print("no character present")
+
+		
+>>> test("gelsforgeeks" , "set")
+minimum index is at 1 position and character is e
+
+
+Time Complexity: O(len(str)*len(ptn))
+=============================
+Find last index of a character in a string
+
+Input : str = "geeks", x = 'e'
+Output : 2
+Last index of 'e' in "geeks" is: 2 
+
+Input : str = "Hello world!", x = 'o'
+Output : 7
+Last index of 'o' is: 7 
+
+>>> def test(strr , x):
+	index=-1
+	for i in range(len(strr)):
+		if strr[i] == x:
+			index=i
+	if index != -1:
+		print("last index is",index)
+	else:
+		print(" {} not found in {}".format(x, strr))
+
+		
+>>> test("hellohi", 'h')
+last index is 5
+
+
+Time Complexity : Θ(n)
+========================
+Find one extra character in a string
+
+Input : string strA = "abcd";
+        string strB = "cbdae";
+Output : e
+string B contain all the element 
+there is a one extra character which is e
+
+Input : string strA = "kxml";
+        string strB = "klxml";
+Output : l
+string B contain all the element 
+there is a one extra character which is l
+
+
+>>> def findExtraCharacter(strA, strB): 
+
+    m1 = {} 
+
+    for i in strB: 
+        if i in m1: 
+            m1[i] += 1
+        else: 
+            m1[i] = 1
+
+    for i in strA: 
+        m1[i] -= 1
+  
+    for h1 in m1: 
+
+        if m1[h1] == 1: 
+            return h1
+
+        
+>>> findExtraCharacter("abc" , "abcde")
+'d'
+
+Time Complexity:- O(n)
+
+=====================
+Pallindrome string
+>>> def test(s):
+	i=0
+	while i < (len(s)/2):
+		if s[i] != s[len(s) -1 -i]:
+			return False
+		i+=1
+	return True
+
+>>> test("madam")
+True
+
+O(n)
+
+===============
+
+Python program to check if given string is vowel Palindrome
+Given a string (may contain both vowel and consonant letters), remove all consonants, then check if the resulting string is palindrome or not.
+
+Examples:
+
+Input :  abcuhuvmnba
+Output : YES
+Explanation :
+The consonants in the string "abcuhuvmnba"
+are removed. Now the string becomes "auua".
+
+
+>>> def test(s):
+	v=("aeiou")
+	ss=str()
+	for i in range(len(s)):
+		if s[i] in v:
+			ss+=s[i]
+	i=0
+	while i < (len(ss)/2):
+		if ss[i] != ss[len(ss) -i -1]:
+			return False
+		i+=1
+	return True
+
+>>> test("abcuhuvmnba")
+True
+>>> test("xayzuezyax")
+False
+
+========================
+Program to accept string starting with vowel
+
+def test(s):
+	t=("aeiouAEIOU")
+	if s[0] in t:
+		print("valid string")
+	else:
+		print("invalid string")
+
+		
+>>> test("asfsd")
+valid string
+>>> test("Easknf")
+valid string
+>>> test("gdsfads")
+invalid string
+
+============
+Python Regex – Program to accept string starting with vowel
+
+>>> def test(s):
+	regex="^[aeiouAEIOU][A-Za-z0-9]*"
+	if re.search(regex , s):
+		print("valid string")
+	else:
+		print("invalid string")
+
+		
+>>> test("animal")
+valid string
+>>> test("Iadsf")
+valid string
+>>> test("Pafas")
+invalid string
+
+================
+Python Regex | Program to accept string ending with alphanumeric character
+
+Input: ankitrai326
+Output: Accept
+
+Input: ankirai@
+Output: Discard
+
+>>> def test(s):
+	regex="[A-Za-z0-9]$"
+	if re.search(regex, s):
+		print("valid string")
+	else:
+		print("invalid string")
+
+		
+>>> test("vijay9")
+valid string
+>>> test("vijay&")
+invalid string
+
+
+===========================
+
+factorial program:
+def fact(n):
+	return 1 if (n==1) else n*fact(n-1)
+	
+def test(n):
+	if n==1:
+		return n
+	else:
+		return n*test(n-1)
+		
+		
+def fact(n):
+	ans=1
+	for i in range(1, n+1):
+		ans*=i
+	print("factorial of {} is {}".format(n,ans))
+	
+==================
+Python Program for Fibonacci numbers
+
+>>> def fibo(n):
+	if n<0:
+		print("INcorrect input")
+	elif n==1:
+		return 0
+	elif n==2:
+		return 1
+	else:
+		return fibo(n-1)+fibo(n-2)
+
+	
+>>> fibo(3)
+1
+>>> fibo(5)
+3
+====================
+>>> def fibo(n):
+	n1, n2, count=0,1,0
+	if n <= 0:
+		print("please enter positive number")
+		return
+	elif n ==1:
+		print(n1)
+	else:
+		while count < n:
+			print(n1)
+			sum=n1+n2
+			n1=n2
+			n2=sum
+			count+=1
+
+			
+>>> 
+>>> fibo(3)
+0
+1
+1
+================
+program to check first character of string is lower charcter/upper character/ number / special character
+
+>>> def test(s):
+	c=s[0]
+	if (c>='a' and c<='z'):
+		print("lower")
+	elif (c>="A" and c<="Z"):
+		print("upper")
+	elif (c >='0' and c<="9"):
+		print("number")
+	else:
+		print("special character")
+
+		
+>>> test("vijay")
+lower
+>>> test("Tea")
+upper
+>>> test("3sf")
+number
+>>> test("$afd")
+special character
+
+==================
+Write a program that accepts a sentence and calculate the number of letters and digits.
+Suppose the following input is supplied to the program:
+hello world! 123
+Then, the output should be:
+LETTERS 10
+DIGITS 3
+
+>>> def test(s):
+	l,d=0,0
+	for i in s:
+		if (i>='a')and (i<='z'):
+			l+=1
+		elif (i>='Z')and (i<='Z'):
+			l+=1
+		elif (i>='0') and (i<='9'):
+			d+=1
+	print("No of digits are ",d,"\n no of letters are",l)
+
+	
+>>> test("hello234")
+No of digits are  3 
+ no of letters are 5
+ 
+ 
+ >>> def test(s):
+	l,d=0,0
+	for i in s:
+		if i.isdigit():
+			d+=1
+		elif i.isalpha():
+			l+=1
+		else:
+			pass
+	print("digit",d,"letter",l)
+
+	
+>>> test("asdg4334")
+digit 4 letter 4
+
+============
+Write a program that computes the value of a+aa+aaa+aaaa with a given digit as the value of a.
+Suppose the following input is supplied to the program:
+9
+Then, the output should be:
+11106
+
+>>> def test(n):
+	n1=int("%s"%(n))
+	n2=int("%s%s"%(n,n))
+	n3=int("%s%s%s"%(n,n,n))
+	n4=int("%s%s%s%s"%(n,n,n,n))
+	print(n1+n2+n3+n4)
+
+	
+>>> test(9)
+11106
+
+============
+Use a list comprehension to square each odd number in a list. The list is input by a sequence of comma-separated numbers.
+
+>>> def test():
+	s=input("enter a comma seperated number")
+	x=[int(i)*int(i) for i in s.split(",") if (int(i)%2)!=0]
+	print(x)
+
+	
+>>> test()
+enter a comma seperated number1,2,3,4,5
+[1, 9, 25]
+
+===========
+take input of dictionary from user
+
+>>> def test():
+	n=int(input("enter total no of elements in dictionary"))
+	i=0
+	dict={}
+	while i<n:
+		inpt=input("enter key and value seperated by comma")
+		key,value=inpt.split(",")
+		dict[key]=value
+		i+=1
+	print(dict)
+
+	
+>>> test()
+enter total no of elements in dictionary2
+enter key and value seperated by comma1,2
+enter key and value seperated by comma3,4
+{'1': '2', '3': '4'}
+
+>>> def test():
+	dict={}
+	n=int(input("enter size of dict"))
+	for i in range(n):
+		key=input("enter key")
+		value=input("enter value")
+		dict[key]=value
+	print(dict)
+	
+	===================
+Write a program that computes the net amount of a bank account based a transaction log from console input. The transaction log format is shown as following:
+D 100
+W 200
+
+D means deposit while W means withdrawal.
+Suppose the following input is supplied to the program:
+D 300
+D 300
+W 200
+D 100
+Then, the output should be:
+500
+
+>>> def test():
+	dic={}
+	sum=0
+	n=int(input("enter no of transcations"))
+	for i in range(n):
+		key=input("enter transcation type")
+		value=int(input("enter amount"))
+		dic[key]=value
+	for k,v in dic.items():
+		if k == "D":
+			sum+=int(v)
+		elif k == "W":
+			sum -=int(v)
+	print(sum)
+
+	
+>>> test()
+enter no of transcations2
+enter transcation typeD
+enter amount1000
+enter transcation typeW
+enter amount200
+
+===========
+A website requires the users to input username and password to register. Write a program to check the validity of password input by users.
+Following are the criteria for checking the password:
+1. At least 1 letter between [a-z]
+2. At least 1 number between [0-9]
+1. At least 1 letter between [A-Z]
+3. At least 1 character from [$#@]
+4. Minimum length of transaction password: 6
+5. Maximum length of transaction password: 12
+Your program should accept a sequence of comma separated passwords and will check them according to the above criteria. Passwords that match the criteria are to be printed, each separated by a comma.
+Example
+If the following passwords are given as input to the program:
+ABd1234@1,a F1#,2w3E*,2We3345
+Then, the output of the program should be:
+ABd1234@1
+
+
+>>> def test():
+	import re
+	values=[]
+	items=[x for x in input().split(",")]
+	for p in items:
+		if len(p)<6 or len(p) > 12:
+			continue
+		elif not re.search("[A-Z]" ,p):
+			continue
+		elif not re.search("[a-z]" , p):
+			continue
+		elif not re.search("[$#@]",p):
+			continue
+		else:
+			values.append(p)
+	print(",".join(values))
+
+	
+>>> test()
+ABd1234@1,a F1#,2w3E*,2We3345
+ABd1234@1
+>>> test()
+abC23!#d
+abC23!#d
+
+========================
+A robot moves in a plane starting from the original point (0,0). The robot can move toward UP, DOWN, LEFT and RIGHT with a given steps. The trace of robot movement is shown as the following:
+UP 5
+DOWN 3
+LEFT 3
+RIGHT 2
+¡­
+The numbers after the direction are steps. Please write a program to compute the distance from current position after a sequence of movement and original point. If the distance is a float, then just print the nearest integer.
+Example:
+If the following tuples are given as input to the program:
+UP 5
+DOWN 3
+LEFT 3
+RIGHT 2
+Then, the output of the program should be:
+2
+
+
+def test():
+	dic={}
+	pos=[0,0]
+	import math
+	n=int(input("enter the total no of moves: "))
+	for i in range(n):
+		key=input("enter the direction: ")
+		value=int(input("enter the unit: "))
+		dic[key]=value
+	for k,v in dic.items():
+		if k == "UP":
+			pos[1]+=v
+		elif k =="DOWN":
+			pos[1]-=v
+		elif k =="RIGHT":
+			pos[0]+=v
+		elif k =="LEFT":
+			pos[0]-=v
+		else:
+			pass
+	dis=int(round(math.sqrt(pos[1]**2+pos[0]**2)))
+	print(dis)
+
+	
+>>> test()
+enter the total no of moves: 4
+enter the direction: UP
+enter the unit: 5
+enter the direction: DOWN
+enter the unit: 3
+enter the direction: LEFT
+enter the unit: 3
+enter the direction: RIGHT
+enter the unit: 2
+2
+
+=========================
+Write a program to compute the frequency of the words from the input. The output should output after sorting the key alphanumerically. 
+Suppose the following input is supplied to the program:
+New to Python or choosing between Python 2 and Python 3? Read Python 2 or Python 3.
+Then, the output should be:
+2:2
+3.:1
+3?:1
+New:1
+Python:5
+Read:1
+and:1
+between:1
+choosing:1
+or:2
+to:1
+
+def test():
+	d={}
+	s=input("enter the sentense: ").split()
+	for i in s:
+		if i in d:
+			d[i] +=1
+		else:
+			d[i] = 1
+	for i in sorted(d.keys()):
+		print(i," : ",d[i])
+
+		
+>>> test()
+enter the sentense: New to Python or choosing between Python 2 and Python 3? Read Python 2 or Python 3
+2  :  2
+3  :  1
+3?  :  1
+New  :  1
+Python  :  5
+Read  :  1
+and  :  1
+between  :  1
+choosing  :  1
+or  :  2
+to  :  1
+
+==================
+Reverse words in a given String in Python
+
+def test(s):
+	l=s.split()
+	l=l[::-1]
+	print(" ".join(l))
+
+	
+>>> test("hello vijay how")
+how vijay hello
+
+==================
+remove i’th character from string in Python
+
+def test(s,i):
+	return s[:i]+s[i+1:]
+
+>>> test("vijay",1)
+'vjay'
+=============
