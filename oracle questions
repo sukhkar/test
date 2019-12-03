@@ -206,3 +206,211 @@ first_name varchar2(20),
 id number(2),
 );
 
+22)
+what does instr() and substr() return ?
+substr() is used to extract substring from string
+
+instr() is used to return location of substring from string
+
+23) what are conversion function
+it is used to typecast data from one datatype to another data type
+
+select to_date('January 15 2015', 'month dd, yyyy') from dual
+
+here we are converting char to date format
+
+24) what is usage o lpad and rpad function
+
+it is used to add padding characters to the left or right side of a string up to a given length
+the default padding character is space
+if string's length is greater than required length then it will be trimmed
+
+25) what is difference between single row and multi row functions
+
+single row functions return single row for every row of quered table / view
+
+select eno,ename, to_char(sal , '9,999.99') from emp
+
+multi row functions return single result row based on groups of rows 
+
+select dno, sum(sal) from emp group by dno
+
+
+26) how to add 1 month to system date
+
+select ADD_MONTHS( SYSDATE , 1) from dual
+
+
+substract 1 month
+select ADD_MONTHS( SYSDATE , -1) from dual
+
+27) how to add 1 hour to SYSDATE
+
+select SYSDATE + (1/24) from dual
+
+28) what is output of below sql statements
+
+select 1+ null from dual
+select 1* null from dual
+select 1/ null from dual
+
+ANS : null
+
+any arithmetic operation on null is null
+
+29) difference between nvl , nvl2 and null if functions
+
+1) nvl() : takes 2 parameter
+if the first parameter value is not null then it returns first parameter value
+if the first parameter value is null then it return the value in second parameter
+
+select nvl(null, 1) from dual // 1
+select  nvl('a' , 1) from dual // a
+
+
+2) nvl2(): It accepts 3 parameter
+if first parameter value is not null then it return second parameter
+if first parameter value is null then it returns third parameter
+select nvl2( 'a' , 1,2) from dual //1
+select nvl2( null , 1,2)  from dual // 2
+
+3) nullif : accepts 2 parameter
+returns null if both parameters are equal
+if both aprameters are not equal then it returns first parameter
+select nullif('a' ,'b') from dual // a
+select nullif('a' , 'a') from dual // null
+
+
+30) what is COALESCE function ?
+
+it accepts 2 or more functions
+
+return first non-null value in list
+if alll parameters are null values it returns null
+
+select COALESSCE( null , null, 'a' ,'b') from dual  // a
+
+31) what is output of below query ?
+select * from test1 where c_phone = null ;
+select * from test1 where c_phone in (null);
+ans : 0 row's are returned
+
+because we cant use "=" or "in:" operator with null , we should use "is" oeprator with null
+
+32) what is output of below query ?
+
+select 'tom' ||null || 'joe' from dual 
+
+ans : tomjoe
+
+33)which data type does not allow 'null' values ?
+ans : none . all data type can be null . only if you have specified NOT NULL constraint for any column then only its value cant be null
+
+34) what are constraints / integrity constraints ? their types ?
+
+it is a way of enforcing rule into database , it maintains integrity of database
+Integrity constraints are used to prevent entry of invalid info into tables
+
+types :
+1) not null :
+it prohibits a database value from being null
+
+2) unique :
+it prohibits multiple rows fom having same value in same column  but it allows null value
+
+3) primary key :
+it is same as unique key but it cant be null
+
+4) foreign key :
+it requires value in one table to match value in another table
+
+5) check :
+it requires a value in database to comply with specified condition 
+for ex we can set salary column to be not greater than 100000
+
+35) can a table have 2 primary key ? 
+NO
+
+36) how to disable constraint ?
+alter table tablename
+disable constraint constraint_name
+
+37) if you create a primary key  by default which index is created ?
+by default unique index is create 
+
+38) what are various set oeprations ?
+
+1) UNION : it return rows of first query + rows of second query minux duplicate rows
+2) UNION ALL : it returns rows from both queris including duplicate rows
+3) minus : rows that are unique for first query will be retrieved
+4) intersect : common rows from both query will be retrieved
+
+
+39) difference betwen joins and set operations ?
+
+set :it is used to combine similiar type of data from 2 or more table
+joins : it is used to select columns from 2 or mote tables based on logical relationship between tables;
+
+
+40) what is difference between union and union all operator ?
+union set operator return all distinct rows from selected queries means duplicate rows are removed
+union all set operator removed duplicate rows from queries
+
+41) which is faster betwen union and union all ?
+
+union all is faster bcoz removal of duplicates requires extra processing hence takes some time
+
+42) should no of columns be same when performing set operations ?
+
+yes
+select eno , ename from emo:
+union all
+select eno , ename from emp_history ;
+
+43) should data type of columns be same when performing when set operations ?
+
+yes
+
+44) what is inline view ?
+
+a subquery which appears in the FROM Clause is called as inline view
+ex :
+
+select * 
+from sales s
+( select customer_id
+from customer 
+where region = 'south'
+) c
+where c.customer_id = s.customer_id
+
+
+45) what is scalar subquery ?
+a subquery which appears in select clause is called as sclaar subquery 
+it can return only 1 row and 1 column
+
+select s.customer_id,
+s.total_amount,
+(select first_name
+from customer c
+where c.customer_id = s.customer_id
+) first_name
+from sales s
+
+
+46)what is index , what are various indexes and what is default index ?
+indexes are data structres used by oracle/mysql to faciliate faster data retrivial 
+
+type 
+B-Tree index
+bitmap index
+bitmap join index
+function based index
+
+we can create unique or non unique index
+
+
+
+
+
+
