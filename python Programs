@@ -651,3 +651,393 @@ def test(s,i):
 >>> test("vijay",1)
 'vjay'
 =============
+1) Program to check if a string contains any special character
+
+def test(s):
+	import re
+	regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+	if(regex.search(s) == None):
+		print("pass")
+	else:
+		print("fail")
+
+		
+>>> test('afa')
+pass
+>>> test('@afaf')
+fail
+
+2) Check if a given string is binary string or not
+
+def test(s):
+	ss=set(s)
+	new={'0','1'}
+	if ss == new or ss == {'0'} or ss == {'1'}:
+		print("yes")
+	else:
+		print("no")
+		
+test("101010001")
+yes
+
+test("101012")
+no
+
+
+3) Find all close matches of input string from a list
+
+from difflib import get_close_matches
+def test(s , l):
+	print(get_close_matches(s , l))
+
+	
+ test("ape" , ["apple", "appe" , "aep" , "apl"])
+['appe', 'apple', 'apl']		
+
+4) program to find uncommon words from two Strings
+
+def test(s1 , s2):
+	s=set()
+	l1=s1.split()
+	l2=s2.split()
+	for i in l1:
+		if i not in l2:
+			s.add(i)
+	for i in l2:
+		if i not in l1:
+			s.add(i)
+	print(s)
+
+	
+>>> test("Geeks for Geeks" , "Learning from Geeks for Geeks")
+set(['from', 'Learning'])
+
+
+5) Permutation of a given string using inbuilt function
+
+from itertools import permutations 
+  
+def test(str): 
+       
+     permList = permutations(str) 
+	 
+test("ABC")
+o/p :
+ABC
+ACB
+BAC
+BCA
+CAB
+CBA
+
+6) Find all duplicate characters in string
+from collections import Counter
+
+def test(s):
+	d=Counter(s)
+	p=[]
+	for k,v in d.items():
+		if v > 1:
+			p.append(k)
+	print(p)
+
+test("hihellohowareyou")
+['e', 'h', 'l', 'o']
+
+
+7) String slicing in Python to check if a string can become empty by recursive deletion
+
+def check(input , ptn):
+	if len(input) <= 0:
+		return False
+	while len(input) != 0:
+		index=input.find(ptn)
+		if index == (-1):
+			return False
+		input=input[:index] + input[index+len(ptn):]
+	return True
+
+	
+	 check('GEEGEEKSKS' , 'GEEKS')
+True
+>>> check('GEEGEEKSKS' , 'GEES')
+False
+
+8) String slicing in Python to rotate a string
+def rotate(s, no):
+	org=s
+	s=s[no:]+s[:no]
+	print("left rotate with {} rotaton is {}".format(no , s))
+	s=org
+	s=s[-no:]+s[:-no]
+	print("right rotation with {} rotation is {}".format(no , s))
+
+	
+>>> rotate("GeeksforGeeks" , 2)
+left rotate with 2 rotaton is eksforGeeksGe
+right rotation with 2 rotation is ksGeeksforGee
+
+>>> rotate("qwertyu" , 2)
+left rotate with 2 rotaton is ertyuqw
+right rotation with 2 rotation is yuqwert
+
+
+9) Execute a String of Code in Python
+def test():
+	loc="""print(5)"""
+	exec(loc)
+
+	
+>>> test()
+5
+
+code = """ def factorial(num):
+               for i in range(1,num+1):
+                   fact = fact*i
+               return fact
+           print(factorial(5))"""
+Output:
+120
+
+10) program to create a list of tuples from given list having number and its cube in each tuple
+Input: list = [1, 2, 3]
+Output: [(1, 1), (2, 8), (3, 27)]
+
+l=[1,2,3]
+>>> s=[(i, pow(i,3)) for i in l]
+>>> s
+[(1, 1), (2, 8), (3, 27)]
+
+11)  program to convert time from 12 hour to 24 hour format
+Input : 11:21:30 PM
+Output : 23:21:30
+
+Input : 12:12:20 AM
+Output : 00:12:20
+
+def convert24(str1): 
+      
+    # Checking if last two elements of time 
+    # is AM and first two elements are 12 
+    if str1[-2:] == "AM" and str1[:2] == "12": 
+        return "00" + str1[2:-2] 
+          
+    # remove the AM     
+    elif str1[-2:] == "AM": 
+        return str1[:-2] 
+      
+    # Checking if last two elements of time 
+    # is PM and first two elements are 12    
+    elif str1[-2:] == "PM" and str1[:2] == "12": 
+        return str1[:-2] 
+          
+    else: 
+          
+        # add 12 to hours and remove PM 
+        return str(int(str1[:2]) + 12) + str1[2:8] 
+  
+# Driver Code         
+print(convert24("08:05:45 PM")) 
+
+12) print the content of file in reverese order:
+
+for line in reversed(list(open(r"C:\Users\VIJAY\Desktop\file.txt"))):
+	print(line)
+	
+	
+13)Given an integer array, output all the unique pairs that sum up to a specific value k.
+
+So the input:
+
+pair_sum([1,3,2,2],4)
+
+would return 2 pairs:
+
+ (1,3)
+ (2,2)
+
+ def test(arr, k):
+	if len(arr) < 2:
+		print("lenght of {} is less than 2".format(arr))
+		return
+	output=set()
+	seen=set()
+	for i in arr:
+		target=k-i
+		if target not in seen:
+			seen.add(i)
+		else:
+			output.add((min(i,target), max(target,i)))
+	print(output)
+	print(len(output))
+
+	
+>>> test([1,3,2,2],4)
+{(1, 3), (2, 2)}
+2
+
+>>> def test(arr,k):
+	op=set()
+	for i in range(len(arr)):
+		tgt=k-arr[i]
+		if tgt in arr[i+1:len(arr)]:
+			op.add((arr[i],tgt))
+	print(op)
+	print(len(op))
+
+	
+>>> test([1,3,2,2],4)
+{(1, 3), (2, 2)}
+2
+
+14) Consider an array of non-negative integers. A second array is formed by shuffling the elements of the first array and deleting a random element. Given these two arrays, find which element is missing in the second array.
+
+Here is an example input, the first array is shuffled and the number 5 is removed to construct the second array.
+
+Input:
+
+finder([1,2,3,4,5,6,7],[3,7,2,1,4,6])
+
+Output:
+
+5 is the missing number
+
+
+def test(a1,a2):
+	sum=0
+	for i in a1:
+		sum+=i
+	for j in a2:
+		sum-=j
+	return sum
+
+>>> test([1,2,3,4,5,6,7],[3,7,2,1,4,6])
+5
+
+
+def test(a1 , a2):
+	d={}
+	for i in a1:
+		d[i]=1
+	for i in a2:
+		if i in d:
+			d.pop(i)
+	for k,v in d.items():
+		print(" {} is missing ".format(k))
+
+		
+>>> test([1,2,3,4],[1,2,3])
+ 4 is missing 
+ 
+15) 
+Given a string in the form 'AAAABBBBCCCCCDDEEEE' compress it to become 'A4B4C5D2E4'. For this problem, you can falsely "compress" strings of single or double letters. For instance, it is okay for 'AAB' to return 'A2B1' even though this technically takes more space.
+
+The function should also be case sensitive, so that a string 'AAAaaa' returns 'A3a3'.
+
+
+ def test(s):
+	s+=" "
+	l=""
+	count=0
+	ss=""
+	for i in range(len(s)):
+		if s[i] != l:
+			if i != 0:
+				ss += l
+				ss += str(count)
+			l=s[i]
+			count=1
+		elif s[i] == l:
+			count +=1
+	print(ss)
+
+	
+>>> test("AAABB")
+A3B2
+>>> test("AAaaa")
+A2a3
+
+
+16) Given a string,determine if it is compreised of all unique characters. For example, the string 'abcde' has all unique characters and should return True. The string 'aabcde' contains duplicate characters and should return false.
+
+ def test(s):
+	for i in range(len(s)):
+		if s[i] in str(s[:i]+s[i+1:]):
+			return False
+	return True
+
+>>> test("abcd")
+True
+>>> test("abcdea")
+False
+
+
+def uni_char(s):
+    return len(set(s)) == len(s)
+
+
+def uni_char2(s):
+    chars = set()
+    for let in s:
+        # Check if in set
+        if let in chars:
+            return False
+        else:
+            #Add it to the set
+            chars.add(let)
+    return True
+	
+	
+
+17) Given a string of opening and closing parentheses, check whether it’s balanced. We have 3 types of parentheses: round brackets: (), square brackets: [], and curly brackets: {}. Assume that the string doesn’t contain any other character than these, no spaces words or numbers. As a reminder, balanced parentheses require every opening parenthesis to be closed in the reverse order opened. For example ‘([])’ is balanced but ‘([)]’ is not.
+
+You can assume the input string has no spaces.
+
+
+def test(s):
+	if len(s)%2 != 0:
+		return False
+	opening=set('[({')
+	matches=set([('(',')')  , ('{','}') , ('[',']')])
+	stack=[]
+	for i in s:
+		if i in opening:
+			stack.append(i)
+		else:
+			if len(stack) == 0:
+				return False
+			l_open=stack.pop()
+			if (l_open , i) not in matches:
+				return False
+	return True
+
+>>> test("({[]})")
+True
+>>> test("{{}}[([])]")
+True
+>>> test("{){})}")
+False
+
+18) Given the Stack class below, implement a Queue class using two stacks! Note, this is a "classic" interview problem. Use a Python list data structure as your Stack.
+
+ class stacks2():
+	def __init__(self):
+		self.stack_in = []
+		self.stack_out =[]
+	def enqueue(self , item):
+		self.stack_in.append(item)
+	def dequeue(self):
+		if not self.stack_out:
+			while self.stack_in:
+				self.stack_out.append(self.stack_in.pop())
+		return self.stack_out.pop()
+
+	
+>>> d=stacks2()
+>>> d.enqueue(1)
+>>> d.enqueue(2)
+>>> d.dequeue()
+1
+>>> d.dequeue()
+2
+>>> d.dequeue()
