@@ -1,0 +1,218 @@
+THree types of variable are supported by perl
+1) scalar : represented by $
+2) array : represented by @
+3) hash : represented by %
+
+$number=10;
+@ages = (10,20,30);
+%data = ("John Paul", 10 , 'ajay', 20 , 'swati', 30);
+print " number is : $number\n";
+print " first age is $ages[0]\n";
+print "\$data{'John Paul'} = $data{'John Paul'}\n";
+
+
+
+$str="hello" . " Vijay";
+$num=4 + 5;
+$mul=3*4;
+$mix=$str . $num;
+
+print "str = $str\n";
+print "num = $num\n";
+print "mul = $mul\n";
+print "mix = $mix\n";
+
+
+str = hello Vijay
+num = 9
+mul = 12
+mix = hello Vijay9
+
+
+@array = qw"vijay is here";
+
+print "$array[0]"; // vijay
+
+@array = qw/vijaya is here/;
+
+print "$array[0]";  // vijaya
+
+@array = ("vijay" , "usis" , "here");
+
+print "$array[0]"; // vijay
+
+
+(..) is range operator
+
+@var_abc=(a..z);
+print "@var_abc"; //a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+@var_abc=(a..z);
+print "$var_abc[0]"; // a
+
+@var_abc=(a..z);
+print "@var_abc[0]";  // a
+
+$size=@var_abc;
+print "$size" // 26
+
+array operations
+
+@data=(1,2,3,4);
+print "@data\n";  // 1 2 3 4
+
+push(@data , 5);
+print "@data\n";  // 1 2 3 4 5
+
+pop(@data);
+print "@data\n"; // 1 2 3 4
+
+unshift(@data, 0);
+print "@data\n";  // 0 1 2 3 4
+
+shift(@data);
+print "@data\n"; // 1 2 3 4
+
+
+array slicing 
+
+@num=(0,1,2,3,4,5);
+
+@slice_num=@num[1,2,3];
+
+
+print "@num\n";  // 0 1 2 3 4 5
+
+print "@slice_num\n";  // 1 2 3
+
+replacing array elements with splice operations
+@num=(0,1,2,3,4,5);
+
+print "@num\n";  // 0 1 2 3 4 5
+
+splice( @num , 2,2,1..2);
+
+print "@num\n";  //0 1 1 2 4 5
+
+
+transform string into array
+
+$str="hello-vijay";
+
+@arr=split('-' , $str);
+
+print "@arr[0]\n";  // hello
+
+transform array into sring
+
+@arr=("hi","Vijay","how");
+@arr2=(1,2,3,4);
+
+$str=join(" ",@arr);
+$arr2=join(" ",@arr2);
+
+
+print "$str\n";  // hi vijay how
+print "$arr2\n";  //  1 2 3 4
+
+sorting the array :
+
+@foods = qw(pizza steak chicken burgers);
+print "Before: @foods\n";
+
+# sort this array
+@foods = sort(@foods);
+print "After: @foods\n";
+
+o/p:
+Before: pizza steak chicken burgers
+After: burgers chicken pizza steak
+
+
+$[ is a special variable:
+ if you set $[ to 1 then all your arrays will use on-based indexing
+ 
+@foods = qw(pizza steak chicken burgers);
+
+$[ = 1;
+
+print "@foods[1]\n";  // pizza
+
+Ternary operator 
+
+$name="vijay";
+$age=26;
+
+$result = $age > 60 ? " senior citizen" : "not a senior citizen";
+
+print "$name is $result";
+
+
+LOOPS :
+for loop :
+for($i=0 ;$i < 5 ;$i++ ) {
+   printf "This loop will run forever.\n";
+}
+
+while loop:
+$i=0;
+while ($i < 10){
+    print " HI VIjay\n";
+    $i++;
+}
+do while loop:
+$i=0;
+do{
+    print "Heu Vijay\n";
+    $i++;
+}while($i < 5);
+
+foreach loop :
+@var = (1,2,3,4);
+
+foreach $i  (@var){
+    print "$i\n";
+}
+ 
+until loop : 
+ $a = 5;
+
+# until loop execution
+until( $a > 10 ) {
+   printf "Value of a: $a\n";
+   $a = $a + 1;
+}
+ 
+STATEMENTS :
+1) next : it goes to next iteration of loop
+$a = 10;
+while( $a < 20 ) {
+   if( $a == 15) {
+      # skip the iteration.
+      $a = $a + 1;
+      next;
+   }
+   print "value of a: $a\n";
+   $a = $a + 1;
+}
+
+2) last : if encountered in loop then it terminates the loop
+$a = 10;
+while( $a < 20 ) {
+   if( $a == 15) {
+      # terminate the loop.
+      $a = $a + 1;
+      last;
+   }
+   print "value of a: $a\n";
+   $a = $a + 1;
+}
+
+3) continue: it is executed when while condition is met:
+$a = 0;
+while($a < 3) {
+   print "Value of a = $a\n";
+} continue {
+   $a = $a + 1;
+}
+
