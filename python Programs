@@ -720,6 +720,8 @@ from itertools import permutations
 def test(str): 
        
      permList = permutations(str) 
+     for perm in list(permList): 
+         print (''.join(perm)) 
 	 
 test("ABC")
 o/p :
