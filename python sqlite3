@@ -1,0 +1,60 @@
+import sqlite3
+ 
+from sqlite3 import Error
+ 
+def sql_connection():
+ 
+    try:
+ 
+        con = sqlite3.connect("C:\\Users\\VIJAY\\Desktop\\test.db") 
+        return con 
+    except Error:
+ 
+        print(Error)
+def craete_table(con):
+    cursObj=con.cursor()
+    cursObj.execute("create table employees(id integer primary key , name text, salary real, department text , position text, hireDate text)")
+    con.commit()
+
+def sql_insert(con, entities):
+    cursObj=con.cursor()
+    cursObj.execute("insert into employees(id , name , salary , department, position , hiredate) values (?,?,?,?,?,?)", entities)
+    con.commit()
+
+def sql_update(con):
+    cursObj=con.cursor()
+    cursObj.execute("update employees set name='Vijay' where department='IT'")
+
+
+def sql_fetch(con):
+    cursObj=con.cursor()
+    cursObj.execute("select * from employees where department='IT'")
+    
+    [ print(r) for r in cursObj.fetchall()]
+
+def sql_fetch_table(con):
+    cursObj=con.cursor()
+    cursObj.execute("select name from sqlite_master where type='table'")
+    print(cursObj.fetchall())
+
+def sql_insert_more(con):
+    cursObj=con.cursor()
+    cursObj.execute("insert into employees values (3,'ram', 10000, 'IT', 'engineer' , '2012-02-02')")
+    con.commit()
+
+def sql_fetch_ram_salary(con):
+    cursObj=con.cursor()
+    cursObj.execute("select name , salary from employees where name='ram'")
+    row=cursObj.fetchall()
+    for r in row:
+        print("name    {} \nsalary  {}".format(r[0] , r[1]))
+    
+entities=(2, 'Andrew', 800, 'IT', 'Tech','2018-02-06')
+con=sql_connection()    
+#craete_table(con)
+#sql_insert(con, entities)
+#sql_insert_more(con)
+#sql_update(con)
+#sql_fetch(con)
+#sql_fetch_table(con)
+sql_fetch_ram_salary(con)
