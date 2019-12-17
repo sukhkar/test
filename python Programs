@@ -269,25 +269,6 @@ valid string
 >>> test("vijay&")
 invalid string
 
-
-===========================
-
-factorial program:
-def fact(n):
-	return 1 if (n==1) else n*fact(n-1)
-	
-def test(n):
-	if n==1:
-		return n
-	else:
-		return n*test(n-1)
-		
-		
-def fact(n):
-	ans=1
-	for i in range(1, n+1):
-		ans*=i
-	print("factorial of {} is {}".format(n,ans))
 	
 ==================
 Python Program for Fibonacci numbers
@@ -1065,9 +1046,8 @@ for i in test_str:
         all_freq[i] += 1
     else: 
         all_freq[i] = 1
-	
-	
-	
+==========================
+
 write a method to check no is even or odd without using modulus operator
 method 1)
 def even(n):
@@ -1086,3 +1066,267 @@ if test(4) == True:
 else:
 	print("odd")
 	
+==============
+Fibonacci series 
+
+1) recursively 
+def fib_rec(n):
+    
+    # Base Case
+    if n == 0 or n == 1:
+        return n
+    
+    # Recursion
+    else:
+        return fib_rec(n-1) + fib_rec(n-2)
+		
+2) Dynamically 
+n = 10
+cache = [None] * (n + 1)
+
+
+def fib_dyn(n):
+    
+    # Base Case
+    if n == 0 or n == 1:
+        return n
+    
+    # Check cache
+    if cache[n] != None:
+        return cache[n]
+    
+    # Keep setting cache
+    cache[n] = fib_dyn(n-1) + fib_dyn(n-2)
+    
+    return cache[n]
+
+3) iteratively 
+def fib_iter(n):
+    
+    # Set starting point
+    a = 0
+    b = 1
+    
+    # Follow algorithm
+    for i in range(n):
+        
+        a, b = b, a + b
+        
+    return a
+=============================
+
+reverse a string with recursion :
+def reverse(s):
+    
+    # Base Case
+    if len(s) <= 1:
+        return s
+
+    # Recursion
+    return reverse(s[1:]) + s[0]
+===================
+	
+4) date operations in python 
+def test():
+	y=int(input("enter the year"))
+	m=int(input("enter the month"))
+	d=int(input("enter the date"))
+	date=datetime.date(y,m,d)
+	print(date)
+	
+enter the year2019
+enter the month12
+enter the date12
+2019-12-12
+
+
+ def date_split():
+	date_entry=input("enter date in yyyy-mm-dd format")
+	year,month,date=map(int, date_entry.split("-"))
+	date=datetime.date(year, month, date)
+	print(date)
+
+	
+>>> date_split()
+enter date in yyyy-mm-dd format2019-12-14
+2019-12-14
+===============
+
+check whether date provvided by user is valid date or not ?
+def test_date():
+	inputdate=input("enter the date in dd/mm/yyyy format")
+	day,month,year=inputdate.split("/")
+	isValid=True
+	try:
+		datetime.datetime(int(year) , int(month), int(day))
+	except ValueError:
+		isValid=False
+	if isValid:
+		print("input date is valid ..")
+	else:
+		print("inout date is not valid ..")
+
+		
+>>> test_date()
+enter the date in dd/mm/yyyy format30/3/19
+input date is valid ..
+>>> test_date()
+enter the date in dd/mm/yyyy format30/3/20
+input date is valid ..
+>>> test_date()
+enter the date in dd/mm/yyyy format30/2/19
+inout date is not valid ..
+
+we can compare two date with < , > operator
+
+import datetime
+from datetime import date as dt
+
+ def test():
+	year=int(input("enter year"))
+	month=int(input("enter month"))
+	date=int(input("enter date"))
+	d1=datetime.date(year,month,date)
+	d2=dt.today()
+	if d1 > d2:
+		print("{} is latest".format(d1))
+	elif d1 < d2:
+		print(" {} is latest".format(d2))
+	else:
+		print("both of the dates are same")
+
+		
+>>> test()
+enter year2019
+enter month12
+enter date14
+both of the dates are same
+>>> test()
+enter year2019
+enter month12
+enter date15
+2019-12-15 is latest
+>>> test()
+enter year2019
+enter month12
+enter date12
+ 2019-12-14 is latest
+ 
+ 
+=============== 
+factorial one liner:
+def fact(n):
+	print(functools.reduce(lambda a,b:a*b , list(range(1,n+1))))
+	
+fact(3)
+6
+
+def fact(n): return 1 if n ==1 else n*fact(n-1)
+fact(4)
+24
+======================
+
+average of list elements in one line:
+def test(l):
+	return functools.reduce(lambda a,b : a+b,l)/len(l)
+	
+def test():
+	l=[int(i) for i in input().split(",")]
+	return sum(l)/len(l)
+
+>>> test()
+1,2,3,4,5
+3.0
+
+
+from statistics import mean
+>>> def test(l):
+	return mean(l)
+
+>>> test([1,2,3,4,5])
+3
+================
+
+print total digits in number
+ def test():
+	count=0
+	n=int(input('enter a number'))
+	orig=n
+	while n>0:
+		n=int(n/10)
+		count+=1
+	print("total digits in {} are {}".format(orig, count))
+
+	
+>>> test()
+enter a number123
+total digits in 123 are 3
+=================
+check whether string are pangram or not ?
+
+def test(s):
+	if len(set('abcdefghijklmnopqrstuvwxyz')-set(s.lower()))== 0:
+		return True
+	else:
+		return False
+		
+>>> test("The five boxing wizards jump quickly")
+True
+>>> test("Pack my box with five dozen liquor jugs")
+True
+>>> test("Pack my box with five dozen liquor ju")
+False
+================
+
+program to count no of characters in string:
+def test(s):
+	print("length of {} is {}".format(s.replace(" ","") , len(s.replace(" ",""))))
+
+	
+>>> test("this string has four tabs")
+length of thisstringhasfourtabs is 21
+>>> test("this string has four spaces")
+length of thisstringhasfourspaces is 23
+
+=======================
+count total lower case characters in string 
+
+>>> def test(s):
+	count=0
+	for i in s:
+		if i >= 'a' and i <= 'z':
+			count+=1
+	print(count)
+
+	
+>>> test("hey vijay HOW are you")
+14
+>>> def test(s):
+	count=0
+	for i in s:
+		if i.islower():
+			count+=1
+	print(count)
+
+	
+>>> test("hey vijay HOW are you")
+14
+
+==================
+find largest odd and largest even no in list 
+ def test(l):
+	l_o=-1
+	l_e=-1
+	for i in l:
+		if i%2 == 0 and i > l_e:
+			l_e = i
+		elif i%2 != 0 and i > l_o:
+			l_o = i
+	print("largest odd is {}".format(l_o))
+	print("largest even is {} ".format(l_e))
+
+	
+>>> test([2,4,3,1,5,7,4,8,33,66,55,11,77,99])
+largest odd is 99
+largest even is 66 
+
