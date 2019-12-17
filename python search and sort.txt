@@ -233,6 +233,102 @@ q.put('code')
 >>> q.get()
 'code'
 ==================
+stack representation of class
+
+class Stack():
+	def __init__(self):
+		self.items=[]
+	def isEmpty(self):
+		return self.items == []
+	def push(self , a):
+		self.items.append(a)
+	def peek(self):
+		return self.items[len(self.items)-1]
+	def pop(self):
+		return self.items.pop()
+	def size(self):
+		return len(self.items)
+
+	
+>>> s=Stack()
+>>> s.isEmpty()
+True
+>>> s.push(3)
+>>> s.push(True)
+>>> s.push("three")
+>>> s.peek()
+'three'
+>>> s.pop()
+'three'
+>>> s.size()
+2
+
+Queue representation of class
+
+class queue():
+	def __init__(self):
+		self.items=[]
+	def enque(self,a):
+		self.items.append(a)
+	def dequeue(self):
+		return self.items.pop(0)
+	def isEmpty(self):
+		return self.items == []
+	def size(self):
+		return len(self.items)
+
+	
+>>> q=queue()
+>>> q.enque(10)
+>>> 1.isEmpty()
+SyntaxError: invalid syntax
+>>> 1.isEmpty()
+SyntaxError: invalid syntax
+>>> q.isEmpty()
+False
+>>> q.enque(True)
+>>> q.dequeue()
+10
+>>> q.enque("hello")
+>>> q.enque("vijay")
+>>> q.dequeue()
+True
+>>> q.dequeue()
+'hello'
+>>> q.size()
+1
+>>> q.dequeue()
+'vijay'
+
+
+Double ended queue
+
+class deque():
+	def __init__(self):
+		self.items=[]
+	def isEmpty(self):
+		return self.items ==  []
+	def addFront(self, a):
+		self.items.insert(0,a)
+	def addRear(self,a):
+		self.items.append(a)
+	def removeFront(self):
+		return self.items.pop(0)
+	def removeRear(self):
+		return self.items.pop()
+	def size(self):
+		return len(self.items)
+
+	
+>>> d=deque()
+>>> d.addFront(1)
+>>> d.addFront(0)
+>>> d.removeFront()
+0
+>>> d.size()
+1
+======================
+
 What the interpreter does is complex but in a nutshell :
 
 1. Looks at the date/time of your script and checks if there is a .pyc file for your script with a later date than your script; if there is skip stage 
@@ -876,4 +972,163 @@ Hi Geeks
 
 magic methods in python
 annotaitons in python
+=============
+1) how to combine 2 lists into 1 nested list 
+
+l1
+[1, 2, 3, 4]
+>>> 
+>>> l2
+[11, 22, 33, 44]
+>>> ll=list(zip(l1,l2))
+>>> ll
+[(1, 11), (2, 22), (3, 33), (4, 44)]
+
+>>> p1,p2=zip(*ll)
+>>> p1
+(1, 2, 3, 4)
+>>> p2
+(11, 22, 33, 44)
+
+ZIP usage
+
+ll=zip(l)
+>>> type(ll)
+<class 'zip'>
+>>> ll
+<zip object at 0x000000C7A1638248>
+>>> list(ll)
+[(1,), (2,), (3,), (4,)]  // if we are passing only single list then in this way tuple will form
+
+>>> l2=["one" , "two" , "three"]
+>>> ll=zip(l,l2)
+>>> list(ll)
+[(1, 'one'), (2, 'two'), (3, 'three')]
+
+create a dictionary from two lists
+l1=[1,2,3]
+l2=['one','two','three']
+
+d=dict(zip(l1,l2))
+>>> d
+{1: 'one', 2: 'two', 3: 'three'}
+
+2) print odd numbers between 1 to 10
+
+print([ i for i in range(1,11,2)])
+
+3)  USAGE OF "_" IN PYTHON
+
+init_tuple = [(0, 1), (1, 2), (2, 3)]
+
+>>> print(sum(n for _, n in init_tuple))
+6
+
+here 1 + 2+ 3 = 6 , _ is used for ignoring the 0,1,2 values
+
+_ in loops 
+for _ in range(5):
+    print(_)
+	
+_ in seperating digits of numbers :
+ you can also use underscore(_) to separate the binary, octal or hex parts of numbers.
+ million = 1_000_000
+
+print(million) // 1000000
+
+_ use in interpreter 
+
+>>> 5 + 4
+9
+>>> _     # stores the result of the above expression
+9
+
+======================
+
+copy operation with shutil 
+import os
+import shutil
+
+>>> def copy(src,dest):
+	for file in os.listdir(src):
+		full_path=os.path.join(src,file)
+		shutil.copy(full_path,dest)
+		
+copy(r"C:\Users\VIJAY\Desktop\data" , r"C:\Users\VIJAY\Desktop\dattavadhut swami")
+
+move files from one to other directory 
+
+>>> def move(src,dest):
+	for file in os.listdir(src):
+		full_path=os.path.join(src,file)
+		shutil.move(full_path,dest)
+		
+move(r"C:\Users\VIJAY\Desktop\data" , r"C:\Users\VIJAY\Desktop\dattavadhut swami")
+
+============
+
+Random module :
+import random
+
+random.random()  // create a random float between (0,1]
+0.35699405312267074
+
+random.uniform(1,10)  // creates a random float betwen 1,10
+5.722263354698193
+
+random.randrange(20)  // creates a random integer between (0,20]
+7
+
+random.randrange(0,20) // creates a random integer between (0,20]
+8
+
+random.randint(0,5)  //  creates a random integer between (0,5)
+5 
+
+difference between randint (a,b) and randrange(a,b) is that 
+randint will include a to b but randrange will include a to b-1
+
+random.randrange(1,20,2)  // prints odd random integer between 1 to 19
+15
+
+random.randrange(0,20,1)  // prints even random integer between 0 to 19
+6
+
+l=[1,2,3,4]
+>>> random.choice(l)  prints random element from list
+3
+>>> random.choice(l)
+1
+>>> random.shuffle(l)  // shuffles list randomly
+>>> l
+[3, 4, 2, 1]
+>>> random.shuffle(l)
+>>> l
+[2, 3, 4, 1]
+
+===========
+
+any() returns:
+
+True if at least one element of an iterable is true
+False if all elements are false or if an iterable is empty
+
+All values are true	True
+All values are false	False
+One value is true (others are false)	True
+One value is false (others are true)	True
+Empty Iterable	False
+
+all() method returns:
+
+True - If all elements in an iterable are true
+False - If any element in an iterable is false
+
+All values are true	True
+All values are false	False
+One value is true (others are false)	False
+One value is false (others are true)	False
+Empty Iterable	True
+
+
 
