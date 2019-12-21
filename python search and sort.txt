@@ -1,5 +1,4 @@
-Python interpereter , memorymanagement, python tools , lambda function , generator , iterator , slicing , linked list , array list , list tuple , orm design patterns ,pickling unpickling , mvc pattern , list stack queue , binary search  , memory management in python app , db modelling  , *args and **kwargs
-joins , ACID  , index 
+Implement selection sort 
 
 
 >>> def selection(a):
@@ -16,6 +15,8 @@ joins , ACID  , index
 [1, 2, 3, 4]
 
 ============================
+Implement bubble sort
+
 >>> def bubble(a):
 	s=True
 	while s:
@@ -32,7 +33,9 @@ joins , ACID  , index
 [1, 2, 3, 4, 5]
 
 =====================
->>> def bubblesearch_iterative(a, l , r , x):
+Implement binary search iterative 
+
+>>> def binarysearch_iterative(a, l , r , x):
 	while l <= r:
 		mid=l+ (r-l)/2
 		if a[mid]==x:
@@ -43,7 +46,9 @@ joins , ACID  , index
 			r=mid-1
 	return -1
 =================
->>> def bs(a , l , r , x):
+Implement Binray search with recursion
+
+>>> def binarysearch(a , l , r , x):
 	if r >= 1:
 		mid= l+ ( r-l )/2
 		if a[mid] == x:
@@ -55,6 +60,8 @@ joins , ACID  , index
 	else:
 		return -1
 ========================
+Implement singly linked list 
+
 class node:
 	def __init(self , data):
 		self.data=data
@@ -87,8 +94,10 @@ class ll:
 			while tmp.next is not None:
 				n=n.next
 			tmp.next=n
-	==========================
-	import collections
+==========================
+Implement deque with python priovided package
+
+import collections
 >>> lst=collections.deque()
 >>> lst.append("a")
 >>> lst
@@ -128,6 +137,9 @@ deque(['a', 'b', 'c'])
 >>> lst
 deque(['a', 'c'])
 ===========================
+
+Implement stack with python provided package
+
 Stack
 1) s = []
 
@@ -186,6 +198,8 @@ s.put('code')
 >>> s.get()
 'eat'
 =======================
+Implement queue with python provided package
+
 QUEUE
 1) q = []
 
@@ -300,8 +314,8 @@ True
 >>> q.dequeue()
 'vijay'
 
-
-Double ended queue
+=======================
+Implement Double ended queue 
 
 class deque():
 	def __init__(self):
@@ -329,14 +343,14 @@ class deque():
 1
 ======================
 
-What the interpreter does is complex but in a nutshell :
+Explain functionality of python interpreter
 
 1. Looks at the date/time of your script and checks if there is a .pyc file for your script with a later date than your script; if there is skip stage 
 2. Read the script line by line and converts that script into python byte code, and then writes the byte code into a pyc file. If your application has mutiple files it creates a pyc file for every .py file. It is at this stage that syntax errors are generated.
 3. Load the first pyc file into memory, and the interpret then executes the file instruction by instruction, it is at this stage Runtime errors are created if your code generates such errors. If neccessary then other pyc files are loaded into memory and executed.
 
 ============================
-Pickling :
+what is Pickling 
 
 It is used to serilize and deserialize the python objects
 Pickling: It is a process where a Python object is converted into a byte stream.
@@ -385,7 +399,8 @@ with open(r'C:\Users\VIJAY\Desktop\mydict.txt', "rb") as f:
 O/P : {'vijay': 'TCS', 'ram': 'GOD', 'Seeta': 'Goddess'}
 
 ====================================================
-Type of operators in Pyton:
+what are differet type of operators in Pyton:
+
 1) Arithmetic operators: Arithmetic operators are used to perform mathematical operations like addition, subtraction, multiplication and division.
 OPERATOR	DESCRIPTION	SYNTAX
 +	Addition: adds two operands	x + y
@@ -615,7 +630,7 @@ True
 False
 
 ===========================================
-Monkey Patching in Python (Dynamic Behavior)
+what is Monkey Patching in Python (Dynamic Behavior)
 
 In Python, the term monkey patch refers to dynamic (or run-time) modifications of a class or module. In Python, we can actually change the behavior of code at run-time.
 
@@ -643,48 +658,56 @@ Examples:
 Output :monkey_f() is being called
 ====================================
 
-It will print last 4 lines of file after removing "\n" from file
+how to print last 4 lines of file after removing "\n" from file
 with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as f:
     ll=[ x.rstrip() for x in f.readlines()[-4:]]
     print(ll)
-	
-It will print first 4 lines of file after removing "\n" from file
+==================
+how to print first 4 lines of file after removing "\n" from file
 with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as f:
     ll=[ x.rstrip() for x in f.readlines()[:4]]
     print(ll)
-	
+=======================
 print second column in file (space seperated)
 print([ x.split()[1] for x in open(r"C:\Users\VIJAY\Desktop\mydict.txt").readlines()])
-
+=======================
 print third column in file "|" seperated
 print([ x.split("|")[2] for x in open(r"C:\Users\VIJAY\Desktop\mydict.txt").readlines()])
-
+========================
 search for a pattern and print the line 
 print([x.rstrip() for x in open(r"C:\Users\VIJAY\Desktop\mydict.txt") if "do" in x])
-
-print(len(open(r"C:\Users\VIJAY\Desktop\mydict.txt").readlines())) // print no of lines in file
-
+==========================
+print no of lines in file
+print(len(open(r"C:\Users\VIJAY\Desktop\mydict.txt").readlines()))
+=========================
+print toatal no of words in file
 count=0
 with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as f:
     for line in f:
         count+= len(line.split())
-print("total words are :",count)  // it will print total no of words in file
+print("total words are :",count) 
+=========================
 
+print all the lines except line no 2 and 3
 
 with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as f:
     for i ,line in enumerate(f):
         if i >= 1 and i <= 2:
             pass
         else:
-            print(line)                  // it will print all the lines except line no 2 and 3
-
+            print(line)                 
+			
+========================
+replace file content 'hi' wih 'HI'
 
 with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as f:
-    r=f.read().replace("hi","HI")           // replace file content 'hi' with 'HI'
+    r=f.read().replace("hi","HI")           
 with open(r"C:\Users\VIJAY\Desktop\mydict.txt","w") as f:
     f.writelines(r)
 	
-	
+=======================
+replace the string in file, only at line no 1 and 2
+
 with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as f:
     with open(r"C:\Users\VIJAY\Desktop\myopt.txt","w") as ff:
         for i,line in enumerate(f):
@@ -692,19 +715,22 @@ with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as f:
                 r=line.replace('hi',"HI")
                 ff.writelines(r)
             else:
-                ff.writelines(line)   // replace the string in file, only at line no 1 and 2
+                ff.writelines(line)   
 				
 				
-				
+======================
+append string "end"  at end of every line
+
 s="end"
 with open(r"C:\Users\VIJAY\Desktop\mydict.txt") as fin:
     with open(r"C:\Users\VIJAY\Desktop\myopt.txt" , "w") as fout:
         for line in fin:
             fout.write(line.rstrip("\n") + s+ "\n")
-print(open(r"C:\Users\VIJAY\Desktop\myopt.txt").readlines())	// append string at end of every line
+print(open(r"C:\Users\VIJAY\Desktop\myopt.txt").readlines())	
 
 ======================
-// how to take command line input from user
+how to take command line input from user
+
 import sys
 
 program_name=sys.argv[0]
@@ -714,6 +740,8 @@ for x in sys.argv[1:]:
      print(x)
 
 ===============
+what is usage of *args and **kwargs ?
+
 def person(name , *data):
     print("name :",name)
     for info in data:
@@ -735,7 +763,7 @@ case2) in one program you are  printing __name__ and importing that program into
 
 
 ===========================
-Multithreading
+implement Multithreading in python 
 
 from threading import *
 from time import *
@@ -766,7 +794,8 @@ print("bye")
 here because of join method main thread will wait for t1 to complete and t2 to complete and main thread will proceed to print "bye"
 
 =============================
-list methods :
+what are different list methods
+
 s=[1,2,3,4]
 1) append():
 it is used to append at th end of list
@@ -829,7 +858,7 @@ del List[0] : deleted first element
 del List : deletes entire list
 
 =========================
-differences between Python 2.x and Python 3.x 
+what is differences between Python 2.x and Python 3.x ?
  1) Division Operator
  print 7 / 5
    
@@ -874,18 +903,14 @@ what all data types can be a key in dictionary ?
 >>> d[sys] = "sys"
 >>> d[(1,2)]=(1,2)
 >>> d[(1,[2])]=(1,[2]) // error
-
-
-===========
-closure
-=====
-application of generator
-======
+================
 MRO :
+refer below link for MRO
+
 http://www.srikanthtechnologies.com/blog/python/mro.aspx
 ======
-Decorator :
-allows programmers to modify the behavior of function or class. Decorators allow us to wrap another function in order to extend the behavior of wrapped function, without permanently modifying it.
+what is Decorator :
+it allows programmers to modify the behavior of function or class. Decorators allow us to wrap another function in order to extend the behavior of wrapped function, without permanently modifying it.
 
 In Decorators, functions are taken as the argument into another function and then called inside the wrapper function.
 
@@ -912,7 +937,8 @@ Hello, this is before function execution
 This is inside the function !!
 This is after function execution
 ======================
-Method overloading
+does python supports Method overloading?
+
 python does not supports method overloading. We may overload the methods but can only use the latest defined method.
 
 def product(a, b): 
@@ -968,20 +994,13 @@ add('str', 'Hi ', 'Geeks')
 Output:
 11
 Hi Geeks
-===================
-
-magic methods in python
-annotaitons in python
 =============
 1) how to combine 2 lists into 1 nested list 
 
-l1
-[1, 2, 3, 4]
->>> 
->>> l2
-[11, 22, 33, 44]
->>> ll=list(zip(l1,l2))
->>> ll
+l1=[1, 2, 3, 4] 
+l2=[11, 22, 33, 44]
+ll=list(zip(l1,l2))
+print(ll)
 [(1, 11), (2, 22), (3, 33), (4, 44)]
 
 >>> p1,p2=zip(*ll)
@@ -993,10 +1012,7 @@ l1
 ZIP usage
 
 ll=zip(l)
->>> type(ll)
-<class 'zip'>
->>> ll
-<zip object at 0x000000C7A1638248>
+
 >>> list(ll)
 [(1,), (2,), (3,), (4,)]  // if we are passing only single list then in this way tuple will form
 
@@ -1013,37 +1029,24 @@ d=dict(zip(l1,l2))
 >>> d
 {1: 'one', 2: 'two', 3: 'three'}
 
+=============
+what is o/p of below code:
+l1=[1,2,3,4]
+>>> l2=["one","two"]
+>>> z=zip(l1,l2)
+>>> dict(z)
+
+O/P is 
+{1: 'one', 2: 'two'}
+===============
+
 2) print odd numbers between 1 to 10
 
 print([ i for i in range(1,11,2)])
 
-3)  USAGE OF "_" IN PYTHON
-
-init_tuple = [(0, 1), (1, 2), (2, 3)]
-
->>> print(sum(n for _, n in init_tuple))
-6
-
-here 1 + 2+ 3 = 6 , _ is used for ignoring the 0,1,2 values
-
-_ in loops 
-for _ in range(5):
-    print(_)
-	
-_ in seperating digits of numbers :
- you can also use underscore(_) to separate the binary, octal or hex parts of numbers.
- million = 1_000_000
-
-print(million) // 1000000
-
-_ use in interpreter 
-
->>> 5 + 4
-9
->>> _     # stores the result of the above expression
-9
 
 ======================
+how to copy content of one dir to another directory ?
 
 copy operation with shutil 
 import os
@@ -1056,6 +1059,9 @@ import shutil
 		
 copy(r"C:\Users\VIJAY\Desktop\data" , r"C:\Users\VIJAY\Desktop\dattavadhut swami")
 
+====================
+
+how to move content of one directory into another ?
 move files from one to other directory 
 
 >>> def move(src,dest):
@@ -1130,5 +1136,70 @@ One value is true (others are false)	False
 One value is false (others are true)	False
 Empty Iterable	True
 
+==============
+what is o/p of below code:
+numbers = [1, 2, 3, 4, 5, 6]
 
+# The left side of unpacking should be list or tuple.
+*a, = numbers
+o/p : a = [1, 2, 3, 4, 5, 6]
 
+*a, b = numbers
+o/p  a = [1, 2, 3, 4, 5]
+o/p  b = 6
+
+a, *b, = numbers
+o/p  a = 1 
+o/p  b = [2, 3, 4, 5, 6]
+
+a, *b, c = numbers
+o/p a = 1
+o/p b = [2, 3, 4, 5]
+o/p c = 6
+
+=============
+take a list as input to function for ex s=[1,2,3,4,5]
+then write following content into a file C:\Users\VIJAY\Desktop\file.txt
+1
+2
+3
+4
+5
+
+def test(s):
+	ss=""
+	for i in s:
+		ss+=str(str(i)+"\n")
+	with open(r"C:\Users\VIJAY\Desktop\file.txt","w") as f:
+		f.writelines(ss)
+=====================
+what is o/p of below code:
+
+ def test(n,l=[2,3,4]):
+	l.append(n)
+	print(l)
+	
+test(2)
+test(5,[1,2,3,4])
+test(3)
+
+o/p : [2,3,4,2]
+o/p : [1,2,3,4,5]
+o/p : [ 2, 3, 4, 2, 3]
+
+==================
+what is o/p of below code:
+>> var='a'
+>>> l=[]
+>>> l.append(var)
+>>> new_l=l
+>>> new_l.append('b')
+>>> var='c'
+ print(l)
+ print(new_l)
+ print(var)
+
+o/p :
+['a','b']
+['a','b']
+c
