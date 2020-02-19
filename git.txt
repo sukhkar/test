@@ -120,3 +120,54 @@ git merge new-branch // this will merge the data of new-branch to master
 git branch -d new-branch  // it will delete branch but deleted branch will not be visible only in CLI that will be present in GUI i. e. website
 
 git push origin --delete new-branch // it will delete the branch from website as well
+
+===========================
+1) difference between working directory files and staging area files
+git diff
+
+2) to see the difference between working directory and git repository
+git difftool HEAD
+
+
+3) to see the difference between stagging area and git repository
+git diff --staged HEAD
+
+OR
+
+git difftool --staged HEAD
+
+4)limit the comparision to only one files ( between working directory and staging area)
+git diff -- readme.md
+git difftool -- readme.md
+
+
+5) git diff HEAD^ HEAD
+this will give comparision between last commit -1 and last commit
+
+6) git diff efa4244 HEAD
+will give comparision between efa4244 commit and current commit
+
+7) compare the difference between local master branch and origin master branch
+git diff master origin/master
+
+
+8) show all the branches
+git branch -a
+
+9) create a new branch
+git branch new
+
+10) to go to newly created branch
+git checkout new
+
+11) delete a branch 
+git branch -d new
+
+12) how to check currently you are at which branch
+git branch
+
+13) how to create and checkout new branch at a time 
+git checkout -b newb
+
+14) how to merge the content of newb branch to master branch (cu you are at master branch)
+git merge newb
