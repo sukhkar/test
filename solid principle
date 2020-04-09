@@ -1,0 +1,35 @@
+3) Liskov substitution principle
+
+Subtypes must be substitutable for their base types
+
+As simple as that — a subclass should replace its superclass without breaking the application or functionality, but this requires all subclasses to behave in the same way as the parent class.
+To achieve that, your subclasses need to verify two additional points: Pre-conditions and Post-conditions changes.
+
+Preconditions cannot be strengthened in a subtype
+Suppose you have an interface with a method that colors a shape and this method accepts only hexadecimal colors ("#123456") or rgb colors ((123,124,125)). Suppose you create a class Rectangle that implements this interface, but it accepts only rgb colors. You're strengthening the pre-condition. If you have this line in your code: generic_shape.color("#123456")
+
+You cannot replace your Rectangle in it, so you are breaking LSP.
+
+Postconditions cannot be weakened in the subtype
+A classical example would be returning None for a method that should not return None. Suppose that in the Shape interface, you have a getSide method, and you create a Circle class, and when implementing this method, you return None. This breaks the caller expectative and may cause an unexpected error:
+
+Implementaion Guidelines:
+1) no new exceptions cna be thrown by the subtype
+2) clients should not know which specific subtypes they are calling
+3) new derived classes just extend without replacing the functionality of old class
+
+
+4) Interface segration principle
+
+the principle is defined as, “Clients should not be forced to depend on methods that they do not use.” In other words, classes should not have access to behavior it does not use
+
+The interface-segregation principle (ISP) states that no client should be forced to depend on methods it does not use. ISP splits interfaces that are very large into smaller and more specific ones so that clients will only have to know about the methods that are of interest to them. Such shrunken interfaces are also called role interfaces. ISP is intended to keep a system decoupled and thus easier to refactor, change, and redeploy
+
+
+5) Dependency Inversion Principle
+
+High-level modules should not depend on low-level modules. Both should depend on abstractions.
+Abstractions should not depend on details. Details should depend on abstractions.
+
+
+The general idea of this principle is as simple as it is important: High-level modules, which provide complex logic, should be easily reusable and unaffected by changes in low-level modules, which provide utility features. To achieve that, you need to introduce an abstraction that decouples the high-level and low-level modules from each other.
