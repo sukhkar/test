@@ -1203,3 +1203,34 @@ o/p :
 ['a','b']
 ['a','b']
 c
+====================
+==================
+what is difference between instace, class and static methods
+
+class  Student:
+	school = 'Vijay School'
+	def __init__(self, m1, m2, m3):
+		self.m1 = m1
+		self.m2 = m2
+		self.m3 = m3
+	def avg(self):
+		return (self.m1+self.m2+self.m3)/3
+	@classmethod
+	def getschoolname(cls):
+		return cls.school
+	@staticmethod
+	def info():
+		print("this is Student class in student module")
+
+		
+>>> s1=Student(9,8,7)
+>>> s1.avg()
+8.0
+>>> Student.getschoolname()
+'Vijay School'
+>>> Student.info()
+this is Student class in student module
+
+
+instance method deals with instance variables , class method deals with class variables , those variables which are declared outside of a method are said to be class method.
+if there is any method which doesn't want to use instance and class variables then that method is static method
