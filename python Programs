@@ -1329,4 +1329,174 @@ find largest odd and largest even no in list
 >>> test([2,4,3,1,5,7,4,8,33,66,55,11,77,99])
 largest odd is 99
 largest even is 66 
+=========================
+reverse a string with recursion 
+def test(s):
+	if len(s) == 0:
+		return ''
+	else:
+		return test(s[1:]) + s[0]
 
+	
+>>> test('vijay')
+'yajiv'
+
+======================
+program to check whether linked list contains a cycle
+def cycle(node):
+	marker1 = node
+	marker2 = node
+	while marker2 != None and marker2.next != None:
+		marker1 = marker1.next
+		marker2 = marker2.next.next
+		if marker1 == marker2:
+			return True
+	return False
+	
+========================
+You've been given a list of historical stock prices for a single day for Amazon stock. The index of the list represents the timestamp, so the element at index of 0 is the initial price of the stock, the element at index 1 is the next recorded price of the stock for that day, etc. Your task is to write a function that will return the maximum profit possible from the purchase and sale of a single share of Amazon stock on that day. Keep in mind to try to make this as efficient as possible.
+
+For example, if you were given the list of stock prices:
+
+prices = [12,11,15,3,10]
+
+Then your function would return the maximum possible profit, which would be 7 (buying at 3 and selling at 10)
+
+>>> def test(l):
+	profit, buy , sell  = 0,0,0
+	for i in range(len(l)-1):
+		for j in range(i+1,len(l)-1):
+			if l[i] < l[j] and (l[j]-l[i]) > profit:
+				profit = l[j] - l[i]
+				buy = l[i]
+				sell = l[j]
+	print(" profit : {} , buy : {} , sell : {}".format(profit, buy, sell))
+	
+test([12, 11, 15, 3 , 10])
+profit : 4 , buy : 11 , sell : 15
+
+
+test([10,12,14,12,13,11,8,7,6,13,23,45,11,10])
+profit : 39 , buy : 6 , sell : 45
+
+
+===========================
+
+Given a list of integers, write a function that will return a list, in which for each index the element will be the product of all the integers except for the element at that index
+
+For example, an input of [1,2,3,4] would return [24,12,8,6] by performing [2×3×4,1×3×4,1×2×4,1×2×3]
+
+Requirements
+You can not use division in your answer! Meaning you can't simply multiply all the numbers and then divide by eahc element for each index!
+
+ def test(l):
+	  op = list()
+	  for i in range(len(l)):
+		  if i ==0 :
+			  op.append(reduce(lambda x,y : x*y , l[1:]))
+		  elif i == len(l)-1:
+			  op.append(reduce(lambda x,y : x*y , l[:-1]))
+		  else:
+			  op.append(reduce(lambda x,y : x*y , l[:i]+l[i+1:]))
+	  print(op)
+
+	  
+>>> test([1,2,3,4])
+	  
+[24, 12, 8, 6]
+>>> test([0,1,2,3,4])
+	  
+[24, 0, 0, 0, 0]
+=========================
+Find the squareroot of a given number rounded down to the nearest integer, without using the sqrt function. For example, squareroot of a number between [9, 15] should return 3, and [16, 24] should be 4.
+
+def test(n):
+	if n < 0:
+		raise ValueError
+	elif n ==1:
+		return 1
+	for k in range(2,1+int(n/2)):
+		if k**2 == n:
+			return k
+		elif k**2 >n:
+			return k-1
+
+		
+>>> test(14)
+3
+>>> test(15)
+3
+>>> test(16)
+4
+
+=====================
+
+Given a list of account ID numbers (integers) which contains duplicates , find the one unique integer. (the list is guaranteed to only have one unique (non-duplicated) integer
+
+Requirements
+Do not use built-in Python functions or methods
+
+ def test(id_list):
+    
+    # Initiate unique Id
+    unique_id = 0
+    
+    # XOR fo revery id in id list
+    for i in id_list:
+        
+        # XOR operation
+        unique_id ^= i
+    
+    return unique_id
+	
+test([123,456,789,234,123,456,789])
+234
+
+================
+Remove duplicate characters in a given string keeping only the first occurrences. For example, if the input is ‘tree traversal’ the output will be ‘tre avsl’.
+
+def test(s):
+	op = ""
+	for i in range(len(s)):
+		if s[i] not in op:
+			op += s[i]
+	print(op)
+
+	
+>>> test('tree traversal')
+tre avsl
+===============
+
+Sample Input
+
+1222311
+Sample Output
+
+(1, 1) (3, 2) (1, 3) (2, 1)
+Explanation
+
+First, the character  occurs only once. It is replaced by . Then the character  occurs three times, and it is replaced by  and so on.
+
+def test():
+    s=input()
+    s+=" "
+    l = list()
+    for i in range(len(s)):
+        if i ==0:
+            char = s[i]
+            occur = 1
+        else:
+            if char == s[i]:
+                occur +=1
+            else:
+                l.append((occur, int(char)))
+                char = s[i]
+                occur = 1
+    [ print(x, end=' ') for x in l]
+
+    
+>>> test()
+1222311
+(1, 1) (3, 2) (1, 3) (2, 1) 
+
+================
