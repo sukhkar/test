@@ -390,3 +390,50 @@ has the same inode number and permissions of original file,
 permissions will be updated if we change the permissions of source file,
 has the actual contents of original file, so that you still can view the contents, even if the original file moved or removed.
 
+==========================
+FOR Loop
+
+        #!/bin/bash
+        for i in `seq 1 10`;
+        do
+                echo $i
+        done    
+        
+While sample
+         #!/bin/bash 
+         COUNTER=0
+         while [  $COUNTER -lt 10 ]; do
+             echo The counter is $COUNTER
+             let COUNTER=COUNTER+1 
+         done
+         
+
+Until sample
+         #!/bin/bash 
+         COUNTER=20
+         until [  $COUNTER -lt 10 ]; do
+             echo COUNTER $COUNTER
+             let COUNTER-=1
+         done
+	
+==========================
+[ -a FILE ]	True if FILE exists.
+[ -b FILE ]	True if FILE exists and is a block-special file.
+[ -c FILE ]	True if FILE exists and is a character-special file.
+[ -d FILE ]	True if FILE exists and is a directory.
+[ -e FILE ]	True if FILE exists.
+[ -f FILE ]	True if FILE exists and is a regular file.
+[ -g FILE ]	True if FILE exists and its SGID bit is set.
+[ -h FILE ]	True if FILE exists and is a symbolic link.
+[ -k FILE ]	True if FILE exists and its sticky bit is set.
+[ -p FILE ]	True if FILE exists and is a named pipe (FIFO).
+[ -r FILE ]	True if FILE exists and is readable.
+[ -s FILE ]	True if FILE exists and has a size greater than zero.
+[ -u FILE ]	True if FILE exists and its SUID (set user ID) bit is set.
+[ -w FILE ]	True if FILE exists and is writable.
+[ -x FILE ]	True if FILE exists and is executable.
+[ -O FILE ]	True if FILE exists and is owned by the effective user ID.
+[ -G FILE ]	True if FILE exists and is owned by the effective group ID.
+[ -L FILE ]	True if FILE exists and is a symbolic link.
+[ -z STRING ]	True of the length if "STRING" is zero.
+[ -n STRING ] or [ STRING ]	True if the length of "STRING" is non-zero.
