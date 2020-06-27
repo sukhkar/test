@@ -174,3 +174,38 @@ git merge newb
 
 if you want to go to previous checkout state 
 git checkout 5b8d8541d6f10a2f7f29c24615a5e0f0e5b4abd9
+
+================
+if you want to go to previous checkout state 
+git checkout 5b8d8541d6f10a2f7f29c24615a5e0f0e5b4abd9
+where 5b8d8541d6f10a2f7f29c24615a5e0f0e5b4abd9 is commit id which can be get from git log command
+
+git checkout master // to go back to latest commit state
+
+
+GIt Revert :
+The git revert command can be considered an 'undo' type command, however, it is not a traditional undo operation. Instead of removing the commit from the project history, it figures out how to invert the changes introduced by the commit and appends a new commit with the resulting inverse content. This prevents Git from losing history, which is important for the integrity of your revision history and for reliable collaboration.
+
+Reverting should be used when you want to apply the inverse of a commit from your project history
+
+$ git log
+commit c0297e2694c5fed5db72af0e000391f771c652bc (HEAD)
+Author: vijay bhalekar <bhalekarvijay5@gmail.com>
+Date:   Mon Jun 22 15:17:44 2020 +0530
+
+    added c
+
+commit a84148f784f8779190fb0f8bd398b1aafd0c37e4
+Author: vijay bhalekar <bhalekarvijay5@gmail.com>
+Date:   Mon Jun 22 15:17:30 2020 +0530
+
+    added b
+
+commit 5b8d8541d6f10a2f7f29c24615a5e0f0e5b4abd9
+Author: vijay bhalekar <bhalekarvijay5@gmail.com>
+Date:   Mon Jun 22 15:17:12 2020 +0530
+
+    added a
+
+git revert a84148f784f8779190fb0f8bd398b1aafd0c37e4
+by this command only the content which has been added in 'a84148f784f8779190fb0f8bd398b1aafd0c37e4' this commit , will remove.
