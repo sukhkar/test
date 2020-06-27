@@ -1,3 +1,75 @@
+#importing module 
+import logging 
+
+#Create and configure logger 
+logging.basicConfig(filename=r"C:\Users\VIJAY\Desktop\test.txt", 
+					format='%(asctime)s %(message)s', 
+					filemode='w') 
+
+#Creating an object 
+logger=logging.getLogger()
+
+
+#Setting the threshold of logger to DEBUG 
+logger.setLevel(logging.DEBUG)
+
+#Test messages 
+logger.debug("Harmless debug Message") 
+logger.info("Just an information") 
+logger.warning("Its a Warning") 
+logger.error("Did you try to divide by zero") 
+logger.critical("Internet is down") 
+
+
+https://www.geeksforgeeks.org/logging-in-python/
+
+
+===================
+paramiko is used for performing ssh over another server, executing commands over there and getting the output/ error of that commands
+
+
+import paramiko
+
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect(hostname, username = 'vijay', password='Vijay123')
+stdin, stdout, stderr = ssh.exec_command('df -hk')
+print(stdout.readlines())
+
+there are 2 paramiko policies
+1) reject policy ( default policy)
+2) autoadd policy
+
+by default all the ssh.connect(hostname, username = 'vijay', password='Vijay123') will fail saying that known_hosts file doesn't contain the entry of hostname.
+so we need to add the AutoAddPolicy to paramiko after that this error will not appear
+
+
+https://www.youtube.com/watch?v=kvPa85M9z2Q
+
+=====================
+
+paramiko expect provides expect like functionality to paramiko ssh library.
+
+from paramiko_expect import SSHClientInteraction
+
+
+self.client = paramiko.SSHClient()
+arglist = {1:'one', 2:'two', 3:'three'}
+password_prompt = '.*password.*'
+prompt = '.*$.*'
+value = '.*.*'
+interact = SSHClientInteraction(self.client, timeout=10, display=True)
+interact.expect(prompt, default_match_prefix='.*')
+interact.send("openssl enc -e -aes-256-cbc -md md5 -a <<<" + "'" + collector_password + "'")
+interact.expect(password_prompt)
+interact.send(arglist[3])
+interact.expect(password_prompt)
+
+
+============================
+
+
+============================
 Implement selection sort 
 
 
