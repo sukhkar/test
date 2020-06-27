@@ -136,7 +136,7 @@ it is a join in which table is joined with itself
 ex > getting details about emp and its manager
 select e1.ename as employee_name, 
 e2.ename as manager_name
-from emp
+from emp e1, emp e2
 where e1.mgr =  e2.empno
 
 15) what happends when join condition is missed
