@@ -467,3 +467,135 @@ $$: The process number of the current shell. For shell scripts, this is the proc
 
 8	
 $!: The process number of the last background command.
+
+===========================
+
+basic for loop 
+for i in `ls /etc/rc.*`; do
+  echo $i
+done
+
+
+C-like for loop
+for ((i = 0 ; i < 100 ; i++)); do
+  echo $i
+done
+
+Ranges
+for i in {1..5}; do
+    echo "Welcome $i"
+done
+
+With step size
+for i in {5..50..5}; do
+    echo "Welcome $i"
+done
+
+cat file.txt | while read line; do
+  echo $line
+done
+
+while true; do
+  ···
+done
+
+
+defining functions
+myfunc() {
+    echo "hello $1"
+}
+# Same as above (alternate syntax)
+function myfunc() {
+    echo "hello $1"
+}
+myfunc "John"
+
+returning values
+myfunc() {
+    local myresult='some value'
+    echo $myresult
+}
+result="$(myfunc)"
+
+Fruits=('Apple' 'Banana' 'Orange') // define array
+
+// define array
+Fruits[0]="Apple"
+Fruits[1]="Banana"
+Fruits[2]="Orange"
+
+lines=(`cat logfile`)   // create array by reading from file
+
+
+echo ${Fruits[0]}          Apple # Element #0
+echo ${Fruits[-1]}         Orange # Last element
+echo ${Fruits[@]}          Apple Banana Orange # All elements, space-separated
+echo ${#Fruits[@]}         3 # Number of elements
+echo ${#Fruits}            5 # String length of the 1st element
+echo ${#Fruits[3]}         6 # String length of the Nth element
+
+for i in "${arrayName[@]}"; do
+  echo $i
+done
+
+
+dictionary in bash
+declare -A sounds  // sounds is declared as associative array (two types of array associative and indexed array)
+
+sounds[dog]="bark"
+sounds[cow]="moo"
+sounds[bird]="tweet"
+sounds[wolf]="howl"
+
+echo ${sounds[dog]} # Dog's sound
+echo ${sounds[@]}   # All values
+echo ${!sounds[@]}  # All keys
+echo ${#sounds[@]}  # Number of elements
+unset sounds[dog]   # Delete dog
+
+
+
+Mention some ways to perform arithmetic operations in bash?
+
+var1=$( expr 120 - 100 )
+# print the result
+echo $var1
+# Calculate the addition by using let command
+let var2=200+300
+# Print the rsult
+echo $var2
+# Calculate and print the value of division using ‘bc’ to get the result
+# with fractional value
+echo "scale=2; 44/7" | bc
+# Calculate the value of multiplication using double brackets
+var3=$(( 5*3 ))
+# Print the result
+echo $var3
+
+
+
+What is IFS?
+IFS is a special shell variable. The full form of IFS is Internal Field Separator,
+it acts as delimiter to separate the word from the line of text. It is mainly used for splitting a string, reading a command, replacing text etc.
+
+Example:
+
+#!/bin/bash
+# Declare ':' as delimiter for splitting the text
+IFS=":"
+# Assign text data with ':' to $text
+text="Red:Green:Blue"
+for val in $text; do
+    echo $val
+done
+
+
+How to find out the length of a string data? 
+
+# Count length using `expr` length option
+echo `expr length "I like PHP"`
+# Count length using `wc` command
+echo "I like Bash" | wc -c
+# Count length using `awk` command
+echo "I like Python" | awk '{print length}'
+
