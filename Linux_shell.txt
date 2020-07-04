@@ -599,3 +599,4 @@ echo "I like Bash" | wc -c
 # Count length using `awk` command
 echo "I like Python" | awk '{print length}'
 
+https://www.slashroot.in/suid-and-sgid-linux-explained-examples  // sticky bit , SUID and SGID
