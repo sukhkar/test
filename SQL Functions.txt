@@ -238,3 +238,8 @@ find nth highest salary in mysql
 
 select name , salary from emp e1 where N-1= ( select count(distinct salary) from emp e2 where e2.salary > e1.salary)
 where N is 3 in case you want 3rd highest salary
+
+================================
+Query for getting N maximum salaries
+
+select * from worker w1 where N-1>=( select count(distinct salary) from worker w2 where w2.salary > w1.salary) order by salary desc;
