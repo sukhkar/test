@@ -1306,3 +1306,234 @@ this is Student class in student module
 
 instance method deals with instance variables , class method deals with class variables , those variables which are declared outside of a method are said to be class method.
 if there is any method which doesn't want to use instance and class variables then that method is static method
+
+=========================================
+what is context manager in Python ?
+
+context manager:
+ In any programming language, the usage of resources like file operations or database connections is very common. But these resources are limited in supply. Therefore, the main problem lies in making sure to release these resources after usage. If they are not released then it will lead to resource leakage and may cause the system to either slow down or crash. It would be very helpful if user have a mechanism for the automatic setup and teardown of resources.In Python, it can be achieved by the usage of context managers which facilitate the proper handling of resources
+
+When creating context managers using classes, user need to ensure that the class has the methods: __enter__() and __exit__(). The __enter__() returns the resource that needs to be managed and the __exit__() does not return anything but performs the cleanup operations.
+
+class FileManager(): 
+    def __init__(self, filename, mode): 
+        self.filename = filename 
+        self.mode = mode 
+        self.file = None
+          
+    def __enter__(self): 
+        self.file = open(self.filename, self.mode) 
+        return self.file
+      
+    def __exit__(self, exc_type, exc_value, exc_traceback): 
+        self.file.close() 
+  
+# loading a file  
+with FileManager('test.txt', 'w') as f: 
+    f.write('Test') 
+  
+print(f.closed) 
+Output:
+
+True
+ 
+File management using context manager and with statement :
+
+On executing the with block, the following operations happen in sequence:
+
+A FileManager object is created with test.txt as the filename and w(write) as the mode when __init__ method is executed.
+The __enter__ method opens the test.txt file in write mode(setup operation) and returns the FileManager object to variable f.
+The text ‘Test’ is written into the file.
+The __exit__ method takes care of closing the file on exiting the with block(teardown operation).
+When print(f.closed) is run, the output is True as the FileManager has already taken care of closing the file which otherwise needed to be explicitly done.
+
+https://www.geeksforgeeks.org/context-manager-in-python/
+
+======================
+
+what is difference between __del__ and __delete__ method ?
+__del__ is a destructor method which is called as soon as all references of the object are deleted i.e when an object is garbage collected.
+
+
+class Example: 
+	
+	# Initializing 
+	def __init__(self): 
+		print("Example Instance.") 
+
+	# Calling destructor 
+	def __del__(self): 
+		print("Destructor called, Example deleted.") 
+	
+obj = Example() 
+del obj 
+
+O/: 
+Example Instance.
+Destructor called, Example deleted.
+
+__delete__:
+__delete__ is used to delete the attribute of an instance i.e removing the value of attribute present in the owner class for an instance.
+
+
+class Example(object): 
+  
+    # Initializing 
+    def __init__(self): 
+        print("Example Instance.") 
+  
+    # Calling __delete__ 
+    def __delete__(self, instance): 
+        print ("Deleted in Example object.") 
+  
+  
+# Creating object of Example 
+# class as an descriptor attribute 
+# of this class 
+class Foo(object): 
+    exp = Example() 
+  
+# Driver's code 
+f = Foo() 
+del f.exp 
+
+
+Output:
+Example Instance.
+Deleted in Example object.
+
+difference : 
+__delete__ 												__del__
+it is used to delete attribute of a class 				It is used as destructor
+need to called explicitly  								gets called implicitly
+executed before program ends							executed after program ends
+
+
+combination of __del__ and __delete__
+# Python program to demonstrate 
+# __del__ and __delete__ 
+
+
+class Example(object): 
+
+	# Initializing 
+	def __init__(self): 
+		self.value = '' 
+
+	# deletes an attribute 
+	def __delete__(self, instance): 
+		print ("Inside __delete__") 
+		
+	# Destructor 
+	def __del__(self): 
+		print("Inside __del__") 
+	
+	
+class Foo(object): 
+	exp = Example() 
+
+# Driver's code 
+f = Foo() 
+del f.exp 
+
+Output:
+
+Inside __delete__
+Inside __del__
+
+
+=================================
+
+from itertools import cycle 
+  
+# initializing lists 
+test_list1 = [7, 8, 4, 5, 9, 10] 
+test_list2 = [1, 5, 6] 
+  
+# printing original lists 
+print ("The original list 1 is : " + str(test_list1)) 
+print ("The original list 2 is : " + str(test_list2)) 
+  
+# using itertools.cycle() 
+# zipping of two different size list  
+res = list(zip(test_list1, cycle(test_list2)) 
+            if len(test_list1) > len(test_list2) 
+            else zip(cycle(test_list1), test_list2)) 
+  
+# printing result  
+print ("The zipped list is : " +  str(res)) 
+Output:
+The original list 1 is : [7, 8, 4, 5, 9, 10]
+The original list 2 is : [1, 5, 6]
+The zipped list is : [(7, 1), (8, 5), (4, 6), (5, 1), (9, 5), (10, 6)]
+
+
+======================
+dictionary methods
+1) update
+
+# Python program to show working 
+# of update() method in Dictionary 
+
+# Dictionary with three items 
+Dictionary1 = { 'A': 'Geeks', 'B': 'For', } 
+Dictionary2 = { 'B': 'Geeks' } 
+
+# Dictionary before Updation 
+print("Original Dictionary:") 
+print(Dictionary1) 
+
+# update the value of key 'B' 
+Dictionary1.update(Dictionary2) 
+print("Dictionary after updation:") 
+print(Dictionary1) 
+
+o/p:
+Original Dictionary:
+{'A': 'Geeks', 'B': 'For'}
+
+Dictionary after updation:
+{'A': 'Geeks', 'B': 'Geeks'}
+
+# Python program to show working 
+# of update() method in Dictionary 
+
+# Dictionary with single item 
+Dictionary1 = { 'A': 'Geeks'} 
+
+# Dictionary before Updation 
+print("Original Dictionary:") 
+print(Dictionary1) 
+
+# update the Dictionary with iterable 
+Dictionary1.update(B = 'For', C = 'Geeks') 
+print("Dictionary after updation:") 
+print(Dictionary1) 
+
+Output:
+
+Original Dictionary:
+{'A': 'Geeks'}
+
+Dictionary after updation:
+{'C': 'Geeks', 'B': 'For', 'A': 'Geeks'}
+
+
+2) setdefault(): method returns the value of a key (if the key is in dictionary). If not, it inserts key with a value to the dictionary.
+
+Returns:
+Value of the key if it is in the dictionary.
+None if key is not in the dictionary and default_value is not specified.
+default_value if key is not in the dictionary and default_value is specified.
+
+
+3) fromkeys :
+setdefault() method returns the value of a key (if the key is in dictionary). If not, it inserts key with a value to the dictionary.
+
+l=[1,2]
+d=dict.fromkeys(l)
+>>> d
+{1: None, 2: None}
+>>> dd=dict.fromkeys(l,0)
+>>> dd
+{1: 0, 2: 0}
