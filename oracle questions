@@ -1,6 +1,6 @@
 1) what is dual table 
 
-it si a special one ro table which is create by default whenever u install oracel database
+it is a special one row table which is create by default whenever u install oracle database
 it is used for selecting a psudeo column such as sysdate or user ( select user from dual) (select sysdate from dual)
 it can be used to perform calculations ( select 2*45 from dual)
 it can be used as sequence generator 
@@ -70,21 +70,19 @@ The inner query is executed first and list of values obtained as result are used
 
 select e_id , salary
 from emp
-where d_id in( select d_id
-				from department)
+where d_id in( select d_id from department)
 				
 				
 EXISTS
 the first row from outer query is executed and then the inner query is executed , the outer query output is uses this this result for checking
-
 the process of inner query execution repeates as many no of times as there are outer query rows
 
 
 select *
 from customer cs
 where exists ( select * 
-				from order_details ord
-				where ord.id=cs.id )
+	       from order_details ord
+	       where ord.id=cs.id )
 				
 				
 9)what is differece having and where caluse
@@ -121,7 +119,7 @@ since no undo log is maintained and has no dependencies truncate is faster
 no
 
 12)
-can we delete a record from moret han 1 table simultaneously ?
+can we delete a record from more than 1 table simultaneously ?
 yes
 
 delete t1 , t2
@@ -160,7 +158,7 @@ where e1.mgr =  e2.empno
 it performs a cartessian join which is also called as cross join
 each row in first table is paired with all row in second table
 
-selecct * 
+select * 
 from sales , customer
 
 16)which is faster among left outerjoin and right outer join
@@ -197,7 +195,7 @@ xml data types
 
 18)diifference between char , varchar and varchar2
 
-varchar is reservedd by oracle fr future releaes and is advised not to use
+varchar is reservedd by oracle for future releaes and is advised not to use
 char variable stores data in fixed length 
 varchar2 stores data ( variable length text)
 
@@ -206,7 +204,7 @@ data can store month ,day , year , century , hours , minute , seconds
 
 timestamp can store even miliseconds
 
-timestamp can optionall store timezone as well
+timestamp can optionally store timezone as well
 
 20) difference betn char and nchar
 when data is stored in char , it takes n bytes for n chars 
@@ -235,7 +233,7 @@ select to_date('January 15 2015', 'month dd, yyyy') from dual
 
 here we are converting char to date format
 
-24) what is usage o lpad and rpad function
+24) what is usage of lpad and rpad function
 
 it is used to add padding characters to the left or right side of a string up to a given length
 the default padding character is space
