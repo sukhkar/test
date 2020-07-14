@@ -1500,3 +1500,187 @@ def test():
 (1, 1) (3, 2) (1, 3) (2, 1) 
 
 ================
+Given an array of integers arr, a lucky integer is an integer which has a frequency in the array equal to its value.
+
+Return a lucky integer in the array. If there are multiple lucky integers return the largest of them. If there is no lucky integer return -1.
+
+ 
+
+Example 1:
+
+Input: arr = [2,2,3,4]
+Output: 2
+Explanation: The only lucky number in the array is 2 because frequency[2] == 2.
+Example 2:
+
+Input: arr = [1,2,2,3,3,3]
+Output: 3
+Explanation: 1, 2 and 3 are all lucky numbers, return the largest of them.
+
+
+
+    def findLucky(self, arr: List[int]) -> int:
+	    d = collections.Counter(arr)
+	    ll = list()
+	    for k,v in d.items():
+		    if k == v:
+			    ll.append(k)
+	    ll.sort()
+	    return -1 if len(ll) == 0 else ll.pop()
+		
+		
+=================================
+Balanced strings are those who have equal quantity of 'L' and 'R' characters.
+
+Given a balanced string s split it in the maximum amount of balanced strings.
+
+Return the maximum amount of splitted balanced strings.
+
+ 
+
+Example 1:
+
+Input: s = "RLRRLLRLRL"
+Output: 4
+Explanation: s can be split into "RL", "RRLL", "RL", "RL", each substring contains same number of 'L' and 'R'.
+Example 2:
+
+Input: s = "RLLLLRRRLR"
+Output: 3
+Explanation: s can be split into "RL", "LLLRRR", "LR", each substring contains same number of 'L' and 'R'.
+
+
+    def balancedStringSplit(self, s: str) -> int:
+        char_count = total = 0
+        for i in s:
+            char_count += 1 if i == 'L' else -1
+            if char_count == 0:
+                total +=1
+        return total
+		
+		
+=====================
+ Decrypt String from Alphabet to Integer Mapping
+Given a string s formed by digits ('0' - '9') and '#' . We want to map s to English lowercase characters as follows:
+
+Characters ('a' to 'i') are represented by ('1' to '9') respectively.
+Characters ('j' to 'z') are represented by ('10#' to '26#') respectively. 
+Return the string formed after mapping.
+
+It's guaranteed that a unique mapping will always exist.
+
+ 
+
+Example 1:
+
+Input: s = "10#11#12"
+Output: "jkab"
+Explanation: "j" -> "10#" , "k" -> "11#" , "a" -> "1" , "b" -> "2".
+Example 2:
+
+Input: s = "1326#"
+Output: "acz"
+Example 3:
+
+Input: s = "25#"
+Output: "y"
+
+
+ def freqAlphabets(self, s: str) -> str:
+    	mp={'1':'a','2':'b','3':'c','4':'d','5':'e','6':'f','7':'g','8':'h','9':'i','10#':'j','11#':'k','12#':'l','13#':'m','14#':'n','15#':'o','16#':'p','17#':'q','18#':'r','19#':'s','20#':'t','21#':'u','22#':'v','23#':'w','24#':'x','25#':'y','26#':'z'}
+        op=str()
+	    start = 0
+	    while start < len(s)-2:
+		    if s[start+2] == '#':
+			    op += mp.get(s[start]+s[start+1]+s[start+2])
+			    start += 3
+		    else:
+			    op+=mp.get(s[start])
+			    start += 1
+	    if s[-1] != '#':
+		    op+=mp.get(s[-2])
+		    op+=mp.get(s[-1])
+		
+	    return op
+
+===================
+
+Count Negative Numbers in a Sorted Matrix
+
+Given a m * n matrix grid which is sorted in non-increasing order both row-wise and column-wise. 
+
+Return the number of negative numbers in grid.
+
+ 
+
+Example 1:
+
+Input: grid = [[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]
+Output: 8
+Explanation: There are 8 negatives number in the matrix.
+Example 2:
+
+Input: grid = [[3,2],[1,0]]
+Output: 0
+
+def test(grid):
+	count = 0
+	for row in grid : count += len([x for x in row if x <0])
+	return count
+	
+	=========================
+	
+Unique Morse Code Words
+
+International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows: "a" maps to ".-", "b" maps to "-...", "c" maps to "-.-.", and so on.
+
+For convenience, the full table for the 26 letters of the English alphabet is given below:
+
+[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+Now, given a list of words, each word can be written as a concatenation of the Morse code of each letter. For example, "cab" can be written as "-.-..--...", (which is the concatenation "-.-." + ".-" + "-..."). We'll call such a concatenation, the transformation of a word.
+
+Return the number of different transformations among all words we have.
+
+Example:
+Input: words = ["gin", "zen", "gig", "msg"]
+Output: 2
+Explanation: 
+The transformation of each word is:
+"gin" -> "--...-."
+"zen" -> "--...-."
+"gig" -> "--...--."
+"msg" -> "--...--."
+
+There are 2 different transformations, "--...-." and "--...--.".
+
+def test(words):
+	s=set()
+	mapp={'a':".-",'b':"-...",'c':"-.-.",'d':"-..",'e':".",'f':"..-.",'g':"--.",'h':"....",'i':"..",'j':".---",'k':"-.-",'l':".-..",'m':"--",'n':"-.",'o':"---",'p':".--.",'q':"--.-",'r':".-.",'s':"...",'t':"-",'u':"..-",'v':"...-",'w':".--",'x':"-..-",'y':"-.--",'z':"--.."}
+	temp=str()
+	for char in words:
+		temp=str()
+		for ltr in char:
+			temp+=mapp.get(ltr)
+		s.add(temp)
+	return len(s)
+	
+	================
+ Replace Elements with Greatest Element on Right Side
+ Given an array arr, replace every element in that array with the greatest element among the elements to its right, and replace the last element with -1.
+
+After doing so, return the array.
+
+ 
+
+Example 1:
+
+Input: arr = [17,18,5,4,6,1]
+Output: [18,6,6,6,1,-1]
+
+
+    def replaceElements(self, arr: List[int]) -> List[int]:
+        for i in range(len(arr)-1):
+            arr[i] = max(arr[i+1:])
+        arr=arr[:-1]
+        arr.append(-1)
+        return arr
