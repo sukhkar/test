@@ -26,6 +26,22 @@ similiar to table columns but are not actually stored in table
 we can select psudeo columns but cant update delete insert into them
 eg SYSDATE , ROWID , ROWNUM
 
+what are acid proerties ?
+Atomicity:
+By this, we mean that either the entire transaction takes place at once or doesn’t happen at all. There is no midway i.e. transactions do not occur partially. Each transaction is considered as one unit and either runs to completion or is not executed at all. It involves the following two operations.
+—Abort: If a transaction aborts, changes made to database are not visible.
+—Commit: If a transaction commits, changes made are visible.
+Atomicity is also known as the ‘All or nothing rule’.
+Consistency:
+Data is in a consistent state when a transaction starts and when it ends.
+For example, in an application that transfers funds from one account to another, the consistency property ensures that the total value of funds in both the accounts is the same at the start and end of each transaction.
+Isolation:
+This property ensures that multiple transactions can occur concurrently without leading to the inconsistency of database state. Transactions occur independently without interference. Changes occurring in a particular transaction will not be visible to any other transaction until that particular change in that transaction is written to memory or has been committed. This property ensures that the execution of transactions concurrently will result in a state that is equivalent to a state achieved these were executed serially in some order.
+Durability:
+This property ensures that once the transaction has completed execution, the updates and modifications to the database are stored in and written to disk and they persist even if a system failure occurs. These updates now become permanent and are stored in non-volatile memory. The effects of the transaction, thus, are never lost.
+
+https://www.geeksforgeeks.org/acid-properties-in-dbms/
+
 7) what is difference between count(1) and count(*) ?
 exactly same
 they take same amount of resources
