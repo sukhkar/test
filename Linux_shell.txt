@@ -600,3 +600,50 @@ echo "I like Bash" | wc -c
 echo "I like Python" | awk '{print length}'
 
 https://www.slashroot.in/suid-and-sgid-linux-explained-examples  // sticky bit , SUID and SGID
+
+===========================
+
+print specific portion of logfile based on date 
+
+Feb 23 13:55:01 messagerie postfix/smtpd[20964]: connect from localhost[127.0.0.1]
+Feb 23 13:55:02 messagerie postfix/smtpd[20964]: lost connection after CONNECT from localhost[127.0.0.1]
+Feb 23 13:55:03 messagerie postfix/smtpd[20964]: disconnect from localhost[127.0.0.1]
+Feb 23 13:55:04 messagerie pop3d: Connection, ip=[::ffff:127.0.0.1]
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: connect from localhost[127.0.0.1]
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: lost connection after CONNECT from localhost[127.0.0.1]
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: disconnect from localhost[127.0.0.1]
+Feb 23 13:57:01 messagerie pop3d: Connection, ip=[::ffff:127.0.0.1]
+Feb 23 13:57:01 messagerie postfix/smtpd[20964]: connect from localhost[127.0.0.1]
+Feb 23 13:57:01 messagerie postfix/smtpd[20964]: lost connection after CONNECT from localhost[127.0.0.1]
+Feb 23 13:58:01 messagerie postfix/smtpd[20964]: disconnect from localhost[127.0.0.1]
+Feb 23 13:58:01 messagerie pop3d: Connection, ip=[::ffff:127.0.0.1]
+
+
+print every line it finds between the string Feb 23 13:56 and the string Feb 23 13:58
+
+O/P:
+way 1) 
+
+ sed -n '/Feb 23 13.56/, /Feb 23 13.58/p' test_new.txt
+ 
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: connect from localhost[127.0.0.1]
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: lost connection after CONNECT from localhost[127.0.0.1]
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: disconnect from localhost[127.0.0.1]
+Feb 23 13:57:01 messagerie pop3d: Connection, ip=[::ffff:127.0.0.1]
+Feb 23 13:57:01 messagerie postfix/smtpd[20964]: connect from localhost[127.0.0.1]
+Feb 23 13:57:01 messagerie postfix/smtpd[20964]: lost connection after CONNECT from localhost[127.0.0.1]
+Feb 23 13:58:01 messagerie postfix/smtpd[20964]: disconnect from localhost[127.0.0.1]
+
+way 2)
+ 
+ grep "Feb 23 13:5[6-8]" test_new.txt
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: connect from localhost[127.0.0.1]
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: lost connection after CONNECT from localhost[127.0.0.1]
+Feb 23 13:56:01 messagerie postfix/smtpd[20964]: disconnect from localhost[127.0.0.1]
+Feb 23 13:57:01 messagerie pop3d: Connection, ip=[::ffff:127.0.0.1]
+Feb 23 13:57:01 messagerie postfix/smtpd[20964]: connect from localhost[127.0.0.1]
+Feb 23 13:57:01 messagerie postfix/smtpd[20964]: lost connection after CONNECT from localhost[127.0.0.1]
+Feb 23 13:58:01 messagerie postfix/smtpd[20964]: disconnect from localhost[127.0.0.1]
+Feb 23 13:58:01 messagerie pop3d: Connection, ip=[::ffff:127.0.0.1]
+
+==========================
