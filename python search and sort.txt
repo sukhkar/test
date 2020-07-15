@@ -1598,3 +1598,41 @@ fun()
 Output:
 20
 In this example, before initializing var1 in gun(). We have explicitly told Python that, do not initialize a new variable, instead access var1 present already on line 2. using the keyword nonlocal So when interpreter performs addition, it access the value 10(already present) and error is avoided.
+
+=======================
+fetch specific portion of logfile based on date
+I would like to print only lines with dates from: 2012/09/30-00:00:10 to: 2012/09/30-00:00:13
+
+2012/09/30-00:00:08.773 log error
+2012/09/30-00:00:09.034 log warning
+2012/09/30-00:00:09.352 log info
+2012/09/30-00:00:10.526 log info
+2012/09/30-00:00:10.995 log warning
+2012/09/30-00:00:12.014 log warning
+2012/09/30-00:00:18.035 log error
+2012/09/30-00:00:21.733 log fatal
+2012/09/30-00:00:21.981 log info
+It should print:
+
+2012/09/30-00:00:10.526 log line
+2012/09/30-00:00:10.995 log line
+2012/09/30-00:00:12.014 log line
+
+ANS:
+
+way 1) 
+Actullay, the log format allows to compare date strings without their conversion to datetime.
+
+with open('mylog.log','r') as f:
+    for line in f:
+        d = line.split(" ")[0] 
+        if d >= '2012/09/30-00:00:10' and d <= '2012/09/30-00:00:13':
+            print lines
+			
+way 2) 
+import re
+for line in log:
+    if re.match("2012/09/30-00:00:1[0-3]", line):
+        print line
+		
+============================
