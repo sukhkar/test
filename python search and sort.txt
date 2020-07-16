@@ -65,10 +65,6 @@ interact.expect(password_prompt)
 interact.send(arglist[3])
 interact.expect(password_prompt)
 
-
-============================
-
-
 ============================
 Implement selection sort 
 
@@ -417,9 +413,9 @@ class deque():
 
 Explain functionality of python interpreter
 
-1. Looks at the date/time of your script and checks if there is a .pyc file for your script with a later date than your script; if there is skip stage 
-2. Read the script line by line and converts that script into python byte code, and then writes the byte code into a pyc file. If your application has mutiple files it creates a pyc file for every .py file. It is at this stage that syntax errors are generated.
-3. Load the first pyc file into memory, and the interpret then executes the file instruction by instruction, it is at this stage Runtime errors are created if your code generates such errors. If neccessary then other pyc files are loaded into memory and executed.
+1. Looks at the date/time of your script and checks if there is a .pyc file for your script with a later date than your script; if there then is skip stage 2
+2. Read the script line by line and converts that script into python byte code, and then writes the byte code into a pyc file. If your application has mutiple files it creates a pyc file for every .py file. At this stage syntax errors are generated.
+3. Load the first pyc file into memory, and then interprets executes the file instruction by instruction, at this stage Runtime errors are created if your code generates such errors. If neccessary then other pyc files are loaded into memory and executed.
 
 ============================
 what is Pickling 
@@ -832,8 +828,6 @@ person_kwargs("vijay"  , company="tcs" , hometown="bhandup" , phone=9588756746)
 case1) if you are printing __name__ in current program then it will print as "__main__"
 
 case2) in one program you are  printing __name__ and importing that program into another program then over there instead of printing "__main__" it will print the name of program which was imported
-
-
 ===========================
 implement Multithreading in python 
 
@@ -1526,9 +1520,26 @@ Value of the key if it is in the dictionary.
 None if key is not in the dictionary and default_value is not specified.
 default_value if key is not in the dictionary and default_value is specified.
 
+Dictionary1 = { 'A': 'Geeks', 'B': 'For'} 
+  
+Third_value = Dictionary1.setdefault('C') 
+print("Dictionary:", Dictionary1) 
+print("Third_value:", Third_value) 
+  
+Fourth_value = Dictionary1.setdefault('D', 'Geeks') 
+print("Dictionary:", Dictionary1) 
+print("Fourth_value:", Fourth_value) 
+
+Output:
+
+Dictionary: {'A': 'Geeks', 'B': 'For', 'C': None}
+Third_value: None
+Dictionary: {'A': 'Geeks', 'B': 'For', 'C': None, 'D': 'Geeks'}
+Fourth_value: Geeks
+
 
 3) fromkeys :
-setdefault() method returns the value of a key (if the key is in dictionary). If not, it inserts key with a value to the dictionary.
+It Return a dictionary with keys mapped to None if no value is provided, else to the value provided in the field.
 
 l=[1,2]
 d=dict.fromkeys(l)
@@ -1636,3 +1647,88 @@ for line in log:
         print line
 		
 ============================
+Iterator in python is any python type that can be used with a ‘for in loop’. Python lists, tuples, dicts and sets are all examples of inbuilt iterators. These types are iterators because they implement following methods. In fact, any object that wants to be an iterator must implement following methods.
+
+__iter__ method that is called on initialization of an iterator. This should return an object that has a next or __next__ (in Python 3) method.
+next ( __next__ in Python 3) The iterator next method should return the next value for the iterable. When an iterator is used with a ‘for in’ loop, the for loop implicitly calls next() on the iterator object. This method should raise a StopIteration to signal the end of the iteration.
+
+class Test: 
+  
+    def __init__(self, limit): 
+        self.limit = limit 
+  
+    def __iter__(self): 
+        self.x = 10
+        return self
+  
+    def __next__(self):
+        x = self.x 
+ 
+        if x > self.limit: 
+            raise StopIteration 
+  
+        # Else increment and return old value 
+        self.x = x + 1; 
+        return x 
+  
+# Prints numbers from 10 to 15 
+for i in Test(15): 
+    print(i) 
+  
+# Prints nothing 
+for i in Test(5): 
+    print(i)
+    
+Output :
+10
+11
+12
+13
+14
+15
+
+=======================
+Generator :
+https://www.geeksforgeeks.org/generators-in-python/
+
+Generator-Function : A generator-function is defined like a normal function, but whenever it needs to generate a value, it does so with the yield keyword rather than return. If the body of a def contains yield, the function automatically becomes a generator function.
+
+def simpleGeneratorFun(): 
+    yield 1            
+    yield 2            
+    yield 3            
+   
+# Driver code to check above generator function 
+for value in simpleGeneratorFun():  
+    print(value) 
+Output :
+
+1
+2
+3
+
+Generator-Object : Generator functions return a generator object. Generator objects are used either by calling the next method on the generator object or using the generator object in a “for in” loop (as shown in the above program).
+
+# A Python program to demonstrate use of  
+# generator object with next()  
+  
+# A generator function 
+def simpleGeneratorFun(): 
+    yield 1
+    yield 2
+    yield 3
+   
+# x is a generator object 
+x = simpleGeneratorFun() 
+  
+# Iterating over the generator object using next 
+print(x.next()) 
+print(x.next()) 
+print(x.next()) 
+Output :
+
+1
+2
+3
+
+So a generator function returns an generator object that is iterable, i.e., can be used as an Iterators .
