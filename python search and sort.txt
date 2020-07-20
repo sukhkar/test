@@ -1,3 +1,18 @@
+Following python Modules are used:
+paramiko, paramiko_expect ,pytest, csv, json, shutil,  logging, itertools, functools, subprocess, os,time,  datetime, sys, math
+=========================
+difference between a+, r+ and w+ in file handling python
+r+ Opens a file for both reading and writing. The file pointer placed at the beginning of the file. 
+w+ Opens a file for both writing and reading. Overwrites the existing file if the file exists.if file exists already then existing data is flushed out.
+a+ Open for reading and appending (writing at end of file). The file is created if it does not exist. The initial file position for reading is at the beginning of the file, but output is appended to the end of the file
+
+=================
+
+Closure
+
+https://www.programiz.com/python-programming/closure
+==========================
+
 #importing module 
 import logging 
 
