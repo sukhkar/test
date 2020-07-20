@@ -1,94 +1,13 @@
 
 count no of lines in file : wc -l filename
 count no of words in file : wc -w filename
-file containg 100 lines print 30 to 40 number of lines : cat  filename | head -40 | tail -10
-sed -n '30,40p' filename
+
 ls = echo *  // both are same
 
-display entire file except lines from 3 to 7 : sed '3,7d' filename
-string replacement :  sed 's/version/story/g' myfile.txt
-string replacement by ignoring case : sed 's/version/story/gi' myfile.txt
-replace multiple spaces with single space : sed 's/ */ /g' aa      // if 2 or more than 2 consecitive spaces are there then those will be repalced with single space
-replacing words only within a line range (30 through 40) : sed '30,40 s/version/story/g' myfile.txt
-^#  : lines starting with comment
-^$   : blank lines   
-find some pattern in file :  sed -n '/this/p' file.txt
-insert 1 at the start of every line : sed -i 's/^/1/' filename
-insert  at the last of every line :  sed -i 's/$/6/' filename
-remove cntl+M character from file : sed -i 's/\^M//g' filename
-remove blank line : sed '/^$/d' file.txt
-perform 2 or more substitution at once : sed -i 's/that/this/gi;s/line1/line2/gi' myfile.txt
-give "()" to all capital characters in file:
-sed 's/\(\b[A-Z]\)/\(\1\)/g' file.txt
-Replacing string on a specific line number : sed '3 s/unix/linux/' geekfile.txt
-delete line no 9 to 10 in file: sed '9,10d' file.txt
-Deleting lines other than the mentioned :  sed '3,4!d' file.txt
-To add a blank line after every non-blank line : sed G file.txt
-Replace a string on a particular line: sed '1 s/hi/HI/' file.txt // this will replace only on first line only first occurrence
-sed ' s/hi/HI/2' file.txt // this will replace every second occurance of hi on  all lines
-sed '4,5 s/hi/HI/2' file.txt // this will replace every second occurance of hi on  lines between 4 to 5
-To add some content after any string :  sed '/string/a "AFTER_STRING"' file.txt
-to add some content before any string : sed '/string/i "BEFORE_STRING"' file.txt
-multiple sed commands :  sed -e 's/hi/hello/' -e '/10/d' file.txt
- sed 's/this/there/' file.txt this command will not actually update the file while it will just perform operation on file and show that content , if you want to change the content actually then need to use "-i" option.
- 
- sed -i 's/this/there/' file.txt
- if you want to take backup before writing to original file then : sed -i.bak 's/this/there/' file.txt
- this will create file.txt.bak named backup file efore performiing any operation.
- 
- delete a line starting with hi and ending with hello.
- sed '/hi.*hello/d' file.txt
+Sticky BIT 
+https://www.thegeekstuff.com/2013/02/sticky-bit/
+linuxnix.com/sticky-bit-set-linux/
 
-AWK :
-find some pattern in file : awk '/this/{print $0}' file.txt
-awk '{print $0}' file.txt this will print all the lines in file
-print some message before printing content of file and at end of file content: awk 'BEGIN {print "FILE CONTENT"} {print $0} END {print "File ENDS"}' file.txt
-search for pattern "is" in file : awk '/s is/{print $0}' file.txt
-search for pattern ending with "st" : awk '/.st/{print $0}' file.txt
-print lines containing Hi and hi :  awk '/[Hh]i/{print $0}'  file.txt
-echo "Hi123Hi" | awk '/[A-Za-z]/'   // it will grep in the string for A-Z and a-z
-
-
-[[:alpha:]]                            Pattern for any alphabetical character, either upper or lower case.
-[[:alnum:]]                          Pattern for  0–9, A–Z, or a–z.
-[[:blank:]]                            Pattern for space or Tab only.
-[[:digit:]]                              Pattern for 0 to 9.
-[[:lower:]]                            Pattern for a–z lower case only.
-[[:print:]]                            Pattern for any printable character.
-[[:space:]]                          Pattern for any whitespace character: space, Tab, NL, FF, VT, CR.
-[[:upper:]]                          Pattern for A–Z upper case only.
-
-awk '/[[:print:]]/' file.txt
-echo "tessst" | awk '/tes*t/{print $0}'  // * denotes 0 or more occurances means tet , test, tesst as well
-awk '/this.*test/{print $0}' file.txt // means there can be any no of occurnaces in between this and test
-echo "sat" | awk '/s[ae]*t/{print $0}'  // this represents 0 or more occurances of "ae"
-
-The question mark(?) means the previous character can exist once or none.
-echo "test" | awk '/tes?t/{print $0}'  // it will check whether s occurs 0 or 1 time 
-
-The plus sign(+)  means that the character before the plus sign should exist one or more times, but must exist once at least. 
-echo "teest" | awk '/te+st/{print $0}'
-
-Curly braces{} enable you to specify the number of existence for a pattern, it has two formats:
-n: The regex appears exactly n times.
-n,m: The regex appears at least n times, but no more than m times.
-
-echo "test" | awk '/te{1}st/{print $0}' 
-test
-
-$ echo "tst" | awk '/te{1,2}st/{print $0}'
-
-$ echo "test" | awk '/te{1,2}st/{print $0}'
-test
-$ echo "teest" | awk '/te{1,2}st/{print $0}'
-teest
-$ echo "teeest" | awk '/te{1,2}st/{print $0}'
-
-
-cut -d" " -f 2 filename // for displaying 2nd column seperated by space
-print lines starting with "vi"  :  awk '/^vi/{print}' filename
-print lines endng with "kar:  awk '/kar$/{print}' filename    ( cat h | grep "re$")
-print lines containing 0 to 9 numbers :  awk '/[0-9]/{print}' filename
 
 mtime : ls -l : show the last update to file content, it does not udpate with change in permission or owner
 atime : ls -lu : shows the last file accessed time 
