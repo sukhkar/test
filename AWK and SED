@@ -1,0 +1,365 @@
+$ sed s/one/ONE/ t
+ONE one one
+ONE one
+ONE
+ONE
+
+VIJAY@VIJAYHOME MINGW32 ~ (master)
+$ sed s/one/ONE/g t
+ONE ONE ONE
+ONE ONE
+ONE
+ONE
+
+VIJAY@VIJAYHOME MINGW32 ~ (master)
+$ sed '1 s/one/ONE/' t
+ONE one one
+one one
+one
+one
+
+VIJAY@VIJAYHOME MINGW32 ~ (master)
+$ sed '1,2 s/one/ONE/' t
+ONE one one
+ONE one
+one
+one
+
+VIJAY@VIJAYHOME MINGW32 ~ (master)
+$ sed '1,3 s/one/ONE/' t
+ONE one one
+ONE one
+ONE
+one
+	
+Write a command to remove all the occurrences of the word "jhon" except the first one in a line with in the entire file?
+sed 's/jhon//2g' < filename
+
+Write a command to remove the first number on line 5 in file?
+sed '1 s/[0-9][0-9]*//' num
+
+9. Write a command to remove the first number on all lines that start with "@"?
+sed '\,^@,s/[0-9][0-9]*//' num
+
+write a command to replace the word "lite" with "light" from 100th line to last line in a file?
+sed '100,$ s/lite/light/' < filename
+
+Write a command to remove the first 10 lines from a file?
+sed '1,10 d' < filename
+
+Write a command to duplicate each line in a file?
+sed 'p' < filename
+
+ Write a sed command to print the lines that contain the word "run"?
+sed -n '/run/p' < filename
+
+ Write a sed command to print the lines that do not contain the word "run"?
+sed -n '/run/!p' < filename
+
+sed command to delete first line
+$ sed ‘1d’ Sed_File.txt
+
+sed command to delete last line
+$ sed ‘$d’ Sed_File.txt
+
+===============
+AWK 
+
+NR: NR command keeps a current count of the number of input records. Remember that records are usually lines. Awk command performs the pattern/action statements once for each record in a file.
+
+NF: NF command keeps a count of the number of fields within the current input record.
+
+FS: FS command contains the field separator character which is used to divide fields on the input line. The default is “white space”, meaning space and tab characters. FS can be reassigned to another character (typically in BEGIN) to change the field separator.
+
+RS: RS command stores the current record separator character. Since, by default, an input line is the input record, the default record separator character is a newline.
+
+OFS: OFS command stores the output field separator, which separates the fields when Awk prints them. The default is a blank space. Whenever print has several parameters separated with commas, it will print the value of OFS in between each parameter.
+
+ORS: ORS command stores the output record separator, which separates the output lines when Awk prints them. The default is a newline character. print automatically outputs the contents of ORS at the end of whatever it is given to print.
+
+$0
+It represents the entire input record.
+
+$n
+It represents the nth field in the current record where the fields are separated by FS.
+
+
+print content of file with line number
+$ awk '{print NR, $0}' n
+1 ajay manager account 45000
+2 sunil clerk account 25000
+3 varun manager sales 50000
+4 amit manager account 47000
+5 tarun peon sales 15000
+6 deepak clerk sales 23000
+7 sunil peon sales 13000
+8 satvik director purchase 80000
+
+
+print first and last field of file
+$ awk '{print $1,$NF}' n
+OR
+$ awk '{print $1,$4}' n
+
+ajay 45000
+sunil 25000
+varun 50000
+amit 47000
+tarun 15000
+deepak 23000
+sunil 13000
+satvik 80000
+
+search for 'a' in file
+awk '/a/ {print $0}' marks.txt
+awk '/a/' marks.txt 
+
+print only 3rd and 4th column from file having pattern 'a'
+awk '/a/' {print $3, $4}' marks.txt
+
+Counting and Printing Matched Pattern
+awk '/a/{++cnt} END {print "Count = ", cnt}' marks.txt
+
+Printing Lines with More than 18 Characters
+awk 'length($0) > 18' marks.txt
+
+It matches any single character except the end of line character. 
+echo -e "cat\nbat\nfun\nfin\nfan" | awk '/f.n/'
+fun
+fin
+fan
+
+echo "their" | awk '/^the/'
+their
+
+echo -e "knife\nknow\nfun\nfin\nfan\nnine" | awk '/n$/'
+fun
+fin
+fan
+
+
+Match character set
+echo -e "Call\nTall\nBall" | awk '/[CT]all/'
+Call
+Tall
+
+
+exclusive set
+ echo -e "Call\nTall\nBall" | awk '/[^CT]all/'
+ 
+ Ball
+ 
+ 
+A vertical bar allows regular expressions to be logically ORed. 
+
+echo -e "Call\nTall\nBall\nSmall\nShall" | awk '/Call|Ball/'
+
+Output
+Call
+Ball
+ 
+
+zero or one occurance
+
+echo -e "Colour\nColor" | awk '/Colou?r/'
+
+Output
+Colour
+Color 
+
+zero or more occurance
+echo -e "ca\ncat\ncatt" | awk '/cat*/'
+
+ca
+cat
+catt
+
+one or more occurance
+echo -e "111\n22\n123\n234\n456\n222"  | awk '/2+/'
+
+22
+123
+234
+222
+
+grouping
+
+echo -e "Apple Juice\nApple Pie\nApple Tart\nApple Cake" | awk 
+   '/Apple (Juice|Cake)/'
+   
+Apple Juice
+Apple Cake
+
+
+create array in AWK
+awk 'BEGIN {
+   fruits["mango"] = "yellow";
+   fruits["orange"] = "orange"
+   print fruits["orange"] "\n" fruits["mango"]
+}'
+
+
+orange
+yellow
+
+
+
+deleting array elements
+
+awk 'BEGIN {
+   fruits["mango"] = "yellow";
+   fruits["orange"] = "orange";
+   delete fruits["orange"];
+   print fruits["orange"]
+}'
+
+
+if condition in awk
+awk 'BEGIN {num = 10; if (num % 2 == 0) printf "%d is even number.\n", num }'
+
+if else condition in awk
+awk 'BEGIN {
+   num = 11; if (num % 2 == 0) printf "%d is even number.\n", num; 
+      else printf "%d is odd number.\n", num 
+}'
+
+
+if - else - if ladder
+awk 'BEGIN {
+   a = 30;
+   
+   if (a==10)
+   print "a = 10";
+   else if (a == 20)
+   print "a = 20";
+   else if (a == 30)
+   print "a = 30";
+}'
+
+
+for loop in awk
+
+awk 'BEGIN { for (i = 1; i <= 5; ++i) print i }'
+
+while loop
+awk 'BEGIN {i = 1; while (i < 6) { print i; ++i } }'
+
+do while loop
+awk 'BEGIN {i = 1; do { print i; ++i } while (i < 6) }'
+
+break sentense
+
+awk 'BEGIN {
+   sum = 0; for (i = 0; i < 20; ++i) { 
+      sum += i; if (sum > 50) break; else print "Sum =", sum 
+   } 
+}'
+
+continue
+awk 'BEGIN {
+   for (i = 1; i <= 20; ++i) {
+      if (i % 2 == 0) print i ; else continue
+   } 
+}'
+
+awk 'BEGIN {
+   sum = 0; for (i = 0; i < 20; ++i) {
+      sum += i; if (sum > 50) exit(10); else print "Sum =", sum 
+   } 
+}'
+
+output redirection witj awk
+awk 'BEGIN { print "Hello, World !!!" > "/tmp/message.txt" }'
+
+==================
+file containg 100 lines print 30 to 40 number of lines : cat  filename | head -40 | tail -10
+sed -n '30,40p' filename
+
+
+display entire file except lines from 3 to 7 : sed '3,7d' filename
+string replacement :  sed 's/version/story/g' myfile.txt
+string replacement by ignoring case : sed 's/version/story/gi' myfile.txt
+replace multiple spaces with single space : sed 's/ */ /g' aa      // if 2 or more than 2 consecitive spaces are there then those will be repalced with single space
+replacing words only within a line range (30 through 40) : sed '30,40 s/version/story/g' myfile.txt
+^#  : lines starting with comment
+^$   : blank lines   
+find some pattern in file :  sed -n '/this/p' file.txt
+insert 1 at the start of every line : sed -i 's/^/1/' filename
+insert  at the last of every line :  sed -i 's/$/6/' filename
+remove cntl+M character from file : sed -i 's/\^M//g' filename
+remove blank line : sed '/^$/d' file.txt
+perform 2 or more substitution at once : sed -i 's/that/this/gi;s/line1/line2/gi' myfile.txt
+give "()" to all capital characters in file:
+sed 's/\(\b[A-Z]\)/\(\1\)/g' file.txt
+Replacing string on a specific line number : sed '3 s/unix/linux/' geekfile.txt
+delete line no 9 to 10 in file: sed '9,10d' file.txt
+Deleting lines other than the mentioned :  sed '3,4!d' file.txt
+To add a blank line after every non-blank line : sed G file.txt
+Replace a string on a particular line: sed '1 s/hi/HI/' file.txt // this will replace only on first line only first occurrence
+sed ' s/hi/HI/2' file.txt // this will replace every second occurance of hi on  all lines
+sed '4,5 s/hi/HI/2' file.txt // this will replace every second occurance of hi on  lines between 4 to 5
+To add some content after any string :  sed '/string/a "AFTER_STRING"' file.txt
+to add some content before any string : sed '/string/i "BEFORE_STRING"' file.txt
+multiple sed commands :  sed -e 's/hi/hello/' -e '/10/d' file.txt
+ sed 's/this/there/' file.txt this command will not actually update the file while it will just perform operation on file and show that content , if you want to change the content actually then need to use "-i" option.
+ 
+ sed -i 's/this/there/' file.txt
+ if you want to take backup before writing to original file then : sed -i.bak 's/this/there/' file.txt
+ this will create file.txt.bak named backup file efore performiing any operation.
+ 
+ delete a line starting with hi and ending with hello.
+ sed '/hi.*hello/d' file.txt
+
+AWK :
+find some pattern in file : awk '/this/{print $0}' file.txt
+awk '{print $0}' file.txt this will print all the lines in file
+print some message before printing content of file and at end of file content: awk 'BEGIN {print "FILE CONTENT"} {print $0} END {print "File ENDS"}' file.txt
+search for pattern "is" in file : awk '/s is/{print $0}' file.txt
+search for pattern ending with "st" : awk '/.st/{print $0}' file.txt
+print lines containing Hi and hi :  awk '/[Hh]i/{print $0}'  file.txt
+echo "Hi123Hi" | awk '/[A-Za-z]/'   // it will grep in the string for A-Z and a-z
+
+
+[[:alpha:]]                            Pattern for any alphabetical character, either upper or lower case.
+[[:alnum:]]                          Pattern for  0–9, A–Z, or a–z.
+[[:blank:]]                            Pattern for space or Tab only.
+[[:digit:]]                              Pattern for 0 to 9.
+[[:lower:]]                            Pattern for a–z lower case only.
+[[:print:]]                            Pattern for any printable character.
+[[:space:]]                          Pattern for any whitespace character: space, Tab, NL, FF, VT, CR.
+[[:upper:]]                          Pattern for A–Z upper case only.
+
+awk '/[[:print:]]/' file.txt
+echo "tessst" | awk '/tes*t/{print $0}'  // * denotes 0 or more occurances means tet , test, tesst as well
+awk '/this.*test/{print $0}' file.txt // means there can be any no of occurnaces in between this and test
+echo "sat" | awk '/s[ae]*t/{print $0}'  // this represents 0 or more occurances of "ae"
+
+The question mark(?) means the previous character can exist once or none.
+echo "test" | awk '/tes?t/{print $0}'  // it will check whether s occurs 0 or 1 time 
+
+The plus sign(+)  means that the character before the plus sign should exist one or more times, but must exist once at least. 
+echo "teest" | awk '/te+st/{print $0}'
+
+Curly braces{} enable you to specify the number of existence for a pattern, it has two formats:
+n: The regex appears exactly n times.
+n,m: The regex appears at least n times, but no more than m times.
+
+echo "test" | awk '/te{1}st/{print $0}' 
+test
+
+$ echo "tst" | awk '/te{1,2}st/{print $0}'
+
+$ echo "test" | awk '/te{1,2}st/{print $0}'
+test
+$ echo "teest" | awk '/te{1,2}st/{print $0}'
+teest
+$ echo "teeest" | awk '/te{1,2}st/{print $0}'
+
+
+cut -d" " -f 2 filename // for displaying 2nd column seperated by space
+print lines starting with "vi"  :  awk '/^vi/{print}' filename
+print lines endng with "kar:  awk '/kar$/{print}' filename    ( cat h | grep "re$")
+print lines containing 0 to 9 numbers :  awk '/[0-9]/{print}' filename
+
+
+
