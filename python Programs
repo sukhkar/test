@@ -1363,16 +1363,18 @@ For example, if you were given the list of stock prices:
 prices = [12,11,15,3,10]
 
 Then your function would return the maximum possible profit, which would be 7 (buying at 3 and selling at 10)
-
->>> def test(l):
-	profit, buy , sell  = 0,0,0
+	
+ def test(l):
+	profit = 0
 	for i in range(len(l)-1):
-		for j in range(i+1,len(l)-1):
-			if l[i] < l[j] and (l[j]-l[i]) > profit:
-				profit = l[j] - l[i]
-				buy = l[i]
-				sell = l[j]
-	print(" profit : {} , buy : {} , sell : {}".format(profit, buy, sell))
+		if l[i] < max(l[i+1:]):
+			     diff = max(l[i+1:]) - l[i]
+			     if profit < diff:
+				     profit = diff
+	print("profit is {}".format(profit))
+
+			     
+			     
 	
 test([12, 11, 15, 3 , 10])
 profit : 4 , buy : 11 , sell : 15
