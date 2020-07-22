@@ -1246,21 +1246,23 @@ from statistics import mean
 >>> test([1,2,3,4,5])
 3
 ================
+def test(n):
+	if n == 0:
+		return 1
+	elif n <0:
+		n = n* -1
+	t=0
+	while n > 0:
+		n = int(n/10)
+		t += 1
+	return t
 
-print total digits in number
- def test():
-	count=0
-	n=int(input('enter a number'))
-	orig=n
-	while n>0:
-		n=int(n/10)
-		count+=1
-	print("total digits in {} are {}".format(orig, count))
-
-	
->>> test()
-enter a number123
-total digits in 123 are 3
+>>> test(0)
+1
+>>> test(23)
+2
+>>> test(-1213)
+4
 =================
 check whether string are pangram or not ?
 
@@ -1684,3 +1686,51 @@ Output: [18,6,6,6,1,-1]
         arr=arr[:-1]
         arr.append(-1)
         return arr
+
+====================
+
+ 1 - Write a function that checks whether any **permutation** of an input string is a palindrome.
+ Assume the input string contains only lowercase letters.
+
+ Example:
+
+ "radar" - True
+ "aarrd" - True
+ "apple" - False
+ "eppla" - False
+ from itertools import permutations
+
+
+	def test(s):
+     new_s = list(permutations(s))
+     flag = False
+     for i in list(new_s):
+         if "".join(reversed(i)) == "".join(i):
+             print("".join(i))
+             flag = True
+             break
+     if flag:
+         print("True")
+     else:
+         print("False")
+
+ test("rad")
+
+=======================
+wap to fetch random line from file
+
+ def test():
+	with open(r'C:\Users\VIJAY\Desktop\test.txt', 'r') as f:
+		data=f.readlines()
+	n=len(data)
+	line=random.randint(0,n-1)
+	print(data[line])
+
+	
+>>> test()
+5
+
+>>> test()
+1
+
+==================
