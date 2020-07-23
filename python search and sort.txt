@@ -97,6 +97,10 @@ Implement selection sort
 >>> a
 [1, 2, 3, 4]
 
+worst case : O(n2)
+average case: O(N2)
+best case : O(n2)
+
 ============================
 Implement bubble sort
 
@@ -115,25 +119,33 @@ Implement bubble sort
 >>> a
 [1, 2, 3, 4, 5]
 
+worst case : O(n2)
+average case: O(N2)
+best case : O(n)
+
 =====================
 Implement binary search iterative 
 
->>> def binarysearch_iterative(a, l , r , x):
-	while l <= r:
-		mid=l+ (r-l)/2
-		if a[mid]==x:
+def test(l,key):
+	lft=0
+	rht=len(l)-1
+	while lft <= rht:
+		mid=int(lft + (rht-lft)/2)
+		if l[mid] == key:
 			return mid
-		elif a[mid] <x:
-			l=mid+1
+		elif l[mid] < key:
+			lft = mid+1
 		else:
-			r=mid-1
+			rht = mid-1
 	return -1
+	
+time complexity : O(log n)
 =================
 Implement Binray search with recursion
 
->>> def binarysearch(a , l , r , x):
-	if r >= 1:
-		mid= l+ ( r-l )/2
+>>> def bs(a , l , r , x):
+	if r >= l:
+		mid= int(l+ ( r-l )/2)
 		if a[mid] == x:
 			return mid
 		elif a[mid] > x:
