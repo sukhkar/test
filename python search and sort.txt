@@ -1759,3 +1759,156 @@ Output :
 3
 
 So a generator function returns an generator object that is iterable, i.e., can be used as an Iterators .
+==============================
+
+
+Is Python call by value or call by reference ?
+https://medium.com/@lokeshsharma596/is-python-call-by-value-or-call-by-reference-2dd7db74dbd0
+
+
+Call/Pass By Value:
+In pass-by-value, the function receives a copy of the argument objects passed to it by the caller, stored in a new location in memory.
+You pass values of parameter to the function,if any kind of change done to those parameters inside the function ,those changes not reflected back in your actual parameters.
+Call By Reference:
+In pass-by-reference, the function receives reference to the argument objects passed to it by the caller, both pointing to the same memory location.
+you pass reference of parameters to your function.if any changes made to those parameters inside function those changes are get reflected back to your actual parameters.
+In Python Neither of these two concepts are applicable, rather the values are sent to functions by means of object reference.
+Pass-by-object-reference:
+In Python, (almost) everything is an object. What we commonly refer to as “variables” in Python are more properly called names. Likewise, “assignment” is really the binding of a name to an object. Each binding has a scope that defines its visibility, usually the block in which the name originates.
+In Python,Values are passed to function by object reference.
+if object is immutable(not modifiable) than the modified value is not available outside the function.
+if object is mutable (modifiable) than modified value is available outside the function.
+Mutable objects:
+list, dict, set, byte array
+Immutable objects:
+int, float, complex, string, tuple, frozen set
+
+def val(x):
+x=15
+print(x,id(x))
+
+x = 10
+val(x)
+print(x,id(x))
+
+
+a new object is creted into memory because integer objects are immutable
+
+def val(x):
+x.append(4)
+print(x,id(x))
+
+x=[1,2,3]
+val(x)
+print(x,id(x))
+
+a new object is not created into memory bcoz list objects are mutable , it simply add new element to same object.
+
+==========================
+what is difference between package and module in python ?
+
+A package is a collection of Python modules: while a module is a single Python file, a package is a directory of Python modules containing an additional __init__.py file
+
+===================
+
+what is difference between append and extend ?
+
+l=[1,2,3]
+>>> l.append(4)
+>>> l
+[1, 2, 3, 4]
+>>> l.append([5,6])
+>>> l
+[1, 2, 3, 4, [5, 6]]
+>>> l.extend(7)
+Traceback (most recent call last):
+  File "<pyshell#229>", line 1, in <module>
+    l.extend(7)
+TypeError: 'int' object is not iterable
+>>> l.extend([7])
+>>> l
+[1, 2, 3, 4, [5, 6], 7]
+>>> l.extend([8,9])
+>>> l
+[1, 2, 3, 4, [5, 6], 7, 8, 9]
+
+Append : IT considers argument of append as single element that can be integer or list and appends to original list.
+by appending size of originial list always increases by 1
+
+extend :We can pass arguments to extend in list only number as argument is not allowed. there can be single or multiple values present into argument list.by extending the size of original list can be increase by 1 or more.
+
+==============
+difference between multithreading and multiprocessing ?
+
+A multiprocessing system has more than two processors whereas Multithreading is a program execution technique that allows a single process to have multiple code segments. Multiprocessing improves the reliability of the system while in the multithreading process, each thread runs parallel to each other
+=============
+=================
+print odd  rows from file in python 
+
+with open(r'C:\Users\VIJAY\Desktop\test.txt') as f:
+	data=f.readlines()
+	
+for i in range(0, len(data),2):
+	print(i)
+
+===========================
+how to specify two conditions in list comprehension
+>>> l=[1,2,3,4,5,6,7,8,9]
+>>> [i for i in l if i%2 == 0 and i%3 == 0]
+[6]
+
+========================
+what is more faster for loop or list comprehension ?
+Python list comprehension is faster than plain loops. List comprehension is optimized for Python interpreter.
+ 
+
+import timeit
+TEST_CODE1 = '''
+mylist = [x * 2 for x in range(100)]
+'''
+TEST_CODE2 = '''
+mylist = []
+for x in range(100):
+	mylist.append(x*2)
+'''
+timeit.timeit(stmt=TEST_CODE1, number=10000)
+timeit.timeit(stmt=TEST_CODE2, number=10000)
+
+O/P:
+>>> timeit.timeit(stmt=TEST_CODE1, number=100)
+0.003901347999999416
+>>> timeit.timeit(stmt=TEST_CODE2, number=100)
+0.006439930999931676
+
+==========================
+what happends when read() function is executed twice on file ?
+ANS : in first read() entire file is returned in form of string for second read() nothing is returned even error is not returned.
+
+
+>>> with open(r'C:\Users\VIJAY\Desktop\test.txt', 'r')as f:
+	print(f.read())
+	print("hello")
+	f.seek(0)
+	print(f.read())
+
+	
+vijay;bhalekar;23/4;shivashram;bhandup;mumbai;here
+ajay;bhalekar;23/5;shivashram;bhandup;mumbai;there
+swati;bhalekar;23/6;shivashram;bhandup;mumbai;here
+
+
+hello
+0
+vijay;bhalekar;23/4;shivashram;bhandup;mumbai;here
+ajay;bhalekar;23/5;shivashram;bhandup;mumbai;there
+swati;bhalekar;23/6;shivashram;bhandup;mumbai;here
+
+============================
+how to replace the word "nahur" with "bhandup" present in file python ( source and destination file should be same)
+
+>>> def test():
+	with open(r'C:\Users\VIJAY\Desktop\test.txt' ,'r') as f:
+		data=f.read()
+	with open(r'C:\Users\VIJAY\Desktop\test.txt' ,'w+') as f:
+		f.writelines(data.replace('nahur','bhandup'))
+		
