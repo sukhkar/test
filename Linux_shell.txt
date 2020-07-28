@@ -865,3 +865,137 @@ $ jobs
 fg %3 to bring the vim 23 process back to foreground.
 
 To start it running in the background, use bg; e.g.: bg %3
+=========================
+print odd rows from file in unix
+
+awk 'NR%2 == 1' filename
+
+================
+netstat (network statistics) is a command line tool for monitoring network connections both incoming and outgoing as well as viewing routing tables, interface statistics etc.
+
+Nslookup (stands for “Name Server Lookup”) is a useful command for getting information from DNS server. It is a network administration tool for querying the Domain Name System (DNS) to obtain domain name or IP address mapping or any other specific DNS record
+
+=======================
+what happends when we source a file ?
+
+Sourcing a file is nothing but executing the file, more importantly making the changes of the file applicable in the current shell itself, the shell which we are working in. Usually, when we execute a command or a script, a new sub-shell is created and the script is executed in the sub-shell. Due to this, if the script or the command intends to make any change to the current shell, it will not happen. In order to make the changes applicable in the current shell itself, we "source" the file.
+
+ Let us take an example to understand this by writing a script to change the current directory to temp.
+$ cat a.sh
+#!/usr/bin/bash
+
+cd temp
+Check the current directory before running the script:
+$ pwd
+/home/guru
+Let us run the script:
+$ ./a.sh
+/home/guru/temp
+After running the script,  the current directory is:
+$ pwd
+/home/guru
+  As seen above, it is clear that the command is indeed executed in a sub-shell, not in the main shell itself. That is the reason why the change is effected in the sub-shell, and not in the shell from which the script is invoked. In fact, we could have also proved this by checking the process id of the shell script which should have been different from the process id of our home shell.
+
+  To make this change permanent in our current shell is what we use the source command for:
+$ source a.sh
+Now, let us check the current directory after sourcing the script:
+$ pwd
+/home/guru/temp
+      This is the meaning of sourcing of a file.
+
+source : https://www.theunixschool.com/2012/04/what-is-sourcing-file.html
+
+====================
+What is the difference between the sourcing and executing of a file?
+     
+The difference between sourcing and executing a file is : executing a file does not make any changes in the current shell, if intended, whereas the sourced file makes the changes in the current shell itself.
+	 
+===================
+difference between adding variable in export and .profile?
+
+export makes a variable something that will be included in child process environments. It does not affect other already existing environments. In general there isn't a way to set a variable in one terminal and have it automatically appear in another terminal
+
+Adding it to your .profile makes it so that your environment will be setup to include that new variable each time you log in though. So it's not being exported from one shell to another, but instead is instructing a new shell to include it when it sets up the initial environment.
+
+========================
+$ cat t
+vijay;bhalekar;23/4;shivashram;bhandup;mumbai;here
+ajay;bhalekar;23/5;shivashram;bhandup;mumbai;there
+swati;bhalekar;23/6;shivashram;bhandup;mumbai;here
+
+how to print jsut 3,4,5,6 fields from file ?
+
+$ cut -d";" -f 3,4,5,6 t
+23/4;shivashram;bhandup;mumbai
+23/5;shivashram;bhandup;mumbai
+23/6;shivashram;bhandup;mumbai
+
+==============
+
+How add 45 days to the current system date?
+ date -d "+ 45 days"
+
+In which location the sudo user commands history is logged?
+All the sudo users commands history is logged in /var/log/secure
+============
+Umask
+
+For example, let’s calculate how a new file or directory permission will affect because of umask.
+
+Files: 666 - 022 = 644. According to the permission, the owner can read and execute the file. Groups and others can read the file. 
+Directory: 777 - 022 = 755. This means the owner will have all read, write permission and cd to the directory. Group and others can read and list the contents of the directory and cd to the directory. 
+You can also view the umask value in numeric form by executing below command.
+
+$umask
+Output:
+
+u=rwx,g=rx,o=rx
+
+=============
+how to set cron for every sunday
+00 00 * * * 0
+00 00 * * * 7
+00 00 * * * Sun
+
+how to set cron for first sunday of every month
+0 0 1-7 * 0 cmd
+0 0 * * 0 [ `date '+%e'` -le 7 ] && cmd
+
+cron job to run on second to last friday each month
+00 00 8-31 * 5
+
+==============
+
+single quote and double quote meaning in unix
+
+the single quotes will literally echo what you have between them, while the double quotes will evaluate variables between them and output the value of the variable.
+
+a=apple      # a simple variable
+arr=(apple)  # an indexed array with a single element
+	
+
+# | Expression  | Result      | Comments
+---+-------------+-------------+--------------------------------------------------------------------
+ 1 | "$a"        | apple       | variables are expanded inside ""
+ 2 | '$a'        | $a          | variables are not expanded inside ''
+ 3 | "'$a'"      | 'apple'     | '' has no special meaning inside ""
+ 4 | '"$a"'      | "$a"        | "" is treated literally inside ''
+ 5 | '\''        | **invalid** | can not escape a ' within ''; use "'" or $'\'' (ANSI-C quoting)
+ 6 | "red$arocks"| red         | $arocks does not expand $a; use ${a}rocks to preserve $a
+ 7 | "redapple$" | redapple$   | $ followed by no variable name evaluates to $
+ 8 | '\"'        | \"          | \ has no special meaning inside ''
+ 9 | "\'"        | \'          | \' is interpreted inside "" but has no significance for '
+10 | "\""        | "           | \" is interpreted inside ""
+11 | "*"         | *           | glob does not work inside "" or ''
+12 | "\t\n"      | \t\n        | \t and \n have no special meaning inside "" or ''; use ANSI-C quoting
+13 | "`echo hi`" | hi          | `` and $() are evaluated inside ""
+14 | '`echo hi`' | `echo hi`   | `` and $() are not evaluated inside ''
+15 | '${arr[0]}' | ${arr[0]}   | array access not possible inside ''
+16 | "${arr[0]}" | apple       | array access works inside ""
+17 | $'$a\''     | $a'         | single quotes can be escaped inside ANSI-C quoting
+18 | "$'\t'"     | $'\t'       | ANSI-C quoting is not interpreted inside ""
+19 | '!cmd'      | !cmd        | history expansion character '!' is ignored inside ''
+20 | "!cmd"      | cmd args    | expands to the most recent command matching "cmd"
+21 | $'!cmd'     | !cmd        | history expansion character '!' is ignored inside ANSI-C quotes
+---+-------------+-------------+--------------------------------------------------------------------
+
