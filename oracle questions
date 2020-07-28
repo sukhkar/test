@@ -432,3 +432,48 @@ FROM #Employee e1
 WHERE N-1 = (SELECT COUNT(DISTINCT salary) FROM #Employee e2
 WHERE e2.salary > e1.salary)
 
+
+=========================
+print alternate rows from table
+
+select * from worker where worker_id %2 =0;
+select * from ( select rownum rn, first_name, last_name from worker) tmp where mod(tmp.rn,2) = 0;
+============================
+
+
+find all employees who have joined two days before ?
+select * from worker where joining_date  between "2020-07-23" and curdate();
+select * from worker where joining_date  between date_sub(now(), interval 2 day) and now();
+
+
+This WILL include records from 2019-12-02:
+
+SELECT * FROM worker where date between '2019-12-01' and '2019-12-02 23:59:59'
+
+This WON'T include records from 2019-12-02:
+
+SELECT * FROM worker where date between '2019-12-01' and '2019-12-02'
+
+==============
+find all employee names whose first name starts with A/B/C/D/E 
+SELECT Name FROM Employees WHERE Name LIKE '[A-E]%'
+
+==========
+
+how to remove duplicate rows from table
+
+d_id d_name branch
+1     IT    IT_1
+1     IT    IT_1
+2     test   test_1
+3     CS     CS-1
+3     CS     CS-1
+
+delete from department d1
+where d1.rowid > 
+( select min(d2.rowid) from department d2
+where d1.d_id = d2.d_id
+and d1.d_name= d2.d_name
+and d1.branch = d2.branch )
+
+
