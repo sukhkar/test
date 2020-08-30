@@ -1841,7 +1841,7 @@ extend :We can pass arguments to extend in list only number as argument is not a
 difference between multithreading and multiprocessing ?
 
 A multiprocessing system has more than two processors whereas Multithreading is a program execution technique that allows a single process to have multiple code segments. Multiprocessing improves the reliability of the system while in the multithreading process, each thread runs parallel to each other
-=============
+
 =================
 print odd  rows from file in python 
 
@@ -1899,9 +1899,6 @@ swati;bhalekar;23/6;shivashram;bhandup;mumbai;here
 
 hello
 0
-vijay;bhalekar;23/4;shivashram;bhandup;mumbai;here
-ajay;bhalekar;23/5;shivashram;bhandup;mumbai;there
-swati;bhalekar;23/6;shivashram;bhandup;mumbai;here
 
 ============================
 how to replace the word "nahur" with "bhandup" present in file python ( source and destination file should be same)
