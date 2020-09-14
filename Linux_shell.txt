@@ -19,8 +19,20 @@ ls -i file.txt
 2)find partition name on which your filesystem is residing by df -hk command
 df -hk  (for example /dev/sda1)
 3) debugfs -R 'stat <inode number>' /dev/sda1
+===================
+
+lsof -i:8080  // which process is using port 8080
+
+how to redirect error and output to logfile 
 
 
+bash file.txt 2> logfile.txt
+2 for error
+
+Top command parameter in detail
+
+
+==============
 
 
 date -s "27 AUGUST 2018 15:44:00"  // set date 
