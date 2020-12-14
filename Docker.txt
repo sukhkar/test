@@ -1,4 +1,4 @@
-sudo docket ps // will shw all running container
+sudo docker ps // will shw all running container
 sudo docker images // will show all images downloaded
 sudo docker pull ubuntu  // for downloading ubuntu image
 sudo docker run -ti ubuntu bash  // within ubuntu bash command will run
